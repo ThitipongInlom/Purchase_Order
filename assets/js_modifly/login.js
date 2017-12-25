@@ -1,0 +1,1 @@
+$("#loginicon").hide();
