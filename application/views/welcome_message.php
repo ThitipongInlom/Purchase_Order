@@ -67,7 +67,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" class="btn btn-primary btn-block " id="login" style="padding-right: 2px;"><?php echo $this->lang->line('login'); ?>
+          <button type="button" class="btn btn-primary btn-block " id="login"><?php echo $this->lang->line('login'); ?>
             <i class="fa fa-refresh fa-spin fa-fw" id="loginicon" style="padding-right: 2px;"></i></button>
         </div>
         <!-- /.col -->
@@ -90,6 +90,8 @@
 <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
+<!-- Login.js -->
+<script src="<?php echo base_url().'/assets/js_modifly/login.js';?>"></script>
 
 <script>
   $(function () {
@@ -113,8 +115,6 @@ $('#langselect').on('select2:selecting', function(e) {
     location.reload();
     }
   });
-  
-   console.log('Selecting: ' , e.params.args.data.id);
 });
 function addlangimg (opt) {
   if (!opt.id) {
