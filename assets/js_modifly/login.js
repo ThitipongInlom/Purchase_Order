@@ -10,12 +10,12 @@ function login(e) {
 	$('#loginicon').show();
 	$.ajax({
 		type: "POST",
-		url: "Welcome/login",
+		url: "http://172.16.1.253/PO/index.php/Welcome/login",
 		data: datasrting,
 		cache: false,
 		success: function(result){
-		if (result == 1) {
-			setTimeout("window.location.href = 'Dashboard';", 1500);
+		if (result == 1) { 
+			setTimeout("window.location.href = 'http://172.16.1.253/PO/index.php/Dashboard/Dashboard';", 1500);
 		}
 		if (result == 0) {
 			document.getElementById("formlogin").reset();
@@ -30,11 +30,13 @@ function login(e) {
 }
 $('#login').click(function(e) {
 	if (document.formlogin.username.value =='') {
+		$('#username').focus();
 		alertify.defaults.theme.ok = "btn btn-danger";
 		alertify.defaults.theme.cancel = "btn btn-danger";
 		alertify.alert('แจ้งเตือน', 'กรุณากรอก Username');
 	}
 	else if (document.formlogin.password.value =='') {
+		$('#password').focus();
 		alertify.defaults.theme.ok = "btn btn-danger";
 		alertify.defaults.theme.cancel = "btn btn-danger";
 		alertify.alert('แจ้งเตือน', 'กรุณากรอก Password');
@@ -46,12 +48,14 @@ $('#login').click(function(e) {
 $(document).keypress(function(e) { 
     if (e.keyCode == 13) { 
     	if (document.formlogin.username.value =='') {
+    	$('#username').focus();	
 		alertify.defaults.theme.ok = "btn btn-danger";
 		alertify.defaults.theme.cancel = "btn btn-danger";
 		alertify.alert('แจ้งเตือน', 'กรุณากรอก Username');
 		return false;
 	}
 	else if (document.formlogin.password.value =='') {
+		$('#password').focus();	
 		alertify.defaults.theme.ok = "btn btn-danger";
 		alertify.defaults.theme.cancel = "btn btn-danger";
 		alertify.alert('แจ้งเตือน', 'กรุณากรอก Password');

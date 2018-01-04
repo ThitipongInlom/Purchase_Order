@@ -4,15 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html>
 <head>
-  <title><?php echo $this->lang->line('Dashboard'); ?></title>
+  <title><?php echo $this->lang->line('completed'); ?></title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/font-awesome/css/font-awesome.min.css'; ?>">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
   <!-- Morris charts -->
@@ -41,18 +39,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?php echo $this->lang->line('Dashboard'); ?>
+        <?php echo $this->lang->line('completed'); ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
+        <li><a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>"><i class="fa fa-television"></i> <?php echo $this->lang->line('completed'); ?></a></li>
       </ol>
     </section>
     <!-- Main content -->
 <section class="content">    
-       <div class="row">
-        <pre>
-        <?php print_r($this->session->all_userdata()); ?>
-       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">เมนูประเภทสินค้า</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="table_loadoverlay">
+              <table id="typeitem" class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                  <th>ID สินค้า</th>
+                  <th>ชื่อสินค้า</th>
+                </tr>
+                </thead>
+                <tbody >
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>ID สินค้า</th>
+                  <th>ชื่อสินค้า</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>  
+              <div class="overlay" id="loadoverlaytable">
+              <i class="fa fa-refresh fa-spin"></i>
+              </div>
+          </div>
+        </div>
+       </div> 
     </section>
   <!-- /.content-wrapper -->
   </div>

@@ -1,10 +1,14 @@
 <?php  
 defined('BASEPATH') OR exit('No direct script access allowed');
-/*
-if (empty($this->session->user_id)) {
-   redirect('', 'refresh');
+
+if (empty($this->session->username)) {
+  redirect('', 'refresh');
 }
-*/
+if ($this->session->lang == 'english') {
+  $this->lang->load('message','english');
+}else{
+  $this->lang->load('message','thai');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +20,7 @@ if (empty($this->session->user_id)) {
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/font-awesome/css/font-awesome.min.css'; ?>">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
   <!-- Theme style -->
@@ -37,16 +41,14 @@ if (empty($this->session->user_id)) {
 
 </head>
 <body class="hold-transition skin-purple fixed sidebar-mini">
-<input type="hidden" id="id_alert" value="<?php echo $this->session->user_id; ?>">
 <!-- Site wrapper -->
 <div class="wrapper">
-  <input type="hidden" id="id_alert" value="<?php echo $this->session->user_id; ?>">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo site_url('Home'); ?>" class="logo">
+    <a href="<?php echo site_url('Dashboard'); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>QR</span>
+      <span class="logo-mini"><b>P</b>O</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Purchase</b> <b>Order</b></span>
     </a>
@@ -62,24 +64,6 @@ if (empty($this->session->user_id)) {
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning" id="num_alert"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">คุณมีการแจ้งเตือนทั้งหมด<span id="num_alert2" style="padding-left: 2px; padding-right: 2px;"></span>การแจ้งเตือน</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <div id="ceremenu">
-                <ul class="menu">
-                </ul>
-                </div>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-gears"></i>
@@ -87,12 +71,12 @@ if (empty($this->session->user_id)) {
              <ul class="dropdown-menu" style="right: 0;">
                <li>
                   <a href="<?php echo site_url('Profile'); ?>">
-                  <button type="button" class="btn btn-primary btn-flat btn-block" >โปรไฟล์</button>
+                  <button type="button" class="btn btn-primary  btn-block" >โปรไฟล์</button>
                   </a>
               </li>
               <li>
                   <a data-toggle="modal" data-target="#modal-default">  
-                  <button type="button" class="btn btn-danger btn-flat btn-block">ออกจากระบบ</button>
+                  <button type="button" class="btn btn-danger  btn-block">ออกจากระบบ</button>
                   </a>
               </li>
             </ul>
@@ -111,11 +95,39 @@ if (empty($this->session->user_id)) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">เมนูหลัก</li>
+        <li class="header"><?php echo $this->lang->line('mainmenu');?></li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>">
+            <i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?>
+          </a>
+        </li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_all') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_all'); ?>">
+            <i class="fa fa-television"></i> <?php echo $this->lang->line('showallorders'); ?>
+          </a>
+        </li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_approve') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>">
+            <i class="fa fa-television"></i> <?php echo $this->lang->line('approvedprocessing'); ?>
+          </a>
+        </li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>">
+            <i class="fa fa-television"></i> <?php echo $this->lang->line('completed'); ?>
+          </a>
+        </li>
         <li class="treeview <?php 
             if(
-              $this->input->server('REQUEST_URI') == '/Home' ||
-              $this->input->server('REQUEST_URI') == '/AddType'
+              $this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2' 
+              
             ){echo 'active';}?>">
           <a href="#">
             <i class="fa fa-cog"></i> <span>ระบบ</span>
@@ -125,27 +137,9 @@ if (empty($this->session->user_id)) {
           </a>
           <ul class="treeview-menu">
             <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/Home') 
-            {echo 'active';}?>"><a href="<?php echo site_url('Home'); ?>"><i class="fa fa-dashboard"></i> หน้าหลัก</a></li>
-          <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/AddType') 
-            {echo 'active';}?>"><a href="<?php echo site_url('AddType'); ?>"><i class="fa fa-plus"></i> เพิ่มประเภทสินค้า</a></li>
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') 
+            {echo 'active';}?>"><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
           </ul>
-        </li>
-        <li class="treeview <?php 
-            if(
-              $this->input->server('REQUEST_URI') == '/GenItem'
-            ){echo 'active';}?>">
-          <a href="#">
-            <i class="fa fa-folder-open"></i> <span>สร้าง</span>
-            <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-            </span></a>
-          <ul class="treeview-menu">
-            <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/GenItem') 
-            {echo 'active';}?>"><a href="<?php echo site_url('GenItem'); ?>"><i class="fa fa-plus-circle"></i> เพิ่มสินค้า</a></li>
-          </ul>  
         </li>
       </ul>
     </section>
@@ -166,8 +160,8 @@ if (empty($this->session->user_id)) {
                 <p>One fine body…</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger pull-left btn-flat" data-dismiss="modal">ยกเลิก</button>
-                <button type="button" class="btn btn-success btn-flat" id="logout">ยืนยัน <i class="fa fa-refresh fa-spin fa-fw" id="loginicon" style="margin-right: 2px;"></i> </button>
+                <button type="button" class="btn btn-danger pull-left " data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-success " id="logout">ยืนยัน <i class="fa fa-refresh fa-spin fa-fw" id="logouticon" style="margin-right: 2px;"></i> </button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -182,9 +176,7 @@ if (empty($this->session->user_id)) {
 <script src="<?php echo base_url().'/assets/adminlte//bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url().'assets/adminlte/dist/js/adminlte.min.js'; ?>"></script>
-<!-- JS Logout -->
-<script src="<?php echo base_url().'/assets/js_modifly/logout.js'; ?>"></script>
-<!-- JS Alert Load -->
-<script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/alert_load.js'; ?>"></script>
+<!-- Logout -->
+<script src="<?php echo base_url().'assets/js_modifly/logout.js'; ?>"></script>
 </body>
 </html>

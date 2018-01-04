@@ -19,4 +19,9 @@ class Welcome extends CI_Controller {
 		$this->Welcome_model->login_model();
 	}
 
+	public function logout()
+	{
+		$this->session->sess_destroy();
+	}
+
 }	
