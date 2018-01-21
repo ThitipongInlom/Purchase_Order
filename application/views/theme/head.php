@@ -46,7 +46,7 @@ if ($this->session->lang == 'english') {
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo site_url('Dashboard'); ?>" class="logo">
+    <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>P</b>O</span>
       <!-- logo for regular state and mobile devices -->
@@ -64,13 +64,20 @@ if ($this->session->lang == 'english') {
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <?php echo $this->session->fname; echo ' '; echo $this->session->lname; echo ' <b>['; echo $this->session->dep; echo']</b>'; ?>
+            </a>
+          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-gears"></i>
             </a>
              <ul class="dropdown-menu" style="right: 0;">
-               <li>
-                  <a href="<?php echo site_url('Profile'); ?>">
+               <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Profile') 
+            {echo 'active';}?>">
+                  <a href="<?php echo site_url('index.php/Profile'); ?>">
                   <button type="button" class="btn btn-primary  btn-block" >โปรไฟล์</button>
                   </a>
               </li>
@@ -101,6 +108,13 @@ if ($this->session->lang == 'english') {
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>">
             <i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?>
+          </a>
+        </li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Add_Pr/') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Add_Pr/'); ?>">
+            <i class="fa fa-plus"></i> <?php echo $this->lang->line('addpr'); ?>
           </a>
         </li>
         <li class="<?php 

@@ -95,7 +95,6 @@
 <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
 <!-- Login.js -->
 <script src="<?php echo base_url().'/assets/js_modifly/login.js';?>"></script>
-
 <script>
   $(function () {
     $('input').iCheck({

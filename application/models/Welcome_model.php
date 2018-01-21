@@ -18,8 +18,8 @@ class Welcome_model extends CI_Model {
 			$query2 = $this->db->query("select * from PR_Users where username='$username'")->result_array();
 			$newdata = array(
 			'username'  => $query2[0]['username'],
-			'fname'    => $query2[0]['fname'],
-			'lname'   => $query2[0]['lname'],
+			'fname'     => $query2[0]['fname'],
+			'lname'     => $query2[0]['lname'],
 			'email'     => $query2[0]['email'],
 			'type'      => $query2[0]['type'],
 			'dep'       => $query2[0]['dep'],

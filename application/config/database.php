@@ -100,14 +100,14 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-/*
+
 $db['bo'] = array(
 	'dsn'	=> '',
 	'port' => 1443,
-	'hostname' => '172.16.1.254',
-	'username' => 'sa',
-	'password' => 'sa@thezign2013',
-	'database' => 'PRA9',
+	'hostname' => '172.16.1.254\BO',
+	'username' => 'pRaDmIn1',
+	'password' => 'It5200.,',
+	'database' => 'Zign',
 	'dbdriver' => 'sqlsrv',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -123,6 +123,6 @@ $db['bo'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-*/
+
 
 
