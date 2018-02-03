@@ -72,11 +72,11 @@ return $waredesc1;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      <?php echo $this->lang->line('completed'); ?>
+      <?php echo $this->lang->line('reject'); ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
-        <li><a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>"><i class="fa fa-television"></i> <?php echo $this->lang->line('completed'); ?></a></li>
+        <li><a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>"><i class="fa fa-television"></i> <?php echo $this->lang->line('reject'); ?></a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -95,17 +95,15 @@ return $waredesc1;
                 <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive ">
                   <thead>
                     <tr align="center">
-                      <th >PR No.</th>
+                      <th>PR No.</th>
                       <th>Vendor</th>
                       <th>PR Date</th>
                       <th>Ref No.</th>
                       <th>Department/Warehouse</th>
-                      <th>Status Pr</th>
                       <th>HOD</th>
                       <th>AC</th>
                       <th>GM</th>
                       <th>EFC</th>
-                      <th>CP</th>
                       <th>Action.</th>
                     </tr>
                   </thead>
@@ -119,13 +117,6 @@ return $waredesc1;
                       <td><?php echo $result['refno'];  ?></td>
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<small class="label bg-primary">'.$result['dep'].'</small> => '; echo $result['Dep_name'].'<br>[W] '; echo '<small class="label bg-primary">'.$result['warecode'].'</small> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
-                        <td><textarea class="form-control"  <?php
-                          if($this->session->dep =='AC'){
-                          echo '';
-                          }else{
-                          echo 'Disabled';
-                          }
-                        ?>><?php echo $result['statusapp'];?></textarea></td>
                         <td><?php if ($result['HdApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
                           }elseif ($result['HdApprove']=='N'){
@@ -145,11 +136,6 @@ return $waredesc1;
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
                           }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
-                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
-                          }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
-                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
                         } ?></td>
                         <td>
                           <button type="button" class="btn btn-sm  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)"><i class="fa fa-fw fa-search"></i></button>
@@ -219,17 +205,15 @@ return $waredesc1;
     "aLengthMenu": [[ 4, 10, 25, -1], [ 4, 10, 25, "ทั้งหมด"]],
     "columnDefs": [
     { "width": "10%", "targets": 0 },
-    { "width": "20%", "targets": 1 },
-    { "width": "9%", "targets": 2 },
+    { "width": "30%", "targets": 1 },
+    { "width": "10%", "targets": 2 },
     { "width": "8%", "targets": 3 },
     { "width": "20%", "targets": 4 },
     { "width": "1%", "targets": 5 },
-    { "width": "10%", "targets": 6 },
+    { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
     { "width": "1%", "targets": 8 },
-    { "width": "1%", "targets": 9 },
-    { "width": "1%", "targets": 10 },
-    { "width": "10%", "targets": 11 },
+    { "width": "10%", "targets": 9 },
     { "orderable": "false"}
     ],
     "language": {
@@ -247,7 +231,7 @@ return $waredesc1;
     "previous": "ย้อนกลับ"
     },
     },
-    "order":[[0,'desc']],
+    "order":[[0,'asc']],
     "initComplete": function(settings, json) {
     setTimeout(function(){ $(".overlay").fadeOut('3000', function() {
     }); }, 1000);

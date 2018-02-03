@@ -50,30 +50,23 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		$leve = $this->session->type;
-		switch ($leve) {
-			case 'admin':
+		if ($leve=='admin' OR $dep=='AC' OR $dep=='EXC') {
 			$this->db->select('*');
 			$this->db->from('PR');
 			$this->db->limit(1000);
 			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-			$this->db->where('Vendor IS NOT NULL',null, false);
-			$this->db->where('Vendor_name IS NOT NULL',null, false);
 			$this->db->where('GMApprove IS NULL',null, false);
 			$this->db->where('chksub1','1');
 			$result = $this->db->get()->result_array();
-				break;
-			default:
+		}else{
 			$this->db->select('*');
 			$this->db->from('PR');
 			$this->db->limit(1000);
 			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
 			$this->db->where('dep', $dep);
-			$this->db->where('Vendor IS NOT NULL',null, false);
-			$this->db->where('Vendor_name IS NOT NULL',null, false);
 			$this->db->where('GMApprove IS NULL',null, false);
 			$this->db->where('chksub1','1');
 			$result = $this->db->get()->result_array();
-			break;
 		}
 		return $result;
 	}
@@ -82,19 +75,18 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		$leve = $this->session->type;
-		switch ($leve) {
-			case 'admin':
+		if ($leve=='admin' OR $dep=='AC' OR $dep=='EXC') {
 			$this->db->select('*');
 			$this->db->from('PR');
 			$this->db->limit(1000);
 			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-			$this->db->where('Vendor IS NOT NULL',null, false);
-			$this->db->where('Vendor_name IS NOT NULL',null, false);
-			$this->db->where('GMApprove IS NULL',null, false);
-			$this->db->where('chksub1','1');
+			$this->db->where('HdApprove IS NOT NULL',null, false);
+			$this->db->where('completed IS NULL',null, false);
+			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null))";
+			$this->db->where($where);
+			$this->db->where('chksub1 IS NULL',null, false);
 			$result = $this->db->get()->result_array();
-				break;
-			default:
+		}else{
 			$this->db->select('*');
 			$this->db->from('PR');
 			$this->db->limit(1000);
@@ -102,10 +94,62 @@ class Get_data_model extends CI_Model {
 			$this->db->where('dep', $dep);
 			$this->db->where('HdApprove IS NOT NULL',null, false);
 			$this->db->where('completed IS NULL',null, false);
-			$this->db->where('GMApprove IS NULL',null, false);
-			$this->db->where('chksub1','1');
+			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null))";
+			$this->db->where($where);
+			$this->db->where('chksub1 IS NULL',null, false);
 			$result = $this->db->get()->result_array();
-			break;
+		}
+		return $result;
+	}
+
+	public function Get_completed()
+	{
+		$dep = $this->session->dep;
+		$leve = $this->session->type;
+		if ($leve=='admin' OR $dep=='AC' OR $dep=='EXC') {
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$this->db->where('completed','Y');
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+		}else{
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$this->db->where('dep', $dep);
+			$this->db->where('completed','Y');
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+		}
+		return $result;
+	}
+
+	public function Get_reject()
+	{
+		$dep = $this->session->dep;
+		$leve = $this->session->type;
+		if ($leve=='admin' OR $dep=='AC' OR $dep=='EXC') {
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$where = "(HDApprove='N' OR PRApprove='N' OR GMApprove='N' OR EFCApprove='N')";
+			$this->db->where($where);
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+		}else{
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$this->db->where('dep', $dep);
+			$where = "(HDApprove='N' OR PRApprove='N' OR GMApprove='N' OR EFCApprove='N')";
+			$this->db->where($where);
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
 		}
 		return $result;
 	}

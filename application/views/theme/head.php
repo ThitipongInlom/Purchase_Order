@@ -40,7 +40,7 @@ if ($this->session->lang == 'english') {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
-<body class="hold-transition skin-purple fixed sidebar-mini">
+<body class="hold-transition skin-purple sidebar-collapse sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -55,7 +55,7 @@ if ($this->session->lang == 'english') {
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" id="headmanu" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -107,54 +107,69 @@ if ($this->session->lang == 'english') {
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>">
-            <i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?>
+            <i class="fa fa-dashboard"></i><span><?php echo $this->lang->line('Dashboard'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Add_Pr/') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Add_Pr/'); ?>">
-            <i class="fa fa-plus"></i> <?php echo $this->lang->line('addpr'); ?>
+            <i class="fa fa-plus"></i><span><?php echo $this->lang->line('addpr'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_all') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_all'); ?>">
-            <i class="fa fa-television"></i> <?php echo $this->lang->line('showallorders'); ?>
+            <i class="fa fa-television"></i><span><?php echo $this->lang->line('showallorders'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_approve') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>">
-            <i class="fa fa-television"></i> <?php echo $this->lang->line('approvedprocessing'); ?>
+            <i class="fa fa-television"></i><span><?php echo $this->lang->line('approvedprocessing'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>">
-            <i class="fa fa-television"></i> <?php echo $this->lang->line('completed'); ?>
+            <i class="fa fa-television"></i><span><?php echo $this->lang->line('completed'); ?></span>
           </a>
         </li>
-        <li class="treeview <?php 
-            if(
-              $this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2' 
-              
-            ){echo 'active';}?>">
-          <a href="#">
-            <i class="fa fa-cog"></i> <span>ระบบ</span>
-            <span class="pull-right-container">
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_reject') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>">
+            <i class="fa fa-television"></i><span><?php echo $this->lang->line('reject'); ?></span>
+          </a>
+        </li>
+        <?php  
+        if ($this->session->type =='admin' OR $this->session->dep =='IT') {
+        echo '<li class="treeview';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="#">
+              <i class="fa fa-cog"></i> <span>ระบบ</span>
+              <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') 
-            {echo 'active';}?>"><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
-          </ul>
-        </li>
+              </span>
+              </a>      
+        <ul class="treeview-menu">';
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Dashboard/Dashboard').'"><i class="fa fa-dashboard"></i>'.$this->lang->line('Dashboard').'</a></li>';
+        
+        echo '</ul>';
+        }
+        ?>
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -192,5 +207,4 @@ if ($this->session->lang == 'english') {
 <script src="<?php echo base_url().'assets/adminlte/dist/js/adminlte.min.js'; ?>"></script>
 <!-- Logout -->
 <script src="<?php echo base_url().'assets/js_modifly/logout.js'; ?>"></script>
-</body>
 </html>

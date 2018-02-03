@@ -29,4 +29,5 @@ $lang['p/r_date'] = 'วันที่ของ P/R';
 $lang['division'] = 'โรงแรม';
 $lang['refno'] = 'เลขที่อ้างอิง';
 $lang['remark'] = 'ข้อสังเกต';
+$lang['reject'] ='ใบสั่งซื้อไม่สำเร็จ';
 ?>

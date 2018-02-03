@@ -29,4 +29,5 @@ $lang['p/r_date'] = 'P/R Date.';
 $lang['division'] = 'Division';
 $lang['refno'] = 'Ref No.';
 $lang['remark'] = 'Remark';
+$lang['reject'] ='ใบสั่งซื้อไม่สำเร็จ';
 ?>
