@@ -25,6 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'; ?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <!-- Css Modifly -->
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/css_modifly/css_show_all.css'; ?>">    
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,24 +49,199 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </ol>
       </section>
       <!-- Main content -->
-      <section class="content">
-        <div class="row">
-                  <pre>
-            <?php print_r($this->session->all_userdata()); ?>
-                 </div>
-            </section>
-        <!-- /.content-wrapper -->
+<!--       <section class="content">
+      <div class="row">
+      <div class="col-md-12">  
+      <div class="box box-success">
+          <div class="box-header with-border">
+          <h3 class="box-title">PR IN <?php echo date('Y m d '."l"); ?> </h3>
+      </div>
+        <div class="box-body">
+      <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">ALL</span>
+        <div class="info-box-content">
+          <span class="info-box-text">ALL PR</span>
+          <span class="info-box-number"><?php echo $alltoday; ?> PR</span>
         </div>
-      <!-- DataTables -->
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'; ?>"></script>
-      <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js" type="text/javascript" charset="utf-8" ></script>
-      <!-- SlimScroll -->
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
-      <!-- FastClick -->
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
-      <!-- Morris.js charts -->
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/raphael/raphael.min.js';?>"></script>
-      <script src="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.min.js'; ?>"></script>
-    </body>
-  </html>
+      </div>      
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">HOD</span>
+        <div class="info-box-content">
+          <span class="info-box-text">HOD APV</span>
+          <span class="info-box-number"><?php echo $hodtoday; ?> PR</span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">AC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">AC APV</span>
+          <span class="info-box-number"><?php echo $actoday; ?> PR</span>
+          <span class="info-box-number"><?php echo $actodayno; ?> wait approve</span> 
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">GM</span>
+        <div class="info-box-content">
+          <span class="info-box-text">GM APV</span>
+          <span class="info-box-number"><?php echo $gmtoday; ?> PR</span>
+          <span class="info-box-number"><?php echo $gmtodayno; ?> wait approve</span> 
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">EFC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">EFC</span>
+          <span class="info-box-number"><?php echo $efctoday; ?> PR</span>
+          <span class="info-box-number"><?php echo $efctodayno; ?> wait approve</span>
+        </div>
+      </div>       
+      </div>
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+      <section class="content">
+      <div class="row">
+      <div class="col-md-12">  
+      <div class="box box-success">
+          <div class="box-header with-border">
+          <h3 class="box-title">PR Mouth  <?php echo date('M Y'); ?></h3>
+      </div>
+        <div class="box-body">
+      <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">ALL</span>
+        <div class="info-box-content">
+          <span class="info-box-text">ALL PR</span>
+          <span class="info-box-number"><?php echo $allmouth; ?> PR</span>
+        </div>
+      </div>      
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">HOD</span>
+        <div class="info-box-content">
+          <span class="info-box-text">HOD APV</span>
+          <span class="info-box-number"><?php echo $hodmouth; ?> PR</span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">AC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">AC APV</span>
+          <span class="info-box-number"><?php echo $acmouth; ?> PR</span>
+          <span class="info-box-number"><?php echo $acmouthno; ?> wait approve</span>
+
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">GM</span>
+        <div class="info-box-content">
+          <span class="info-box-text">GM APV</span>
+          <span class="info-box-number"><?php echo $gmmouth; ?> PR</span>
+          <span class="info-box-number"><?php echo $gmmouthno; ?> wait approve </span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-2">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">EFC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">EFC</span>
+          <span class="info-box-number"><?php echo $efcmouth; ?> PR</span>
+          <span class="info-box-number"><?php echo $efcmouthno; ?> wait approve </span>
+        </div>
+      </div>       
+      </div>
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </section> -->
+
+
+      <section class="content">
+      <div class="row">
+      <div class="col-md-12">  
+      <div class="box box-success">
+          <div class="box-header with-border">
+          <h3 class="box-title">PR Wait Apporve </h3>
+      </div>
+        <div class="box-body">
+      <div class="row">  
+      <div class="col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">AC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">AC APV</span>
+          <span class="info-box-number"><?php echo $acnoapp; ?> wait approve
+          </span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">GM</span>
+        <div class="info-box-content">
+          <span class="info-box-text">GM APV</span>
+          <span class="info-box-number"><?php echo $gmnoapp; ?> wait approve</span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua">EFC</span>
+        <div class="info-box-content">
+          <span class="info-box-text">EFC</span>
+          <span class="info-box-number"><?php echo $efcnoapp; ?> wait approve</span>
+   
+        </div>
+      </div>       
+      </div>
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+      <!-- /.content-wrapper -->
+    </div>
+
+
+
+    <!-- DataTables -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'; ?>"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js" type="text/javascript" charset="utf-8" ></script>
+    <!-- SlimScroll -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
+    <!-- FastClick -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
+    <!-- charts -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/Chart.js/Chart.js';?>"></script>
+    <!-- Dashboard Modifiy -->
+    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/dashdoard.js'; ?>"></script>
+  </body>
+</html>

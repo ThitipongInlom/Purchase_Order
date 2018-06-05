@@ -33,6 +33,11 @@
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
+    <style type="text/css" media="screen">
+    td {
+      font-size: 13px;
+    }        
+    </style>
     <body class="hold-transition login-page">
         <div class="row">
             <div class="col-md-12 col-xs-12">
@@ -46,19 +51,19 @@
                     <div class="box-header with-border">
                     </div>
                     <div class="box-body">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-condensed">
                             <tr align="center">
-                                <td>Date Last PR</td>
-                                <td>PR No</td>
-                                <td>Qty</td>
-                                <td>Price</td>
-                                <td>remark</td>
-                                <td>File</td>
+                                <td width="15%">Date Last PR</td>
+                                <td width="15%">PR No</td>
+                                <td width="5%">Qty</td>
+                                <td width="10%">Price</td>
+                                <td width="45%">remark</td>
+                                <td width="10%">File</td>
                             </tr>
                             <?php foreach ($datahistory as $key => $result) { ?>
                             <tr align="center">
                                 <td><?php $Newdate = nice_date($result['usedate'], 'd-m-Y'); echo $Newdate; ?></td>
-                                <td><?php echo $result['prno']; ?></td>
+                                <td><a href="#"><p style="color: red;" dataprno="<?php echo $result['prno']; ?>" onclick="showwindowsmodalprview(this)"><?php echo $result['prno']; ?></p></a></td>
                                 <td><?php echo $result['prqty']; ?></td>
                                 <td><?php echo number_format($result['prprice'],2).'฿'; ?></td>
                                 <td><?php echo $result['iremark']; ?></td>
@@ -86,5 +91,5 @@
     <!-- Select2 -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
     <!-- Add Pr Modifiy -->
-    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/addpr.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/modelview.js'; ?>"></script>
 </html>

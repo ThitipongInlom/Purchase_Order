@@ -1,4 +1,0 @@
-Reconfig dvr A_FL_234
-
-
-Change movies quality to normal zize 320*288 

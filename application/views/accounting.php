@@ -11,6 +11,8 @@ $result = $query->result_array();
 $waredesc1 = $result[0]['waredesc1'];
 return $waredesc1;
 }
+$querydep = $beta->get('ZZFC0020');
+$depall = $querydep->result_array();
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,16 +27,18 @@ return $waredesc1;
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css';?>">     
+    <link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css';?>">    
     <!-- Morris charts -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.css';?>">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="<?php echo base_url().'assets/alertify/css/alertify.min.css'; ?>" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">    
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/dist/css/AdminLTE.min.css'; ?>">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/dist/css/skins/_all-skins.min.css'; ?>">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">    
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'; ?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
@@ -73,27 +77,31 @@ return $waredesc1;
     .table-stripedstyle > tbody > tr:nth-child(2n+1) > td, .table-stripedstyle > tbody > tr:nth-child(2n+1) > th {
     background-color: #D4E6F1;
     background-repeat: no-repeat;
-    }
+    } 
     #loginicon{
       display: none;
-    } 
+    }    
+    .select2-selection{
+    background-color:#b3d1ff !important;
+    color:red !important;
+    }  
     div {
       font-size: 13px;
     }
     td {
       font-size: 13px;
-    }           
+    }
     </style>
   </head>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      <?php echo $this->lang->line('reject'); ?>
+      <?php echo $this->lang->line('account'); ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
-        <li><a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>"><i class="fa fa-times"></i> <?php echo $this->lang->line('reject'); ?></a></li>
+        <li><a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>"><i class="fa fa-calculator"></i> <?php echo $this->lang->line('account'); ?></a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -108,8 +116,18 @@ return $waredesc1;
           <button type="button" id="btnopendata" data-toggle="modal" data-target="#opendata"></button>
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
-              <div class="row">
-                <div class="col-md-10 col-xs-8">
+                <div class="row"> 
+                <div class="col-md-2 col-md-2">
+                  <?php $getv = $this->input->get('i'); ?>
+                  <select id='Setvaluefordata'>
+                    <option value="All" <?php if ($getv=='All') {echo 'selected';} ?>>All Department</option>
+                    <?php
+                    foreach ($depall as $depz) { ?>
+                    <option value="<?php echo $depz['depcode']; ?>" <?php if ($getv==$depz['depcode']) {echo 'selected';} ?>><?php echo $depz['depname1']; ?></option>
+                    <?php } ?>
+                  </select> 
+                </div>  
+                <div class="col-md-8 col-xs-8">
                 <div class="form-inline">
                 <div class="form-group">
                 <label for="hsearch">ค้นหาจากวันที่: </label>
@@ -119,31 +137,33 @@ return $waredesc1;
                 <i class="fa fa-calendar"></i>
                 </div>
                 </div>
-                <button class="btn btn-primary" onclick="searchreject(this);">ค้นหา</button>
-                <button class="btn btn-success" onclick="blackupreject(this);">แสดงทั้งหมด</button>
+                <button class="btn btn-primary" onclick="searchprac(this);">ค้นหา</button>
+                <button class="btn btn-success" onclick="blackupacpr(this);">แสดงทั้งหมด</button>
                 </div>
-                </div>                   
-                </div>
-                <div class="col-md-2 col-xs-4">
+                </div>                                 
+                </div> 
+                <div class="col-md-2 col-xs-2">
                   <div align="right">
                   <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
                   <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">  
                   </div>                
-                </div>                
-              </div>              
+                </div>
+                </div>              
               <div class="table-responsive">
                 <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed table-stripedstyle">
                   <thead>
                     <tr align="center">
-                      <th>PR No.</th>
+                      <th >PR No.</th>
                       <th>Vendor</th>
                       <th>PR Date</th>
                       <th>Ref No.</th>
                       <th>Department/Warehouse</th>
+                      <th>Status Pr</th>
                       <th>HOD</th>
                       <th>AC</th>
                       <th>GM</th>
                       <th>EFC</th>
+                      <th>CP</th>
                       <th>Action.</th>
                     </tr>
                   </thead>
@@ -152,11 +172,26 @@ return $waredesc1;
                     foreach ($row as $result) { ?>
                     <tr align="center">
                       <td><?php echo $result['prno']; ?></td>
-                      <td><?php echo  '<div align="left">'.$result['Vendor_name'].'<br><b>'.$result['Vendor'].'</b></div>'; ?></td>
+                      <td><?php echo  '<div align="left">'.$result['Vendor_name'].' - <b>'.$result['Vendor'].'</b><br>';?>
+                          <?php  if ($this->session->dep =='AC') {
+                            echo '<button type="button" class="btn btn-xs btn-warning" prid="'.$result['prno'].'" onclick="Setvenderprmodel(this)" venderold="'.$result['Vendor'].'"><i class="fa fa-fw fa-refresh"></i></button></div><input type="hidden" id="Setvenderprmodelshow" data-toggle="modal" data-target="#Setvenderprmodel">';
+                          } ?>
+                      </td>
                       <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
                       <td><?php echo $result['refno'];  ?></td>
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
+                        <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
+                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee'){
+                            echo '';
+                          }else{
+                            echo 'Disabled';
+                          }
+                        ?> value="<?php echo $result['statusapp'];?>">
+                        <?php 
+                        if ($result['statusdatetime']!='') {
+                        echo '<div align="left">'.nice_date($result['statusdatetime'], 'd-m-Y').''.' <b>'.$result['statusby'].'</b></div>';
+                        } ?></td>
                         <td><?php if ($result['HdApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
                           }elseif ($result['HdApprove']=='N'){
@@ -177,9 +212,32 @@ return $waredesc1;
                           }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
+                        <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
+                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
+                          }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
+                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
+                        } ?></td>
                         <td>
                           <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
                           <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
+                          <?php  
+                          $type = $this->session->type;
+                          $user = $this->session->username;  
+                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $type=='accounting0' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
+                          echo '<button type="button" class="btn btn-warning btn-xs" prno="'.$result['prno'].'"" onclick="completedYA(this)" data-toggle="tooltip" data-placement="bottom" title="สั้งซื้อแล้ว"><i class="fa fa-fw fa-exchange"></i></button>';   
+                          }
+                          ?>
+                          <?php
+                          if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
+                            if ($this->session->username =='Nalinee') {
+                           echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
+                            }
+                          }else{
+                          echo '
+                          <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
+                          ';
+                          }
+                          ?>
                         </td>
                       </tr>
                       <? } ?>
@@ -202,7 +260,7 @@ return $waredesc1;
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ดูข้อมูล <i id="idprimary"></i></h4>
+              <h4 class="modal-title">ดูข้อมูล<i id="idprimary"></i></h4>
             </div>
             <div class="modal-body" id="dispayopendata">
             </div>
@@ -210,6 +268,44 @@ return $waredesc1;
         </div>
       </div>
       <!-- /.content-wrapper -->
+    <!-- Modal Set-->
+    <div id="Setvenderprmodel" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Set Vender ใหม่ <span id="headsetvender"></span><input type="hidden" id="headsetvenderinput"></h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+            <table class="table table-striped" cellspacing="0" width="100%">
+            <tr>  
+            <div class="col-md-2 col-xs-2">  
+            <td width="25%"><input type="text" id="vendor" class="form-control input-sm" readonly></td>
+            </div>
+            <div class="col-md-4 col-xs-4"> 
+            <td width="50%" align="center"><input type="text" id="vendorname" class="form-control input-sm" readonly></td>
+            </div>
+            <div class="col-md-2 col-xs-4"> 
+            <td width="25%"><select class="form-control" style="width:100%;" id="getvender" onchange="setvender(this.value)"></select>
+            </td>
+            </div>
+            </tr>          
+            </table>
+            </div>
+            <div align="center">
+              <button type="button" class="btn btn-success" onclick="savesetvenderpr(this);">บันทึก</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div align="center">
+              <button type="button" class="btn btn-danger" id="closeSetvenderpr" data-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Modal -->
     <div id="productmodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -228,7 +324,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-    </div>  
+    </div>
   <!-- Modal -->
     <div id="vendormodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -247,7 +343,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-    </div>    
+    </div>          
     </div>
     <!-- DataTables -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>
@@ -259,22 +355,24 @@ return $waredesc1;
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/date-eu.js"></script>
     <!-- SlimScroll -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
-    <!-- Select2 -->
-    <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>     
-    <!-- date-range-picker -->
-    <script src="<?php echo base_url().'/assets/adminlte/bower_components/moment/min/moment.min.js'; ?>"></script>
-    <script src="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js'; ?>"></script>     
     <!-- FastClick -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
     <!-- Morris.js charts -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/raphael/raphael.min.js';?>"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>  
+    <!-- date-range-picker -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/moment/min/moment.min.js'; ?>"></script>
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js'; ?>"></script>      
+    <!-- Alertify -->
+    <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.min.js'; ?>"></script>
     <!-- JS Modal  -->
     <script src="<?php echo base_url().'/assets/js_modifly/modal_show_all.js'; ?>"></script>
-    <script src="<?php echo base_url().'/assets/js_modifly/addpr.js'; ?>"></script>     
+    <script src="<?php echo base_url().'/assets/js_modifly/addpr.js'; ?>"></script> 
     <script type="text/javascript">
     $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();   
+    $('[data-toggle="tooltip"]').tooltip();  
     $('.datepicker').daterangepicker();
     $(".spinner").hide();
     $("#tabledata").show();
@@ -287,15 +385,17 @@ return $waredesc1;
     "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
     "columnDefs": [
     { "width": "10%", "targets": 0 },
-    { "width": "30%", "targets": 1 },
-    { "width": "10%", "type":"date-eu", "targets": 2 },
+    { "width": "20%", "targets": 1 },
+    { "width": "9%", "type":"date-eu", "targets": 2 },
     { "width": "8%", "targets": 3 },
     { "width": "20%", "targets": 4 },
-    { "width": "1%", "targets": 5 },
+    { "width": "10%", "targets": 5 },
     { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
     { "width": "1%", "targets": 8 },
-    { "width": "10%", "targets": 9 },
+    { "width": "1%", "targets": 9 },
+    { "width": "1%", "targets": 10 },
+    { "width": "10%", "targets": 11 },
     { "orderable": "false"}
     ],
     "language": {
@@ -313,12 +413,42 @@ return $waredesc1;
     "previous": "ย้อนกลับ"
     },
     },
-    "order":[[0,'asc']],
+    "order":[[0,'desc']],
     "initComplete": function(settings, json) {
     setTimeout(function(){ $(".overlay").fadeOut('3000', function() {
     }); }, 1000);
     }
     });
+    $("#Setvaluefordata").select2({
+      width: '100%'
     });
+    });
+
+    $("#Setvaluefordata").on('select2:selecting', function(e) {
+      location.href = "http://172.16.1.253/PO/index.php/Show_data/Show_accounting?i="+e.params.args.data.id;
+    });
+
+    var linkurl = function linkurl() {
+    var url = "http://172.16.1.253/PO/index.php/Controurl/url";
+    var Httpreq = new XMLHttpRequest(); 
+    Httpreq.open("GET",url,false);
+    Httpreq.send(null);
+    return Httpreq.responseText; 
+    }
+    var statusapp = function statusapp(e) {
+      var urlresult = JSON.parse(linkurl());
+      var prid = $(e).attr('statusapppr');
+      var deppr = $(e).attr('deppr');
+      var statusappval = $(e).val();
+      $.ajax({
+        url: urlresult.statusapp,
+        type: 'POST',
+        data: {prid: prid,statusappval: statusappval,deppr: deppr},
+        success: function (callblack) {
+        alertify.set('notifier','position', 'อัพเดตเสร็จสิ้น');
+        alertify.success('แจ้งเตือน : ' + alertify.get('notifier','position'));
+        }
+      });
+    }
     </script>
   </html>

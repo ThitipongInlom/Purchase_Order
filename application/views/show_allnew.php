@@ -24,14 +24,8 @@ return $waredesc1;
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'; ?>">
-    <!-- daterange picker -->
-  	<link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css';?>">
     <!-- Morris charts -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.css';?>">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">     
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/dist/css/AdminLTE.min.css'; ?>">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -73,18 +67,9 @@ return $waredesc1;
     }
     }
     .table-stripedstyle > tbody > tr:nth-child(2n+1) > td, .table-stripedstyle > tbody > tr:nth-child(2n+1) > th {
-    background-color: #D4E6F1;
+    background-color: #94b8b8;
     background-repeat: no-repeat;
-	  }
-    #loginicon{
-      display: none;
-    }  
-    div {
-      font-size: 13px;
-    }
-    td {
-      font-size: 13px;
-    }
+	}
     </style>
   </head>
   <body>
@@ -92,11 +77,11 @@ return $waredesc1;
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-        <?php echo $this->lang->line('showallorders'); ?>
+        <?php echo $this->lang->line('showallordersnew'); ?>
         </h1>
         <ol class="breadcrumb">
           <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
-          <li><a href="<?php echo site_url('index.php/Show_data/show_all'); ?>"><i class="fa fa-book"></i> <?php echo $this->lang->line('showallorders'); ?></a></li>
+          <li><a href="<?php echo site_url('index.php/Show_data/show_all'); ?>"><i class="fa fa-television"></i> <?php echo $this->lang->line('showallordersnew'); ?></a></li>
         </ol>
       </section>
       <!-- Main content -->
@@ -111,43 +96,20 @@ return $waredesc1;
             <button type="button" id="btnopendata" data-toggle="modal" data-target="#opendata"></button>
             <div class="box box-primary" id="tabledata">
               <div class="box-body">
-              	<div class="row">
-              	<div  class="col-md-10 col-xs-8">
-              	<div class="form-inline">
-						    <div class="form-group">
-						  	<label for="hsearch">ค้นหาจากวันที่: </label>
-						  	<div class="input-group">
-						    <input type="text" class="form-control datepicker" id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-						    <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-							  </div>
-							  <button class="btn btn-primary" onclick="searchpr(this);">ค้นหา</button>
-							  <button class="btn btn-success" onclick="blackupallpr(this);">แสดงทั้งหมด</button>
-						    </div>              			
-                </div>
-                </div>
-              	<div class="col-md-2 col-xs-4">
-                  <div align="right">
-              			<button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
-                    <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">
-                  </div>
-              	</div>
-              	</div>
                 <div class="table-responsive">
-                  <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed table-stripedstyle">
+                  <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover table-condensed table-stripedstyle">
                     <thead>
                       <tr align="center">
-                        <th width="12" align="center">PR No.</th>
-                        <th width="28" align="center">Vendor</th>
-                        <th width="9" align="center">PR Date</th>
-                        <th width="10" align="center">Ref No.</th>
-                        <th width="20" align="center">Warehouse</th>
-                        <th width="1" align="center">HOD</th>
-                        <th width="1" align="center">AC</th>
-                        <th width="1" align="center">GM</th>
-                        <th width="1" align="center">EFC</th>
-                        <th width="6" align="center">Action.</th>
+                        <th width="12">PR No.</th>
+                        <th width="28">Vendor</th>
+                        <th width="9">PR Date</th>
+                        <th width="10">Ref No.</th>
+                        <th width="20">Warehouse</th>
+                        <th width="1">HOD</th>
+                        <th width="1">AC</th>
+                        <th width="1">GM</th>
+                        <th width="1">EFC</th>
+                        <th width="6">Action.</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -155,14 +117,14 @@ return $waredesc1;
                       foreach ($row as $result) { ?>
                       <tr align="center">
                         <td><?php echo $result['prno']; ?></td>
-                        <td><?php echo '<div align="left">'.$result['Vendor_name'].' - <b>'.$result['Vendor'].'</b></div>'; ?></td>
+                        <td><?php echo '<div align="left">'.$result['Vendor_name'].' - <small class="label bg-primary">'.$result['Vendor'].'</small></div>'; ?></td>
                         <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
                         <td><?php echo $result['refno'];  ?></td>
                         <td><?php
                           if (empty($result['warecode'])) {
                           echo '';
                           }else{
-                          echo  '<div align="left">';print_r(namewarecode($result['warecode'])); echo ' - <b>'.$result['warecode'].'</b></div>';
+                          echo  '<div align="left">';print_r(namewarecode($result['warecode'])); echo ' - <small class="label bg-primary">'.$result['warecode'].'</small></div>';
                         }?></td>
                         <td><?php if ($result['HdApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
@@ -177,15 +139,10 @@ return $waredesc1;
                         <td></td>
                         <td></td>
                         <td>
-                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
-                          <button type="button" class="btn btn-xs  btn-warning" primary="<?php echo $result['prno']; ?>" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
-                          <button type="button" class="btn btn-xs btn-danger" primary="<?php echo $result['prno']; ?>" onclick="deletedata(this)"  data-toggle="tooltip" data-placement="left" title="ลบข้อมูล" 
-                          <?php  
-                          if ($result['HdApprove']=='Y') {
-                            echo 'disabled';
-                          }
-                          ?>><i class="fa fa-fw fa-close"></i></button>
+                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)"><i class="fa fa-fw fa-search"></i></button>
+                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)"><i class="fa fa-fw fa-print"></i></button>
+                          <button type="button" class="btn btn-xs  btn-warning" primary="<?php echo $result['prno']; ?>" onclick="edit(this)"><i class="fa fa-fw fa-edit"></i></button>
+                          <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-fw fa-close"></i></button>
                         </td>
                       </tr>
                       <? } ?>
@@ -216,44 +173,6 @@ return $waredesc1;
         </div>
       </div>
       <!-- /.content-wrapper -->
-	<!-- Modal -->
-    <div id="productmodel" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">ค้นหา Product</h4>
-          </div>
-          <div class="modal-body" id="showlistitem">
-          </div>
-          <div class="modal-footer">
-            <div align="center">
-              <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal">ปิด</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-  <!-- Modal -->
-    <div id="vendormodel" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">ค้นหา Vendor</h4>
-          </div>
-          <div class="modal-body" id="showlistitemv">
-          </div>
-          <div class="modal-footer">
-            <div align="center">
-              <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal">ปิด</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>         
     </div>
     <!-- DataTables -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>
@@ -262,49 +181,36 @@ return $waredesc1;
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" type="text/javascript" charset="utf-8" ></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js" type="text/javascript" charset="utf-8" ></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js" type="text/javascript" charset="utf-8" ></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/date-eu.js"></script>
     <!-- SlimScroll -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
-    <!-- bootstrap datepicker -->
-	<script src="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'; ?>"></script>
-	<!-- date-range-picker -->
-	<script src="<?php echo base_url().'/assets/adminlte/bower_components/moment/min/moment.min.js'; ?>"></script>
-	<script src="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js'; ?>"></script>
-    <!-- Select2 -->
-    <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
     <!-- Morris.js charts -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/raphael/raphael.min.js';?>"></script>
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.min.js'; ?>"></script>
-    <!-- Alertify -->
-    <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>    
     <!-- JS Modal  -->
     <script src="<?php echo base_url().'/assets/js_modifly/modal_show_all.js'; ?>"></script>
-    <script src="<?php echo base_url().'/assets/js_modifly/addpr.js'; ?>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();  
-    $('.datepicker').daterangepicker();
     $(".spinner").hide();
     $("#tabledata").show();
     $('#show_all').DataTable({
-    "searching": true,  
-    "responsive": "true",
     "paging": "false",
+    "fixedColumns":{  "heightMatch":"auto","leftColumns":"9"},
     "colReorder": "true",
-    "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
+    "aLengthMenu": [[ 5, -1], [ 5, "ทั้งหมด"]],
     "columnDefs": [
     { "width": "8%", "targets": 0 },
     { "width": "32%", "targets": 1 },
-    { "width": "7%", "type":"date-eu", "targets": 2 },
+    { "width": "7%", "targets": 2 },
     { "width": "6%", "targets": 3 },
     { "width": "24%", "targets": 4 },
     { "width": "1%", "targets": 5 },
     { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
     { "width": "1%", "targets": 8 },
-    { "width": "12%", "targets": 9 }
+    { "width": "12%", "targets": 9 },
+    { "orderable": "false"}
     ],
     "language": {
     "lengthMenu":"แสดง _MENU_ แถว",
@@ -321,8 +227,7 @@ return $waredesc1;
     "previous": "ย้อนกลับ"
     },
     },
-    "order":[[2,'asc']],
-    //"ordering": false,
+    "order":[[0,'asc']],
     "initComplete": function(settings, json) {
     setTimeout(function(){ $(".overlay").fadeOut('3000', function() {
     }); }, 1000);

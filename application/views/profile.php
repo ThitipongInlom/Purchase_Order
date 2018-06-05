@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$username = $this->session->username;
+echo '<input type="hidden" id="usernameSwitch" value="'.$username.'">';
+echo '<input type="hidden" id="usernameSession" value="'.$Switch.'">';
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +29,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'; ?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
-    
+    <!-- switch_bootstrap3 -->
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/switch_bootstrap3/bootstrap-switch.css'; ?>">
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/switch_bootstrap3/bootstrap-switch.min.css'; ?>">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="<?php echo base_url().'assets/alertify/css/alertify.min.css'; ?>" />     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -113,13 +120,101 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                   <div class="col-md-3">
                     <br><div align="center">
-                    <button type="button" class="btn btn-su btn-success">บันทึก</button></div>
+                    <button type="button" class="btn btn-su btn-success" disabled><?php echo $this->lang->line('save'); ?></button></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-warning">
+              <div class="box-header with-border">
+                <h3 class="box-title"><?php echo $this->lang->line('changepassword'); ?></h3>
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group" id="formoldpassword">
+                      <label for="oldpassword" class="control-label"><?php echo $this->lang->line('oldpassword'); ?></label>
+                      <input type="password" class="form-control" id="oldpassword" placeholder="<?php echo $this->lang->line('oldpassword'); ?>" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" id="formnewpassword1">
+                      <label for="newpassword1" class="control-label"><?php echo $this->lang->line('newpassword'); ?></label>
+                      <input type="password" class="form-control" id="newpassword1" placeholder="<?php echo $this->lang->line('newpassword'); ?>" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" id="formnewpassword2">
+                      <label for="newpassword2" class="control-label"><?php echo $this->lang->line('newpassword2'); ?></label>
+                      <input type="password" class="form-control" id="newpassword2" placeholder="<?php echo $this->lang->line('newpassword2'); ?>">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div align="center">
+                      <div class="form-group">
+                      <label for="btnpasswordsave" class="control-label"><?php echo $this->lang->line('confirm'); ?></label><br>
+                      <button type="button" class="btn btn-su btn-success" id="btnpasswordsave" onclick="checkpassword();"><h8><?php echo $this->lang->line('changepassword'); ?></h8></button>
+                      </div>
+                    </div>
+                  </div>                                                      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+        <?php  
+        if ($username == $Switch) {
+        echo '<div class="row">';
+        echo '<div class="col-md-12">';
+        echo '<div class="box box-primary collapsed-box">';
+        echo '<div class="box-header with-border">';
+        echo '<h3 class="box-title">'.$this->lang->line('Settingpage').'</h3>';
+        echo '<div class="box-tools pull-right">
+              <button type="button" id="switchhide" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+              </button>
+              </div>';
+        echo '</div>';
+        echo '<div class="box-body">';
+        echo '<div class="table-responsive"><table class="table">
+              <tr align="center">
+              <td><b>SQLAddpr Switch :</b></td>
+              <td><input type="checkbox" name="SQLAddprSwitch" id="SQLAddprSwitch"></td>
+              <td><b>Addprset Switch :</b></td>
+              <td><input type="checkbox" name="AddprsetSwitch" id="AddprsetSwitch"></td>
+              <td><b>Show_all Switch :</b></td>
+              <td><input type="checkbox" name="Show_allSwitch" id="Show_allSwitch"></td>
+              </tr>
+              <tr align="center">
+              <td><b>Show_allnew Switch :</b></td>
+              <td><input type="checkbox" name="Show_allnewSwitch" id="Show_allnewSwitch"></td>
+              <td><b>Show_approve Switch :</b></td>
+              <td><input type="checkbox" name="Show_approveSwitch" id="Show_approveSwitch"></td>
+              <td><b>Show_completed Switch :</b></td>
+              <td><input type="checkbox" name="Show_completedSwitch" id="Show_completedSwitch"></td>
+              </tr>
+              <tr align="center">
+              <td><b>Show_accounting Switch :</b></td>
+              <td><input type="checkbox" name="Show_accountingSwitch" id="Show_accountingSwitch"></td>
+              <td><b>Show_reject Switch :</b></td>
+              <td><input type="checkbox" name="Show_rejectSwitch" id="Show_rejectSwitch"></td>
+              <td><b>Settinguser Switch :</b></td>
+              <td><input type="checkbox" name="SettinguserSwitch" id="SettinguserSwitch"></td>
+              </tr>              
+              </table></div>
+             ';
+        echo '</div>';
+        echo '</div></div></div>';
+        }
+        ?>
       </section>
       <!-- /.content-wrapper -->
     </div>
@@ -139,6 +234,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.min.js'; ?>"></script>
     <!-- Select2 -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
+    <!-- switch_bootstrap3 -->
+    <script src="<?php echo base_url().'/assets/switch_bootstrap3/bootstrap-switch.js';?>"></script>
+    <script src="<?php echo base_url().'/assets/switch_bootstrap3/bootstrap-switch.min.js';?>"></script>
+    <!-- Profile Pr Modifiy -->
+    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/profile.js'; ?>"></script>
+    <!-- Alertify -->
+    <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>   
     <script type="text/javascript">
     $("#langselect").select2({
     templateResult: addlangimg,

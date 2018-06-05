@@ -17,6 +17,48 @@ class Addpr_model extends CI_Model {
 		return $result;
 	}
 
+	public function openedititem($prno,$seq)
+	{
+		$query = $this->db->get_where('PR_Item', array('prno' => $prno, 'seq' => $seq));
+		$result = $query->result();
+		return $result;
+	}
+
+	public function CheckPrcodeNoOne($productcode,$prno)
+	{
+		$query = $this->db->get_where('PR_Item', array('prno' => $prno, 'prdcode' => $productcode));
+		$result = $query->num_rows();
+		return $result;
+	}
+
+	public function deleteitem($prno,$seq,$prdcode)
+	{
+		$this->db->delete('PR_Item', array('prno' => $prno,'seq' => $seq,'prdcode' => $prdcode));
+		$this->db->select('*');
+		$this->db->select("(SELECT COUNT(seq) FROM PR_Item WHERE PR_Item.prno='".$prno."') AS aa", FALSE);
+		$this->db->where('prno', $prno);
+		$this->db->from('PR_Item');
+		$query = $this->db->get();
+	    $Num=1;
+		while ($row = $query->unbuffered_row())
+		{
+			$this->db->set('seq', $Num);
+			$this->db->where('prno', $prno);
+			$this->db->where('prdcode', $row->prdcode);
+			$this->db->update('PR_Item');   
+			$Num++;
+		}
+	}
+
+	public function showtabledataitem()
+	{
+		$prno = $this->input->post('checkitemid');
+		$this->db->order_by("seq", "asc");
+		$query = $this->db->get_where('PR_Item', array('prno' => $prno));
+		$result = $query->result();
+		return $result;
+	}
+
 	public function getnewpr()
 	{
 		$this->db->select('*');
@@ -58,26 +100,53 @@ class Addpr_model extends CI_Model {
 		$newrefno = $refno+1;
 		return $newrefno;
 	}
+	public function setdepartment()
+	{
+		$dep  = $this->session->dep;
+		if ($pos = strrpos($dep, ",")) {
+		$dep1 = strstr($dep, ",", true);
+		}else{
+			$dep1 = $dep;
+		}		
+		$beta = $this->load->database('bo', TRUE);
+		$info = $beta->select("*")
+						->from("ZZFC0020")
+						->where("depcode",$dep1)
+						->get()
+						->row();
+		return $info;
+	}
+
 
 	public function newpradd($prno,$ref,$prdate)
 	{
 		$type = $this->session->type;
 		$dep  = $this->session->dep;
+		if ($pos = strrpos($dep, ",")) {
+		$dep1 = strstr($dep, ",", true);
+		$depa = $dep1;
+		}else{
+			$depa = $dep;
+		}
 		$fname = $this->session->fname;
+		$depname1 = $this->setdepartment();
+		$sqldepname1 = $depname1->depname1;
 		// User // Admin
 		if ($type =='user' OR $type =='admin') {
 		$PR = array(
         'comid' => '0001',
         'prno' => $prno,
         'prdate' => $prdate,
-        'dep' => $dep,
+        'dep' => $depa,
         'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
+    	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-        'prno' => $prno);
+        'prno' => $prno,
+    	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// Hod
@@ -86,18 +155,87 @@ class Addpr_model extends CI_Model {
         'comid' => '0001',
         'prno' => $prno,
         'prdate' => $prdate,
-        'dep' => $dep,
+        'dep' => $depa,
         'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
+    	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
         'prno' => $prno,
-    	'HdApprove' => 'Y',
-    	'HdApprove_Date' => $prdate);
+    	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);	
 		}
+		// accounting0
+		elseif($type =='accounting0' OR $type =='accounting'){
+		$PR = array(
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
+    	'conflag' => 'N',
+    	'zzuser' => $fname,
+    	'zzstrdate' => $prdate,
+    	'chksub1' => '1');
+		$this->db->insert('PR', $PR);
+		$PR_ref = array(
+        'prno' => $prno,
+    	'Dep_name' => $sqldepname1);
+		$this->db->insert('PR_ref', $PR_ref);	
+		}
+		// approval
+		elseif($type =='approval'){
+		$PR = array(
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
+    	'conflag' => 'N',
+    	'zzuser' => $fname,
+    	'zzstrdate' => $prdate,
+    	'chksub1' => '1');
+		$this->db->insert('PR', $PR);
+		$PR_ref = array(
+        'prno' => $prno,
+    	'Dep_name' => $sqldepname1);
+		$this->db->insert('PR_ref', $PR_ref);	
+		}				
+	}
+
+	public function updatepr($prno,$div,$remark,$warecode,$dc,$dc_a,$vat,$vendor,$vendorname,$depname,$depcode)
+	{
+		if ($warecode=='null' OR $depname=='' OR $div=='null') {
+			$Data = 'กรุณาเลือกข้อมูลสำคัญ';
+			$Code = '1';
+		}else{
+			$PR = array(
+				'div' => $div,
+				'remark' => $remark,
+				'warecode' => $warecode,
+				'dep' => $depcode);
+			$this->db->where('prno', $prno);
+			$this->db->update('PR', $PR);
+			$PR_ref = array(
+				'DC' => $dc,
+				'DC_A' => $dc_a,	
+				'Vat' => $vat,
+				'Vendor' => $vendor,
+				'Vendor_name' => $vendorname,
+				'Dep_name' => $depname);
+			$type = $this->session->type;
+			$prdatehod = date('Ymd');
+			$this->db->where('prno', $prno);
+			$this->db->update('PR_ref', $PR_ref);
+			$Data = 'บันทึกสำเร็จ';
+			$Code = '2';
+		}
+		$arrt = array(
+			'Data' => $Data, 'Code' => $Code);
+		echo json_encode($arrt);
+
 	}
 
 	public function golistmodel()
@@ -126,6 +264,19 @@ class Addpr_model extends CI_Model {
 		}
 	}
 
+	public function golistmodelv()
+	{
+		$vgolistv = $this->input->post('value');
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(100);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->like('Vendor_name', $vgolistv);
+		$this->db->order_by("prdate", "desc");
+		$result = $this->db->get()->result_array();
+		return $result;
+	}
+
 	public function checkoldata($prno)
 	{
 		$this->db->select('*');
@@ -142,7 +293,8 @@ class Addpr_model extends CI_Model {
 		$prno = $this->input->post('checkitemid');
 		$query = $this->db->get_where('PR_Item', array('prno' => $prno));
 		$num = $query->num_rows();
-		return $num;
+		$renum = $num+1;
+		return $renum;
 	}
 
 	public function setproductcode()
@@ -156,6 +308,20 @@ class Addpr_model extends CI_Model {
 		$result = $beta->get()->result_array();
 		return $result;
 	}
+
+	public function setproductoldpr()
+	{
+		$v_id = $this->input->post('v_id');
+		$this->db->select('*');
+		$this->db->limit(1);
+		$this->db->from('PR_Item');
+		$this->db->join('PR', 'PR_Item.prno = PR.prno');
+		$this->db->where('PR_Item.prdcode', $v_id);
+		$this->db->order_by('PR_Item.prno', 'desc');
+		$result = $this->db->get()->result_array();
+		return $result;
+	}
+
 
 	public function titleviewhistory($stcode)
 	{

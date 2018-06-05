@@ -65,7 +65,7 @@ if ($this->session->lang == 'english') {
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <a href="<?php echo site_url('index.php/Profile'); ?>">
               <?php echo $this->session->fname; echo ' '; echo $this->session->lname; echo ' <b>['; echo $this->session->dep; echo']</b>'; ?>
             </a>
           </li>
@@ -83,7 +83,9 @@ if ($this->session->lang == 'english') {
               </li>
               <li>
                   <a data-toggle="modal" data-target="#modal-default">  
-                  <button type="button" class="btn btn-danger  btn-block">ออกจากระบบ</button>
+                  <button type="button" class="btn btn-danger  btn-block" <?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Profile') 
+            {echo 'disabled';}?> >ออกจากระบบ</button>
                   </a>
               </li>
             </ul>
@@ -121,34 +123,48 @@ if ($this->session->lang == 'english') {
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_all') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_all'); ?>">
-            <i class="fa fa-television"></i><span><?php echo $this->lang->line('showallorders'); ?></span>
+            <i class="fa fa-book"></i><span><?php echo $this->lang->line('showallorders'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_approve') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>">
-            <i class="fa fa-television"></i><span><?php echo $this->lang->line('approvedprocessing'); ?></span>
+            <i class="fa  fa-handshake-o"></i><span><?php echo $this->lang->line('approvedprocessing'); ?></span>
           </a>
         </li>
+        <?php  
+        $typedep = $this->session->dep;
+        $typetype = $this->session->type;
+        $typeusername = $this->session->username;
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice') {
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Show_accounting/') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Show_data/Show_accounting?i=All').'"><i class="fa  fa-calculator"></i><span>'.$this->lang->line('account').'</span></a></li>';
+        }
+        ?>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>">
-            <i class="fa fa-television"></i><span><?php echo $this->lang->line('completed'); ?></span>
+            <i class="fa  fa-check"></i><span><?php echo $this->lang->line('completed'); ?></span>
           </a>
         </li>
         <li class="<?php 
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_reject') 
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>">
-            <i class="fa fa-television"></i><span><?php echo $this->lang->line('reject'); ?></span>
+            <i class="fa fa-times"></i><span><?php echo $this->lang->line('reject'); ?></span>
           </a>
         </li>
         <?php  
         if ($this->session->type =='admin' OR $this->session->dep =='IT') {
         echo '<li class="treeview';
-        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') {
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_allnew'
+        OR  $this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') {
           echo 'active';
         }
         echo '">';
@@ -160,12 +176,18 @@ if ($this->session->lang == 'english') {
               </a>      
         <ul class="treeview-menu">';
         echo'<li class="';
-        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard2') {
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_allnew') {
           echo 'active';
         }
         echo '">';
-        echo '<a href="'.site_url('index.php/Dashboard/Dashboard').'"><i class="fa fa-dashboard"></i>'.$this->lang->line('Dashboard').'</a></li>';
-        
+        echo '<a href="'.site_url('index.php/Show_data/show_allnew').'"><i class="fa fa-dashboard"></i><span>'.$this->lang->line('showallordersnew').'</span></a></li>';
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Usersetting/Settinguser').'"><i class="fa fa-dashboard"></i><span>'.$this->lang->line('settinguser').'</span></a></li>';
+
         echo '</ul>';
         }
         ?>
@@ -186,7 +208,7 @@ if ($this->session->lang == 'english') {
                 <h4 class="modal-title">ยืนยันการออกจากระบบ</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body…</p>
+                <p>ออกจากระบบ PO </p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger pull-left " data-dismiss="modal">ยกเลิก</button>
