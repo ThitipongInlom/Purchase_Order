@@ -11,7 +11,6 @@ $result = $query->result_array();
 $waredesc1 = $result[0]['waredesc1'];
 return $waredesc1;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +25,9 @@ return $waredesc1;
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css';?>">  
+    <link rel="stylesheet" href="<?php echo base_url().'assets/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css';?>">
     <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">          
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">           
     <!-- Morris charts -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.css';?>">
     <!-- Theme style -->
@@ -37,7 +36,7 @@ return $waredesc1;
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/dist/css/skins/_all-skins.min.css'; ?>">
     <!-- Alertify -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/alertify/css/alertify.min.css'; ?>" />  
+    <link rel="stylesheet" href="<?php echo base_url().'assets/alertify/css/alertify.min.css'; ?>" />
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'; ?>">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
@@ -54,6 +53,10 @@ return $waredesc1;
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style type="text/css">
+    @page {
+    size: A4;
+    margin: 0;
+    }
     @media screen {
     #printSection {
     display: none;
@@ -65,40 +68,46 @@ return $waredesc1;
     }
     #printSection, #printSection * {
     visibility:visible;
-    page-break-after: always;
     }
     #printSection {
     position:absolute;
     left:0;
     top:0;
-    margin:auto;
     font-size: 10px;
     }
     }
+
     .table-stripedstyle > tbody > tr:nth-child(2n+1) > td, .table-stripedstyle > tbody > tr:nth-child(2n+1) > th {
     background-color: #D4E6F1;
     background-repeat: no-repeat;
-    } 
+    }  
     #loginicon{
       display: none;
-    }     
+    }   
     div {
-    	font-size: 13px;
+      font-size: 13px;
     }
     td {
-    	font-size: 13px;
-    }
+      font-size: 13px;
+    }   
+    page[size="A4"] {
+      width: 21cm;
+      height: 29.7cm;
+      display: block;
+      margin: 1cm auto;
+      margin-bottom: 0.5cm;
+    }     
     </style>
   </head>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      <?php echo $this->lang->line('approvedprocessing'); ?>
+      <?php echo $this->lang->line('showallordersnew'); ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
-        <li><a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>"><i class="fa fa-handshake-o"></i> <?php echo $this->lang->line('approvedprocessing'); ?></a></li>
+        <li><a href="<?php echo site_url('index.php/Show_data/Fax'); ?>"><i class="fa fa-check"></i> <?php echo $this->lang->line('showallordersnew'); ?></a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -111,6 +120,7 @@ return $waredesc1;
             <div class="bounce3"></div>
           </div>
           <button type="button" id="btnopendata" data-toggle="modal" data-target="#opendata"></button>
+          <input type="hidden" id="btnopendatafax" data-toggle="modal" data-target="#opendatafax">
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
               <div class="row">
@@ -124,126 +134,77 @@ return $waredesc1;
                 <i class="fa fa-calendar"></i>
                 </div>
                 </div>
-                <button class="btn btn-primary" onclick="searchapprove(this);">ค้นหา</button>
-                <button class="btn btn-success" onclick="blackupapprove(this);">แสดงทั้งหมด</button>
+                <button class="btn btn-primary" onclick="searchcompleted(this);" disabled="">ค้นหา</button>
+                <button class="btn btn-success" onclick="blackupcompleted(this);" disabled="">แสดงทั้งหมด</button>
                 </div>
                 </div>                   
                 </div>
                 <div class="col-md-2 col-xs-4">
                   <div align="right">
                   <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
-                  <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">   
-                  </div>               
+                  <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor"> 
+                  </div>                 
                 </div>                
-              </div>
+              </div>              
               <div class="table-responsive">
-                <input type="hidden" id="sessionusername" value="<?php echo $this->session->username; ?>">
-                <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed">
+                <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed table-stripedstyle">
                   <thead>
                     <tr align="center">
+                      <th>BOX</th>
                       <th>PR No.</th>
                       <th>Vendor</th>
                       <th>PR Date</th>
                       <th>Ref No.</th>
                       <th>Department/Warehouse</th>
-                      <th>Comment PR</th>
-                      <th>HOD</th>
-                      <th>AC</th>
-                      <th>GM</th>
-                      <th>EFC</th>
+                      <th>CP</th>
+                      <th>RC</th>
+                      <th>FAX</th>
                       <th>Action.</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    $i = 1;
-                    $i2 = 1;
-                    foreach ($row as $result) { $i++; $i2++; ?>
-                    <tr align="center" id="rowred<?php echo $i2; ?>" class="">
+                    foreach ($row as $result) { 
+                    ?>
+                    <tr align="center">
+                      <td><input type="checkbox" class="RCcheckbox" name="RCcheckbox" value="<?php echo $result['prno'];?>"></td>
                       <td><?php echo $result['prno']; ?></td>
-                      <td><?php echo  '<div align="left">'.$result['Vendor_name'].' - <b>'.$result['Vendor'].'</b><br>'; ?>     <?php  if ($this->session->dep =='AC') {
-                            echo '<button type="button" class="btn btn-xs btn-warning" prid="'.$result['prno'].'" onclick="Setvenderprmodel(this)" venderold="'.$result['Vendor'].'"><i class="fa fa-fw fa-refresh"></i></button></div><input type="hidden" id="Setvenderprmodelshow" data-toggle="modal" data-target="#Setvenderprmodel">';
-                          } ?></td>
-                      <td valign="top"><?php 
-                      $Newdate = nice_date($result['prdate'], 'd-m-Y'); 
-                      if ($result['HdApprove']=='Y') {
-                        $HdApprove = nice_date($result['HdApprove_Date'], 'd-m-Y'); 
-                      }else{
-                        $HdApprove = '';
-                      }
-                      if ($result['PRApprove']=='Y') {
-                        $PRApprove = nice_date($result['PRApprove_Date'], 'd-m-Y'); 
-                      }else{
-                        $HdApprove = '';
-                      }
-                      if ($result['GMApprove']=='Y') {
-                        $GMApprove = nice_date($result['GMApprove_Date'], 'd-m-Y'); 
-                      }else{
-                        $GMApprove = '';
-                      }                      
-                      $username = $this->session->username;
-                      if ($username=='Somkhit') {
-                        echo '<b>HOD: </b>'.$HdApprove.'<br><b>ACC: </b>'.$PRApprove;
-                      }elseif ($username=='Nalinee') {
-                        echo '<b>ACC:</b>'.$PRApprove.'<br><b>GM: </b>'.$GMApprove;
-                      }else{echo '<b>HOD: </b>'.$Newdate;} ?></td>
+                      <td><?php echo  '<div align="left">'.$result['Vendor_name'].'<br><b>'.$result['Vendor'].'</b></div>'; ?></td>
+                      <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
                       <td><?php echo $result['refno'];  ?></td>
                       <td><?php
-                        echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; echo namewarecode($result['warecode']); echo'</div>';?></td>
-                        <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee'){
-                            echo '';
-                          }else{
-                            echo 'Disabled';
-                          }
-                        ?> value="<?php echo $result['statusapp'];?>">
-                        <?php 
-                        if ($result['statusdatetime']!='') {
-                        echo '<div align="left">'.nice_date($result['statusdatetime'], 'd-m-Y').''.' <b>'.$result['statusby'].'</b></div>';
-                        } ?></td>
-                        <td><?php if ($result['HdApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x"  aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['HdApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['PRApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['PRApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['GMApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['GMApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
+                        echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
+                        <td><?php if ($result['completed']=='Y') {
+                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
+                          } ?></td>
+                        <td><?php if ($result['chkre']=='Y') {
+                          echo '<i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color: #337ab7;"></i>';
+                          } ?></td> 
                         <td>
-                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" rowred="<?php echo $i; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <?php
-                          if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee') {
-                           echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
-                            }
-                          if ($this->session->username =='Somkid') {
-                          echo '
-                          <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
-                          ';
+                        <?php 
+                        foreach ($Fax as $key => $value) {  
+                          if ($value['Fax_prno'] == $result['prno']) {
+                            $Fax_date = $value['Fax_date'];
+                            echo nice_date($Fax_date, 'd-m-Y');
                           }
-                          }else{
-                          echo '
-                          <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
-                          ';
+                        }
+                        ?>
+                        </td>   
+                        <td>
+                          <?php  
+                          if ($result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0') {
+                          echo '<button type="button" class="btn btn-xs  btn-primary"  primary="'.$result["prno"].'" onclick="receive(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-thumbs-up"></i></button>';
                           }
                           ?>
+                          <button type="button" class="btn btn-xs  btn-warning"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
                         </td>
                       </tr>
                       <? } ?>
                     </tbody>
                   </table>
+                    <div align="center">
+                      <button class="btn btn-success" onclick="rcok();" id="btnrcok">OK</button>
+                    </div>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -254,46 +215,6 @@ return $waredesc1;
           </div>
         </div>
       </section>
-
-          <!-- Modal Set-->
-    <div id="Setvenderprmodel" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Set Vender ใหม่ <span id="headsetvender"></span><input type="hidden" id="headsetvenderinput"></h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-            <table class="table table-striped" cellspacing="0" width="100%">
-            <tr>  
-            <div class="col-md-2 col-xs-2"> 
-            <td width="25%"><input type="text" id="vendor" class="form-control input-sm" readonly></td>
-            </div>
-            <div class="col-md-4 col-xs-4"> 
-            <td width="50%" align="center"><input type="text" id="vendorname" class="form-control input-sm" readonly></td>
-            </div>
-            <div class="col-md-2 col-xs4"> 
-            <td width="25%"><select class="form-control" style="width:100%;" id="getvender" onchange="setvender(this.value)"></select>
-            </td>
-            </div>
-            </tr>          
-            </table>
-            </div>
-            <div align="center">
-            <button type="button" class="btn btn-success" onclick="savesetvenderpr(this);">บันทึก</button>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div align="center">
-              <button type="button" class="btn btn-danger" id="closeSetvenderpr" data-dismiss="modal">ปิด</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      
       <!-- Modal -->
       <div id="opendata" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -301,14 +222,34 @@ return $waredesc1;
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ดูข้อมูล <i id="idprimary"></i></h4>
+              <h4 class="modal-title">ดูข้อมูล</h4>
             </div>
             <div class="modal-body" id="dispayopendata">
+          
             </div>
           </div>
         </div>
       </div>
-      <!-- /.content-wrapper -->
+
+
+      <!-- Modal -->
+      <div id="opendatafax" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">ดูข้อมูล</h4>
+            </div>
+            <div align="center"><br><button class="btn btn-success" id="savefax">FAX</button></div>
+            <hr>
+            <div class="modal-body" id="dispayopendatafax">
+          
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Modal -->
     <div id="productmodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -327,7 +268,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-    </div>
+    </div>    
   <!-- Modal -->
     <div id="vendormodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -346,7 +287,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-    </div>    
+    </div>      
     </div>
     <!-- DataTables -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>
@@ -367,7 +308,6 @@ return $waredesc1;
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
     <!-- Morris.js charts -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/raphael/raphael.min.js';?>"></script>
-    <script src="<?php echo base_url().'/assets/adminlte/bower_components/morris.js/morris.min.js'; ?>"></script>
     <!-- Alertify -->
     <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>
     <!-- JS Modal  -->
@@ -376,29 +316,27 @@ return $waredesc1;
     <script type="text/javascript">
     $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();   
-    $('.datepicker').daterangepicker();
+    $('.datepicker').daterangepicker();      
     $(".spinner").hide();
     $("#tabledata").show();
     $('#show_all').DataTable({
-    "lengthChange": false,  
-    "searching": true,
+    "searching": true,  
     "responsive": "true",
     "paging": "false",
     "fixedColumns":{  "heightMatch":"auto","leftColumns":"9"},
     "colReorder": "true",
-    "aLengthMenu": [[ -1], [ "ทั้งหมด"]],
+    "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
     "columnDefs": [
-    { "width": "8%", "targets": 0 },
-    { "width": "17%", "targets": 1 },
-    { "width": "11%", "type":"date-eu", "targets": 2 },
-    { "width": "5%", "targets": 3 },
-    { "width": "20%", "targets": 4 },
+    { "width": "5%", "targets": 0 },
+    { "width": "10%", "targets": 1 },
+    { "width": "20%", "targets": 2 },
+    { "width": "9%", "type":"date-eu", "targets": 3 },
+    { "width": "8%", "targets": 4 },
     { "width": "20%", "targets": 5 },
     { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
-    { "width": "1%", "targets": 8 },
-    { "width": "1%", "targets": 9 },
-    { "width": "6%", "targets": 10 },
+    { "width": "10%", "targets": 8 },
+    { "width": "5%", "targets": 9 },
     { "orderable": "false"}
     ],
     "language": {
@@ -422,23 +360,8 @@ return $waredesc1;
     }); }, 1000);
     }
     });
-
-      if ($.cookie('rowid') != 'undefined') {
-        var sessionusername = $("#sessionusername").val();
-        if (sessionusername == 'Somkhit') {
-        console.log("#rowred"+$.cookie('rowid'));
-        $("#rowred"+$.cookie('rowid')).css({"background-color": "rgb(202, 222, 33)"});
-        }
-      }else{
-        var sessionusername = $("#sessionusername").val();
-        if (sessionusername == 'Somkhit') {
-        console.log($.cookie('rowid'));
-        $("#rowred"+$.cookie('rowid')).css({"background-color": "rgb(202, 222, 33)"});
-        }        
-      }
-
     });
-    
+
     var linkurl = function linkurl() {
     var url = "../../index.php/URL";
     var Httpreq = new XMLHttpRequest(); 
@@ -460,6 +383,6 @@ return $waredesc1;
         alertify.success('แจ้งเตือน : ' + alertify.get('notifier','position'));
         }
       });
-    }
+    }      
     </script>
   </html>

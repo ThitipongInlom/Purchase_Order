@@ -24,7 +24,8 @@ class Welcome_model extends CI_Model {
 			'type'      => $query2[0]['type'],
 			'dep'       => $query2[0]['dep'],
 			'div'       => $query2[0]['div'],
-			'lang'      => $query2[0]['lang']
+			'lang'      => $query2[0]['lang'],
+			'signature_img' => $query2[0]['signature_img'],
 			);
 			$this->session->set_userdata($newdata);
 		}

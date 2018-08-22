@@ -400,6 +400,7 @@ var Keygolist = function Keygolist(event) {
 var urlresult = JSON.parse(linkurl());
 $("#getvender").select2({
   placeholder: "ค้นหา Vendor",
+  width: "100%",
   ajax: {
     url: urlresult.getvender,
     dataType: 'json',
@@ -421,6 +422,7 @@ $("#getvender").select2({
 
 $("#getwarehouse").select2({
   placeholder: "เลือก",
+  width: "100%",
   ajax: {
     url: urlresult.getwarehouse,
     dataType: 'json',
@@ -440,6 +442,7 @@ $("#getwarehouse").select2({
 });
 $("#getdivision").select2({
   placeholder: "เลือกโรงแรม",
+  width: "100%",
   ajax: {
     url: urlresult.getdivision,
     dataType: 'json',
@@ -459,6 +462,7 @@ $("#getdivision").select2({
 });
 $("#getdepartment").select2({
   placeholder: "เลือกแผนก",
+  width: "100%",
   ajax: {
     url: urlresult.getdepartment,
     dataType: 'json',

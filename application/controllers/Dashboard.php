@@ -27,7 +27,6 @@ class Dashboard extends CI_Controller {
 		$data['gmtoday']  = $this->Dashboard_model->query_gm_apv_today();
 		$data['efctoday']  = $this->Dashboard_model->query_efc_apv_today();
        
-
 		$data['actodayno']  = $this->Dashboard_model->query_ac_apv_todayno();
 		$data['gmtodayno']  = $this->Dashboard_model->query_gm_apv_todayno();	
 		$data['efctodayno']  = $this->Dashboard_model->query_efc_apv_todayno();
@@ -41,7 +40,6 @@ class Dashboard extends CI_Controller {
 		$data['acmouthno']  = $this->Dashboard_model->query_ac_apv_mouthno();
 		$data['gmmouthno']  = $this->Dashboard_model->query_gm_apv_mouthno();
 		$data['efcmouthno']  = $this->Dashboard_model->query_efc_apv_mouthno();
-
 
 		$data['acnoapp']  = $this->Dashboard_model->query_ac_apv_noapp();
 		$data['gmnoapp']  = $this->Dashboard_model->query_gm_apv_noapp();

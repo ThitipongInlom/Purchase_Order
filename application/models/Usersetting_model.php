@@ -55,6 +55,31 @@ class Usersetting_model extends CI_Model {
 		echo json_encode($dataok);
 	}
 
+	public function updatehodimg($primary,$filesqlname)
+	{
+		$data = array(
+        'signature_img' => $filesqlname);
+        $this->db->where('username', $primary);
+        $this->db->update('PR_Users', $data);
+        return;
+	}
+
+	public function deleteimghod($primary)
+	{
+		$query = $this->db->get_where('PR_Users', array('username' => $primary));
+		$result = $query->row();
+		return $result->signature_img;
+	}
+
+	public function deleteupdate($primary)
+	{
+		$data = array(
+        'signature_img' => null);
+        $this->db->where('username', $primary);
+        $this->db->update('PR_Users', $data);
+        return;
+	}
+
 
 
 }

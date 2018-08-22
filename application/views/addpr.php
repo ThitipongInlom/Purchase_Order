@@ -129,23 +129,23 @@ $info = $beta->select("*")
                         <form id="formpr" name="formpr">
                         <tr>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/rno'); ?></b></h5></td>
-                          <td ><input type="text" id="prno" class="form-control input-sm" value="<?php echo $newpr; ?>" readonly></td>
+                          <td ><input type="text" id="prno" class="form-control input-sm" style="width:auto;" value="<?php echo $newpr; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/r_date'); ?></b></h5></td>
-                          <td ><input type="text" class="form-control input-sm" value="<?php $Newdate = nice_date($prdate, 'd/m/Y'); echo $Newdate; ?>" readonly></td>
+                          <td ><input type="text" class="form-control input-sm" style="width:auto;" value="<?php $Newdate = nice_date($prdate, 'd/m/Y'); echo $Newdate; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('refno'); ?></b></h5></td>
-                          <td><input type="text" class="form-control input-sm" value="<?php echo $newref; ?>" readonly></td>
+                          <td><input type="text" class="form-control input-sm" style="width:auto;" value="<?php echo $newref; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/r_date'); ?></b></h5></td>
-                          <td ><input type="text" class="form-control input-sm" value="<?php $Newdate = nice_date($prdate, 'd/m/Y'); echo $Newdate; ?>" readonly></td>
+                          <td ><input type="text" class="form-control input-sm" style="width:auto;" value="<?php $Newdate = nice_date($prdate, 'd/m/Y'); echo $Newdate; ?>" readonly></td>
                         </tr>
                         <tr>
-                          <td width="10%" align="center"><h5><b><?php echo $this->lang->line('vendor'); ?></b></h5></td>
-                          <td width="10%"><input type="text" id="vendor" class="form-control input-sm" readonly></td>
-                          <td width="10%" align="center"><input type="text" id="vendorname" class="form-control input-sm" readonly></td>
-                          <td width="15%"><select class="form-control input-sm" id="getvender" width="100%" onchange="setvender(this.value)"></select></td>
+                          <td align="center"><h5><b><?php echo $this->lang->line('vendor'); ?></b></h5></td>
+                          <td><input type="text" id="vendor" class="form-control input-sm" style="width:auto;" readonly></td>
+                          <td align="center"><input type="text" id="vendorname" class="form-control input-sm" style="width:auto;" readonly></td>
+                          <td><select class="form-control input-sm" id="getvender" width="100%" onchange="setvender(this.value)"></select></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('dep'); ?></b></h5></td>
-                          <td width="10%"><input type="text" id="depcode" class="form-control input-sm" value="<?php echo $dep1; ?>" readonly></td>
-                          <td align="center"><input type="text" id="depname" class="form-control input-sm" value="<?php echo $info->depname1; ?>" readonly></td>
-                          <td width="15%"><select class="form-control input-sm col-md-2" id="getdepartment" width="100%" onchange="setdepartment(this.value)" disabled></select></td>
+                          <td><input type="text" id="depcode" class="form-control input-sm" style="width:auto;" value="<?php echo $dep1; ?>" readonly></td>
+                          <td align="center"><input type="text" id="depname" class="form-control input-sm" style="width:auto;" value="<?php echo $info->depname1; ?>" readonly></td>
+                          <td><select class="form-control input-sm col-md-2" id="getdepartment" width="100%" onchange="setdepartment(this.value)" disabled></select></td>
                         </tr>
                         <tr>
                           <td align="center"><h5><b><?php echo $this->lang->line('warehouse'); ?></b></h5></td>
@@ -177,7 +177,7 @@ $info = $beta->select("*")
                             <table cellspacing="0" width="100%" class="table table-bordered table-condensed responsive">
                               <tr class="trinfo">
                                 <td width="5%" align="center"><h5><?php echo $this->lang->line('item'); ?></h5></td>
-                                <td width="5%" align="center"><input type="text" id="itemprno" class="form-control input-sm" readonly></td>
+                                <td width="5%" align="center"><input type="text" id="itemprno" class="form-control input-sm" style="width:auto;" readonly></td>
                                 <form id="formadditem" name="formadditem">
                                   <td width="8%" align="center"><h5><?php echo $this->lang->line('productcode'); ?></h5></td>
                                   <td width="10%"><input type="text" id="productcode" class="form-control input-sm" readonly></td>

@@ -14,6 +14,7 @@ $result = $query->result_array();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
     <!-- Font Awesome -->
@@ -84,10 +85,10 @@ $result = $query->result_array();
    }
    input:-moz-read-only { background: #ffffff !important;}
    input:read-only { background: #ffffff !important;}
-  .select2-selection{
-  background-color:#b3d1ff !important;
-  color:red !important;
-  } 
+  	.select2-selection{
+  	background-color:#b3d1ff !important;
+  	color:red !important;
+  	} 
   </style>
   </head>
   <body>
@@ -105,33 +106,31 @@ $result = $query->result_array();
       <!-- Main content -->
       <section class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 col-sm-12">
             <div class="box box-success">
               <div class="box-body">
-                <div class="row">
-                  <div class="col-md-12">
                     <div class="table-responsive">
                       <table cellspacing="0" width="100%" class="table table-bordered table-hover responsive">
                         <form id="formpr" name="formpr">
                         <tr>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/rno'); ?></b></h5></td>
-                          <td ><input type="text" id="prno" class="form-control input-sm" value="<?php echo $getdata[0]['prno']; ?>" readonly></td>
+                          <td><input type="text" id="prno" class="form-control input-sm" style="width:auto;" value="<?php echo $getdata[0]['prno']; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/r_date'); ?></b></h5></td>
-                          <td ><input type="text" class="form-control input-sm" value="<?php $Newdate = nice_date($getdata[0]['prdate'], 'd/m/Y'); echo $Newdate; ?>" readonly></td>
+                          <td><input type="text" class="form-control input-sm" style="width:auto;" value="<?php $Newdate = nice_date($getdata[0]['prdate'], 'd/m/Y'); echo $Newdate; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('refno'); ?></b></h5></td>
-                          <td><input type="text" class="form-control input-sm" value="<?php echo $getdata[0]['refno']; ?>" readonly></td>
+                          <td><input type="text" class="form-control input-sm" style="width:auto;" value="<?php echo $getdata[0]['refno']; ?>" readonly></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('p/r_date'); ?></b></h5></td>
-                          <td ><input type="text" class="form-control input-sm" value="<?php $Newdate = nice_date($getdata[0]['prdate'], 'd/m/Y'); echo $Newdate; ?>" readonly></td>
+                          <td><input type="text" class="form-control input-sm" style="width:auto;" value="<?php $Newdate = nice_date($getdata[0]['prdate'], 'd/m/Y'); echo $Newdate; ?>" readonly></td>
                         </tr>
                         <tr>
-                          <td width="10%" align="center"><h5><b><?php echo $this->lang->line('vendor'); ?></b></h5></td>
-                          <td width="10%"><input type="text" id="vendor" class="form-control input-sm" value="<?php echo $getdata[0]['Vendor']; ?>" readonly></td>
-                          <td width="10%" align="center"><input type="text" id="vendorname" class="form-control input-sm" value="<?php echo $getdata[0]['Vendor_name']; ?>" readonly></td>
-                          <td width="15%"><select class="form-control input-sm" id="getvender" width="100%" onchange="setvender(this.value)"></select></td>
+                          <td align="center"><h5><b><?php echo $this->lang->line('vendor'); ?></b></h5></td>
+                          <td><input type="text" id="vendor" class="form-control input-sm" style="width:auto;" value="<?php echo $getdata[0]['Vendor']; ?>" readonly></td>
+                          <td align="center"><input type="text" id="vendorname" class="form-control input-sm" style="width:auto;" value="<?php echo $getdata[0]['Vendor_name']; ?>" readonly></td>
+                          <td><select class="form-control input-sm" id="getvender" width="100%" onchange="setvender(this.value)"></select></td>
                           <td align="center"><h5><b><?php echo $this->lang->line('dep'); ?></b></h5></td>
-                          <td width="10%"><input type="text" id="depcode" class="form-control input-sm" value="<?php echo $getdata[0]['dep']; ?>" readonly></td>
-                          <td align="center"><input type="text" id="depname" class="form-control input-sm" readonly></td>
-                          <td width="15%"><select class="form-control input-sm col-md-2" id="getdepartment" width="100%" onchange="setdepartment(this.value)" disabled></select></td>
+                          <td><input type="text" id="depcode" class="form-control input-sm" style="width:auto;" value="<?php echo $getdata[0]['dep']; ?>" readonly></td>
+                          <td align="center"><input type="text" id="depname" class="form-control input-sm" style="width:auto;" readonly></td>
+                          <td><select class="form-control input-sm col-md-2" id="getdepartment" width="100%" onchange="setdepartment(this.value)" disabled></select></td>
                         </tr>
                         <tr>
                           <td align="center"><h5><b><?php echo $this->lang->line('warehouse'); ?></b></h5></td>
@@ -141,7 +140,7 @@ $result = $query->result_array();
                           <td align="center"><h5><b><?php echo $this->lang->line('division'); ?></b></h5></td>
                           <td><input type="text" id="divisioncode" class="form-control input-sm" value="<?php echo $getdata[0]['div']; ?>" readonly></td>
                           <td align="center"><input type="text" id="divisionname" class="form-control input-sm" readonly></td>
-                          <td><select class="form-control input-sm col-md-2" id="getdivision" width="100%" onchange="setdivision(this.value)"></select></td>
+                          <td><select class="form-control input-sm" id="getdivision" width="100%" onchange="setdivision(this.value)"></select></td>
                         </tr>
                         <tr>
                           <td align="center"><b><?php echo $this->lang->line('remark'); ?></b></td>
@@ -149,6 +148,7 @@ $result = $query->result_array();
                         </tr>
                       </form>
                       </table>
+                  	  </div>
                       <div class="box box-success card panel panel-default divitemcolor">
                         <!--
                         <div class="box-header">
@@ -161,26 +161,26 @@ $result = $query->result_array();
                           <div class="table-responsive">
                             <table cellspacing="0" width="100%" class="table table-bordered table-condensed responsive">
                               <tr class="trinfo">
-                                <td width="5%" align="center"><h5>Item</h5></td>
-                                <td width="5%" align="center"><input type="text" id="itemprno" class="form-control input-sm" readonly></td>
+                                <td width="5%" align="center"><h5><?php echo $this->lang->line('item'); ?></h5></td>
+                                <td width="5%" align="center"><input type="text" id="itemprno" class="form-control input-sm" style="width:auto;" readonly></td>
                                 <form id="formadditem" name="formadditem">
-                                  <td width="8%" align="center"><h5>Product Code</h5></td>
+                                  <td width="8%" align="center"><h5><?php echo $this->lang->line('productcode'); ?></h5></td>
                                   <td width="10%"><input type="text" id="productcode" class="form-control input-sm" readonly></td>
-                                  <td width="5%"><button type="button" class="btn btn-primary btn-sm input-sm" onclick="ajaxopenproduct(this)">ค้นหาสินค้า</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct"></td>
+                                  <td width="5%"><button type="button" class="btn btn-primary btn-sm input-sm" onclick="ajaxopenproduct(this)"><?php echo $this->lang->line('productsearch'); ?></button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct"></td>
                                   <td width="25%" colspan="2"><input type="text" id="itemstname1" class="form-control input-sm" readonly></td>
                                   <td width="5%"><input type="text" id="itemmdesc1" class="form-control input-sm" readonly></td>
                                 </tr>
                                 <tr class="trinfo">
-                                  <td width="10%" align="center"><h5>Last Unit Price</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('lastunitprice'); ?></h5></td>
                                   <td><input type="text" class="form-control input-sm" id="itemprpriceold"></td>
-                                  <td width="10%" align="center"><h5>Unit Price</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('unitprice'); ?></h5></td>
                                   <td colspan="2"><input type="text" class="form-control input-sm" id="itemprprice" onchange="checkNumberunitprice();"></td>
-                                  <td width="10%" align="center"><h5>Quantity</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('quantity'); ?></h5></td>
                                   <td width="5%"><input type="text" id="itemprqty" class="form-control input-sm" onchange="checkNumberprqty();"></td>
                                   <td align="center"><h4><b><p id="Newitem" class="text-danger"></p></b></h4></td>                                  
                                 </tr>
                                 <tr class="trinfo">
-                                  <td width="10%" align="center"><h5>Last Purchase date</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('lastpurchasedate'); ?></h5></td>
                                   <td colspan="2">
                                     <div align="center">
                                     <div class="form-group">
@@ -193,7 +193,7 @@ $result = $query->result_array();
                                     </div>
                                     </div>
                                   </td>  
-                                  <td width="10%" align="center"><h5>Delivery date</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('deliverydate'); ?></h5></td>
                                   <td colspan="2">
                                     <div align="center">
                                     <div class="form-group">
@@ -206,20 +206,20 @@ $result = $query->result_array();
                                     </div>
                                   </div>
                                   </td>                                                                  
-                                  <td width="10%" align="center"><h5>Attach file</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('attachfile'); ?></h5></td>
                                   <td><h5><input type="file" id="itemifileupd" name="itemifileupd"></h5></td>
                                 </tr>  
                                 <tr class="trinfo">
-                                  <td width="10%" align="center"><h5>Remark</h5></td>
+                                  <td width="10%" align="center"><h5><?php echo $this->lang->line('remark'); ?></h5></td>
                                   <td colspan="8"><input type="text" id="itemiremark" class="form-control input-sm"></td>
                                 </tr>
                                 </form>
                             </table>
                           </div>
                           <div align="center">
-                            <button type="button" class="btn btn-success" id="additem">เพิ่มไอเท็ม</button>
-                            <button type="button" class="btn btn-warning" id="updataitem" onclick="updataitem(this);">อัพเดต</button>
-                            <button type="button" class="btn btn-danger" id="colseupdate">ยกเลิก</button>
+                            <button type="button" class="btn btn-success" id="additem"><?php echo $this->lang->line('additem'); ?></button>
+                            <button type="button" class="btn btn-warning" id="updataitem" onclick="updataitem(this);"><?php echo $this->lang->line('update'); ?></button>
+                            <button type="button" class="btn btn-danger" id="colseupdate"><?php echo $this->lang->line('cancel'); ?></button>
                           </div>
                         </div>
                       </div>
@@ -262,30 +262,30 @@ $result = $query->result_array();
                   <div class="table-responsive">
                   <table cellspacing="0" width="100%" class="table table-bordered table-hover responsive table-condensed">
                     <tr>
-                      <td width="10%" align="center"><h5>Vat 7%</h5></td>
+                      <td width="10%" align="center"><h5><?php echo $this->lang->line('vat'); ?></h5></td>
                       <td>
                         <div class="form-group" align="center">
                           <label>
                             <input type="radio" name="r2" class="flat-red" value="Y" <?php  if ($getdata[0]['Vat'] == 'Y') {
                             echo 'checked';
                             } ?>>
-                            Yes
+                            <?php echo $this->lang->line('yes'); ?>
                           </label>
                           <label>
                             <input type="radio" name="r2" class="flat-red" value="N" <?php if ($getdata[0]['Vat'] == 'N' OR $getdata[0]['Vat'] == '') {
                             echo 'checked';
                             } ?>>
-                            No
+                            <?php echo $this->lang->line('no'); ?>
                           </label>
                         </div>
                       </td>
-                      <td width="10%" align="center"><h5>Discount(%)</h5></td>
+                      <td width="10%" align="center"><h5><?php echo $this->lang->line('discount%'); ?></h5></td>
                       <td><input type="text" class="form-control input-sm" value="<?php if($getdata[0]['DC'] == ''){echo '0';}else{ echo $getdata[0]['DC'];} ?>" id="dc" onchange="checkNumberdc();">
-                      <span style="color: red;"><b>*กรณีใช้เป็น Discount(%) กรุณาใส่ Discount เป็น 0</b></span>
+                      <span style="color: red;"><b><?php echo $this->lang->line('incaseofdiscountpleaseenterDiscountto0'); ?></b></span>
                     </td>
-                    <td width="10%" align="center"><h5>Discount</h5></td>
+                    <td width="10%" align="center"><h5><?php echo $this->lang->line('discount'); ?></h5></td>
                     <td><input type="text" class="form-control input-sm" value="<?php if($getdata[0]['DC_A'] == ''){echo '0';}else{ echo $getdata[0]['DC_A'];} ?>" id="dc_a" onchange="checkNumberdc_a();">
-                    <span style="color: red;"><b>*กรณีใช้เป็นตัวเลข Discount กรุณาใส่ Discount(%) เป็น 0</b></span>
+                    <span style="color: red;"><b><?php echo $this->lang->line('incaseofdiscount,pleaseenterDiscount(%)to0'); ?></b></span>
                   </td>
                 </tr>
               </table>
@@ -321,13 +321,13 @@ $result = $query->result_array();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ค้นหาสินค้า</h4>
+        <h4 class="modal-title"><?php echo $this->lang->line('productsearch'); ?></h4>
       </div>
       <div class="modal-body" id="showlistitem">
       </div>
       <div class="modal-footer">
         <div align="center">
-          <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal">ปิด</button>
+          <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
         </div>
       </div>
     </div>

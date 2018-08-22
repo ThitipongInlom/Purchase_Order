@@ -25,7 +25,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -41,10 +41,17 @@ class Editpr_model extends CI_Model {
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
 		}elseif ($typuser=='hod') {
+			$signature_img = $this->session->signature_img;
+			$username = $this->session->username;
+			if ($signature_img=='') {
+				$signature = '';
+			}else{
+				$signature = $username;
+			}
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -56,7 +63,9 @@ class Editpr_model extends CI_Model {
 				'Vendor_name' => $vendorname,
 				'Dep_name' => $depname,
 				'HdApprove' => 'Y',
-				'HdApprove_Date' => $date);
+				'HdApprove_Date' => $date,
+				'Hd_signature' => $signature);
+
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_ref', $PR_ref);
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
@@ -65,10 +74,25 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
+			if ($username=='Somkid') {
+			$PR_ref = array(
+				'DC' => $dc,
+				'DC_A' => $dc_a,	
+				'Vat' => $vat,
+				'Vendor' => $vendor,
+				'Vendor_name' => $vendorname,
+				'Dep_name' => $depname,
+				'HdApprove' => 'Y',
+				'HdApprove_Date' => $date,				
+				'PRApprove' => 'Y',
+				'PRApprove_Date' => $date);
+			$this->db->where('prno', $prno);
+			$this->db->update('PR_ref', $PR_ref);
+			}else{
 			$PR_ref = array(
 				'DC' => $dc,
 				'DC_A' => $dc_a,	
@@ -80,13 +104,14 @@ class Editpr_model extends CI_Model {
 				'PRApprove_Date' => $date);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_ref', $PR_ref);
+			}
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
 		}elseif ($typuser == 'approval' AND $username == 'Somkhit') {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -112,7 +137,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -125,8 +150,7 @@ class Editpr_model extends CI_Model {
 				'Dep_name' => $depname,
 				'EFCApprove' => 'Y',
 				'EFCComment' => $efcremark,
-				'EFCApprove_Date' => $date,
-				'completed' => 'Y');
+				'EFCApprove_Date' => $date);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_ref', $PR_ref);
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
@@ -143,7 +167,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -159,10 +183,17 @@ class Editpr_model extends CI_Model {
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
 		}elseif ($typuser=='hod') {
+			$signature_img = $this->session->signature_img;
+			$username = $this->session->username;
+			if ($signature_img=='') {
+				$signature = '';
+			}else{
+				$signature = $username;
+			}
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -174,7 +205,8 @@ class Editpr_model extends CI_Model {
 				'Vendor_name' => $vendorname,
 				'Dep_name' => $depname,
 				'HdApprove' => 'N',
-				'HdApprove_Date' => $date);
+				'HdApprove_Date' => $date,
+				'Hd_signature' => $signature);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_ref', $PR_ref);
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
@@ -183,7 +215,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -204,7 +236,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
@@ -230,7 +262,7 @@ class Editpr_model extends CI_Model {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
-				'warecode' => $warecode,
+				'warecode' => strtoupper($warecode),
 				'dep' => $depcode);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);

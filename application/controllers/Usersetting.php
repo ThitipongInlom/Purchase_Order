@@ -38,6 +38,36 @@ class Usersetting extends CI_Controller {
 		$this->Usersetting_model->updatedata($primary,$editfname,$editlname,$edittype,$editmail,$editdep,$editdiv);
 	}
 
+	public function uploadimghod()
+	{
+		$primary = $_POST['primary'];
+		if (isset($_FILES['hodimg']['name'])) {
+			$filename = $_FILES['hodimg']['name'];
+			$file_ext = pathinfo($filename,PATHINFO_EXTENSION);
+			$filesqlname = $primary.'.'.$file_ext;
+			$config['upload_path'] = FCPATH.'assets/signature/';
+			$config['allowed_types'] = '*';
+			$config['max_size']     = '10240'; //10240 = 10 MB
+			$config['file_name'] = $filesqlname;
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('hodimg');
+			$this->Usersetting_model->updatehodimg($primary,$filesqlname);
+			echo 'YES';
+		}else{
+			echo 'NO';
+		}
+	}
+
+	public function deleteimghod()
+	{
+		$primary = $_POST['primary'];
+		$hoddelte = $this->Usersetting_model->deleteimghod($primary);
+		$path = FCPATH.'assets/signature/'.$hoddelte;
+		unlink($path); 
+		$this->Usersetting_model->deleteupdate($primary);
+		echo 'OK';
+	}
+
 	public function edituseradata()
 	{
 		$primary = $this->input->post('primary');

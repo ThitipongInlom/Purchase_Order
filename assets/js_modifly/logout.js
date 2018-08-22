@@ -1,14 +1,23 @@
+var linkurl = function linkurl() {
+	var url = "../../index.php/URL";
+    var Httpreq = new XMLHttpRequest(); 
+    Httpreq.open("GET",url,false);
+    Httpreq.send(null);
+    return Httpreq.responseText; 
+}
 $("#logouticon").hide();
 $("#logout").click(function(e) {
 	$("#logouticon").show();
+	var urlresult = JSON.parse(linkurl());
 	$.ajax({
-		url: 'http://172.16.1.253/PO/index.php/Welcome/logout',
+		url: urlresult.logout,
 		type: 'POST',
 		data: {
 			data: 'logout'
 		},
 		success: function(result) {
-			setTimeout("window.location.href = 'http://172.16.1.253/PO';", 1500);
+			$.removeCookie('rowid');
+			setTimeout("window.location.href = urlresult.urlweb;", 200);
 		}
 	});
 });

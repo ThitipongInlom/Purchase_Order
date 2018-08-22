@@ -88,6 +88,30 @@ class Add_Pr extends CI_Controller {
 		';
 	}
 
+	public function listitem3()
+	{
+	echo '
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
+				<div align="center">
+				<div class="input-group">
+                <input type="text" class="form-control" id="inputgolistv3" placeholder="ค้นหา" onkeydown="Keygolistv3(event);" autofocus>
+                   	<span class="input-group-btn">
+                     <button type="button" class="btn btn-primary" onclick="golistv3();">ค้นหา
+                     <i class="fa fa-refresh fa-spin" id="loginicon" style="padding-right: 2px;"></i></button>
+                    </span>
+              </div>
+				</div>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-md-12">
+			<div id="tablelistv3"></div>
+			</div>
+		</div>	
+		';
+	}
+
 	public function listitemv()
 	{
 	echo '
@@ -148,6 +172,42 @@ class Add_Pr extends CI_Controller {
 		echo'</table><div class="table-responsive">
 		';
 	}
+
+	public function golist3()
+	{
+		$result = $this->Addpr_model->golistmodel3();
+		echo '
+		<br><div class="table-responsive">
+		<table class="table table-bordered">
+		<tr class="info" align="center">
+			<td width="10%"><b>PR</b></td>
+			<td width="10%"><b>Refno</b></td>
+			<td width="30%"><b>Vendor</b></td>
+			<td width="20%"><b>Dep_name</b></td>
+			<td width="10%"><b>วันที่เปิดPR</b></td>	
+			<td width="10%"><b>RC</b></td>	
+		</tr>';
+		foreach ($result as $row)
+		{
+		$stcode = $row['prno'];	
+		$Newdate = nice_date($row['prdate'], 'd-m-Y');
+		echo '
+		<tr>
+			<td align="center"><a href="#"><span dataprno="'.$row['prno'].'" onclick="showwindowsmodalprview(this)" class="badge bg-red" value="'.$row['prno'].'">'.$row['prno'].'</span></a></td>
+			<td align="center"><b>'.$row['refno'].'</b></td>	
+			<td align="left"><b>'.$row['Vendor_name'].'</b></td>
+			<td><b>'.$row['Dep_name'].'</b></td>
+			<td align="center"><b>'.$Newdate.'</b></td>';
+		if ($row['chkre']=='Y') {
+			echo '<td align="center"><b><i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color: #337ab7;"></i></b></td>';
+		}else{
+			echo '<td align="center"></td>';
+		}
+		echo '</tr>';
+		}
+		echo'</table><div class="table-responsive">
+		';
+	}	
 
 	public function golist2()
 	{
@@ -644,19 +704,36 @@ class Add_Pr extends CI_Controller {
 			}else{
 				$Newusedate = '';
 			}
+        	if ($Newlastpurdate=='Invalid Date') {
         	$this->db->set('prdcode', $productcode);
         	$this->db->set('prqty', $prqty);
-        	$this->db->set('prprice_old', $prpriceold);
+        	$this->db->set('prprice_old', $prpriceold);    
+        	$this->db->set('prprice', $prprice);
+        	$this->db->set('usedate', $Newusedate);
+        	$this->db->set('iremark', $iremark);
+        	$this->db->where('prno', $prno);
+        	$this->db->where('seq', $newseq);
+        	$this->db->where('prdcode', $prdcodeold);
+        	$this->db->update('PR_Item');
+        	$DataSave = 'อัพเดตข้อมูลสำเร็จ';
+        	$ImgSave  = '';
+        	$ImgCode  = '0';        	    		
+        	}else{
+        	$this->db->set('prdcode', $productcode);
+        	$this->db->set('prqty', $prqty);
+        	$this->db->set('prprice_old', $prpriceold);   
         	$this->db->set('lastpurdate', $Newlastpurdate);
         	$this->db->set('prprice', $prprice);
         	$this->db->set('usedate', $Newusedate);
         	$this->db->set('iremark', $iremark);
-        	$this->db->where('seq', $seqold);
+        	$this->db->where('prno', $prno);
+        	$this->db->where('seq', $newseq);
         	$this->db->where('prdcode', $prdcodeold);
         	$this->db->update('PR_Item');
         	$DataSave = 'อัพเดตข้อมูลสำเร็จ';
         	$ImgSave  = '';
         	$ImgCode  = '0';
+        	}
 		}
 		if (isset($_FILES['file']['name'])) {
 			$nowsha = sha1(now().$_FILES['file']['name']);

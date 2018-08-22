@@ -66,8 +66,63 @@ var updatedata =function updatedata(e) {
 			}
 			$("#closemodal").click();
 		}
-	});
+	});	
+}
 
+var saveimg = function saveimg(e) {
+	var urlresult = JSON.parse(linkurl());
+	$("#saveimgin").click();
+	var primary = $(e).attr('primary');
+	$("#uploadbtn").click(function(event) {
+		var hodimg = $("#hodimg").prop('files')[0];
+		var form_data = new FormData();
+		form_data.append('primary', primary);
+		form_data.append('hodimg', hodimg);
+		$.ajax({
+			url: urlresult.Imghodup,
+			type: 'POST',
+			dataType: 'text',
+		    cache: false,
+		    contentType: false,
+		    processData: false,			
+			data: form_data,
+			success: function (callblack) {
+				if (callblack =='YES') {
+				alertify.set('notifier','position', 'อัพเดตลายเซ็นเสร็จสิ้น');
+        		alertify.success('แจ้งเตือน : ' + alertify.get('notifier','position'));	
+        		setTimeout(function() {
+		        location.reload();
+		        }, 500);
+        		local
+				}if (callblack =='NO') {
+				alertify.set('notifier','position', 'อัพเดตลายเซ็นไม่สำเร็จ');
+        		alertify.error('แจ้งเตือน : ' + alertify.get('notifier','position'));	
+        		setTimeout(function() {
+		        location.reload();
+		        }, 500);        		
+				}
+			}
+		});
+	});
+}
+
+var deleteimg = function deleteimg(e) {
+	var urlresult = JSON.parse(linkurl());
+	var primary = $(e).attr('primary');
+	$.ajax({
+		url: urlresult.Imghoddelete,
+		type: 'POST',
+		data: {primary: primary},
+		success: function (callblack) {
+			if (callblack == 'OK') {
+				alertify.set('notifier','position', 'ลบลายเซ็นเสร็จสิ้น');
+        		alertify.success('แจ้งเตือน : ' + alertify.get('notifier','position'));	
+        		setTimeout(function() {
+		        location.reload();
+		        }, 500);          						
+			}
+		}
+	});
 	
 }
 

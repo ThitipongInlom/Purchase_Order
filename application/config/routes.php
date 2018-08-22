@@ -58,3 +58,5 @@ $route['API_Print/(:any)'] = 'Showprview/API_Print/$1';
 $route['API_email'] = 'Showprview/API_email';
 $route['URL'] = 'Controurl/url';
 $route['Login'] = 'Welcome/index';
+$route['Coss'] = 'Welcome/Coss_PR';
+$route['Clear_Pr'] = 'Welcome/Clear_Pr';

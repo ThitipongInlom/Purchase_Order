@@ -111,7 +111,7 @@ return $waredesc1;
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
               <div class="row">
-                <div class="col-md-10 col-xs-8">
+                <div class="col-md-9 col-xs-8">
                 <div class="form-inline">
                 <div class="form-group">
                 <label for="hsearch">ค้นหาจากวันที่: </label>
@@ -126,8 +126,9 @@ return $waredesc1;
                 </div>
                 </div>                   
                 </div>
-                <div class="col-md-2 col-xs-4">
+                <div class="col-md-3 col-xs-4">
                   <div align="right">
+                  <button class="btn btn-info btn-sm" onclick="accajaxopenproduct3(this)">ค้นหาPR เก่า</button><input type="hidden" data-toggle="modal" data-target="#csproduct" id="opencsproduct">
                   <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
                   <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor"> 
                   </div>                 
@@ -155,7 +156,7 @@ return $waredesc1;
                       <td><?php echo $result['prno']; ?></td>
                       <td><?php echo  '<div align="left">'.$result['Vendor_name'].'<br><b>'.$result['Vendor'].'</b></div>'; ?></td>
                       <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                      <td><?php echo $result['refno'];  ?></td>
+                      <td align="left"><?php echo $result['refno']; echo '<br>'; if (isset($result['pono'])) {echo $result['pono'];} ?></td>
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
@@ -232,6 +233,25 @@ return $waredesc1;
         </div>
       </div>
     </div>    
+    <!-- Modal -->
+    <div id="csproduct" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">ค้นหา PR เก่า</h4>
+          </div>
+          <div class="modal-body" id="showcsproduct">
+          </div>
+          <div class="modal-footer">
+            <div align="center">
+              <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
   <!-- Modal -->
     <div id="vendormodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -283,12 +303,13 @@ return $waredesc1;
     $(".spinner").hide();
     $("#tabledata").show();
     $('#show_all').DataTable({
+    "lengthChange": false,  
     "searching": true,  
     "responsive": "true",
     "paging": "false",
     "fixedColumns":{  "heightMatch":"auto","leftColumns":"9"},
     "colReorder": "true",
-    "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
+    "aLengthMenu": [[ -1], [ "ทั้งหมด"]],
     "columnDefs": [
     { "width": "10%", "targets": 0 },
     { "width": "20%", "targets": 1 },
@@ -325,7 +346,7 @@ return $waredesc1;
     });
 
     var linkurl = function linkurl() {
-    var url = "http://172.16.1.253/PO/index.php/Controurl/url";
+    var url = "../../index.php/URL";
     var Httpreq = new XMLHttpRequest(); 
     Httpreq.open("GET",url,false);
     Httpreq.send(null);

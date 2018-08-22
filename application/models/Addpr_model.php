@@ -131,6 +131,10 @@ class Addpr_model extends CI_Model {
 		$fname = $this->session->fname;
 		$depname1 = $this->setdepartment();
 		$sqldepname1 = $depname1->depname1;
+		$data = array(
+			'prno' => $prno,
+			'refno' => $ref);
+		$this->db->insert('Coss_PR', $data);
 		// User // Admin
 		if ($type =='user' OR $type =='admin') {
 		$PR = array(
@@ -263,6 +267,63 @@ class Addpr_model extends CI_Model {
 		return $result;
 		}
 	}
+
+	public function golistmodel3()
+	{
+		$vgolist = $this->input->post('value');
+		$dep = $this->session->dep;
+		$username = $this->session->username;
+		if ($vgolist=='') {
+		if ($dep =='AC' OR $username =='Somkhit') {
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(100);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->order_by("PR.prno", "desc");
+		$result = $this->db->get()->result_array();
+		}else{
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(100);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where('PR.dep', $dep);
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->order_by("PR.prno", "desc");
+		$result = $this->db->get()->result_array();
+		}
+		}else{
+		if ($dep =='AC' OR $username =='Somkhit') {
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(100);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->like('PR.prno', $vgolist);
+		$this->db->or_like('PR.refno', $vgolist);
+		$this->db->or_like('PR_ref.Vendor_name', $vgolist);
+		$this->db->order_by("PR.prno", "desc");
+		$result = $this->db->get()->result_array();			
+		}else{
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(100);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->where('PR.dep', $dep);
+		$this->db->like('PR.prno', $vgolist);
+		$this->db->or_like('PR.refno', $vgolist);
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->where('PR.dep', $dep);	
+		$this->db->or_like('PR_ref.Vendor_name', $vgolist);	
+		$this->db->where('PR_ref.completed', 'Y');
+		$this->db->where('PR.dep', $dep);
+		$this->db->order_by("PR.prno", "desc");
+		$result = $this->db->get()->result_array();
+		}
+		}
+		return $result;
+	}	
 
 	public function golistmodelv()
 	{

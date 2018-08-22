@@ -187,7 +187,14 @@ echo'<div id="dispayopendata2"><div class="row">
           echo '<b>EFC Comment:</b>'.$EFCcomment.'<br>';
         }
       echo'</div></div></div>';
-      echo '<div class="row"><div class="col-md-12"><table width="100%"><tr align="center"><td align="right">';
+      $userhodapp = $data_head[0]['Hd_signature'];
+      echo '<div class="row"><div class="col-md-12"><table width="100%"><tr align="center"><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
         if ($data_head[0]['HdApprove'] =='Y') {
         $dep = $data_head[0]['dep'];
           if ($dep=='HK01') {
@@ -197,15 +204,31 @@ echo'<div id="dispayopendata2"><div class="row">
           }elseif ($dep =='HK01' OR $dep =='FO01') {
             $dep ='RM';
           }
+          $resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
+          if ($userhodapp=='') {
           if ($dep =='EN01'){
             echo '<img src="../../assets/signature/EN01.gif" width="80">';
           }else{
             echo '<img src="../../assets/signature/'.$dep.'.gif" width="80">';
           }
+          }else{
+            if ($resultimg[0]['signature_img'] == '') {
+            echo '<img src="../../assets/signature/'.$dep.'.gif" width="80">';
+            }else{
+            echo '<img src="../../assets/signature/'.$resultimg[0]['signature_img'].'" width="80">';   
+            }
+          }
+
         }else{
             echo '...............................';
         }
-        echo '</td><td align="right">';
+        echo '</td><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
       if ($data_head[0]['GMApprove'] =='Y') {
         echo '<img src="../../assets/signature/GM.gif" width="80">';
       }else{
@@ -217,11 +240,26 @@ echo'<div id="dispayopendata2"><div class="row">
     }else{
       echo '........................................';
     }
-      echo '</td></tr><tr align="center"><td align="right">';
+      echo '</td></tr><tr align="center"><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
   if ($data_head[0]['HdApprove'] =='Y') {
+    if (isset($resultimg[0]['signature_img'])) {
+      echo $resultimg[0]['fname'].' '.$resultimg[0]['lname'].'<br>';
+    }
     $HdApprove_Date = nice_date($data_head[0]['HdApprove_Date'], 'd/m/Y h:i'); echo $HdApprove_Date;
   }
-    echo '</td><td align="right">';
+    echo '</td><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
   if ($data_head[0]['GMApprove'] =='Y') {
     $GMApprove_Date = nice_date($data_head[0]['GMApprove_Date'], 'd/m/Y h:i'); echo $GMApprove_Date;
   }
@@ -229,9 +267,21 @@ echo'<div id="dispayopendata2"><div class="row">
   if ($data_head[0]['EFCApprove'] =='Y') {
     $EFCApprove = nice_date($data_head[0]['EFCApprove_Date'], 'd/m/Y h:i'); echo $EFCApprove;
   }
-  echo '</td></tr><tr align="center"><td align="right">';
+  echo '</td></tr><tr align="center"><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
     echo 'Department Head';
-  echo '</td><td align="right">';
+  echo '</td><td align="'; 
+      if ($userhodapp=='') {
+        echo 'right';
+      }else{
+        echo 'center';
+      } 
+      echo'">';
     echo 'General Manager';
     echo '</td><td>';
     echo 'Executive Financial Controller';

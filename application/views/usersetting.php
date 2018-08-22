@@ -78,6 +78,7 @@ if ($this->session->lang == 'english') {
                   <th>Email</th>
                   <th>Department</th>
                   <th>Lang</th>
+                  <th>Hod Img</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -94,7 +95,34 @@ if ($this->session->lang == 'english') {
                   <td><?php echo  $row->dep; ?></td>
                   <td><?php echo  $row->lang; ?></td>
                   <td>
+                  <?php  
+                  if ($row->type=='user') {
+                  	echo '<span class="label label-warning">User</span>';
+                  }elseif ($row->type=='accounting0' OR $row->type=='accounting') {
+                  	echo '<span class="label label-warning">AC</span>';
+                  }elseif ($row->type=='approval' AND $row->username=='Nalinee') {
+                  	echo '<span class="label label-primary">EFC</span>';
+                  }elseif ($row->type=='approval' AND $row->username=='Somkhit') {
+                  	echo '<span class="label label-primary">GM</span>';
+                  }elseif ($row->type=='hod' AND $row->signature_img=='') {
+                  	echo '<span class="label label-danger">ไม่มีลายเซ็น</span>';
+                  }elseif ($row->type=='hod' AND $row->signature_img!='') {
+                  	echo '<span class="label label-success">มีลายเซ็น</span>';
+                  }elseif ($row->type=='admin') {
+                  	echo '<span class="label label-warning">Admin</span>';
+                  }
+                  ?>	
+                  </td>
+                  <td>
                     <button class="btn btn-sm btn-warning" primary="<?php echo  $row->username; ?>" onclick="editdata(this);">แก้ไข</button>
+                    <?php  
+                    if ($row->type =='hod' AND $row->signature_img=='') {
+                    	echo '<input type="hidden" id="saveimgin" data-toggle="modal" data-target="#saveimg">';
+                    	echo '<button class="btn btn-sm btn-success" primary="'.$row->username.'" onclick="saveimg(this);">รูป</button>';
+                    }if ($row->type =='hod' AND $row->signature_img!='') {
+                      echo '<button class="btn btn-sm btn-primary" primary="'.$row->username.'" onclick="deleteimg(this);">เปลี่ยน</button>';
+                    }
+                    ?>
                     <input type="hidden" id="showeditdatauser" data-toggle="modal" data-target="#editdatauser">
                     <button class="btn btn-sm btn-danger" disabled>ลบ</button>
                   </td>
@@ -120,6 +148,23 @@ if ($this->session->lang == 'english') {
               <h4 class="modal-title">แก้ไขข้อมูล</h4>
             </div>
             <div class="modal-body" id="showcallblackedit">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="saveimg" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">เพิ่มลายเซ็น HOD</h4>
+            </div>
+            <div class="modal-body" align="center">
+            	<input type="file" id="hodimg" name="hodimg" accept="image/*"><hr>
+            	<button class="btn btn-success" id="uploadbtn">อัพโหลด</button>
             </div>
           </div>
         </div>

@@ -84,7 +84,7 @@ if ($this->session->lang == 'english') {
               <li>
                   <a data-toggle="modal" data-target="#modal-default">  
                   <button type="button" class="btn btn-danger  btn-block" <?php 
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Profile') 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Profile' OR $this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') 
             {echo 'disabled';}?> >ออกจากระบบ</button>
                   </a>
               </li>
@@ -160,6 +160,13 @@ if ($this->session->lang == 'english') {
             <i class="fa fa-times"></i><span><?php echo $this->lang->line('reject'); ?></span>
           </a>
         </li>
+        <li class="<?php 
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Fax') 
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/Fax'); ?>">
+            <i class="fa fa-dashboard"></i><span><?php echo $this->lang->line('showallordersnew'); ?></span>
+          </a>
+        </li>        
         <?php  
         if ($this->session->type =='admin' OR $this->session->dep =='IT') {
         echo '<li class="treeview';
@@ -175,12 +182,7 @@ if ($this->session->lang == 'english') {
               </span>
               </a>      
         <ul class="treeview-menu">';
-        echo'<li class="';
-        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_allnew') {
-          echo 'active';
-        }
-        echo '">';
-        echo '<a href="'.site_url('index.php/Show_data/show_allnew').'"><i class="fa fa-dashboard"></i><span>'.$this->lang->line('showallordersnew').'</span></a></li>';
+        
         echo'<li class="';
         if ($this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') {
           echo 'active';
@@ -229,4 +231,6 @@ if ($this->session->lang == 'english') {
 <script src="<?php echo base_url().'assets/adminlte/dist/js/adminlte.min.js'; ?>"></script>
 <!-- Logout -->
 <script src="<?php echo base_url().'assets/js_modifly/logout.js'; ?>"></script>
+<!-- Cookie -->
+<script src="<?php echo base_url().'/assets/js_modifly/jquery_cookie.js'; ?>"></script>
 </html>

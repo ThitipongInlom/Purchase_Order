@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $username = $this->session->username;
+$type = $this->session->type;
+$signature_img = $this->session->signature_img;
 echo '<input type="hidden" id="usernameSwitch" value="'.$username.'">';
 echo '<input type="hidden" id="usernameSession" value="'.$Switch.'">';
 ?>
@@ -127,6 +129,26 @@ echo '<input type="hidden" id="usernameSession" value="'.$Switch.'">';
             </div>
           </div>
         </div>
+        <?php  
+        if ($type == 'hod') {
+        echo '<div class="row">';
+        echo '<div class="col-md-12">';
+        echo '<div class="box box-info">';
+        echo '<div class="box-header with-border">';
+        echo '<h3 class="box-title">สถานะ ลายเซ็น</h3>';
+        echo '<div class="box-tools pull-right">';
+        echo '<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>';
+        echo '</div></div>';
+        echo '<div class="box-body">';
+        if ($signature_img=='') {
+            echo '<div align="center"><span class="label label-danger">ติดต่อ IT 7367 เพื่อ อัพโหลด ลายเซ็น</span>  ';
+        }else{
+            echo '<div align="center"><span class="label label-success">มีลายเซ็น</span>  ';
+            echo '<img src="../assets/signature/'.$signature_img.'" width="80"></div>';
+        }   
+        echo '</div></div></div></div>';          
+        }
+        ?>        
         <div class="row">
           <div class="col-md-12">
             <div class="box box-warning">

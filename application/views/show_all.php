@@ -289,11 +289,12 @@ return $waredesc1;
     $(".spinner").hide();
     $("#tabledata").show();
     $('#show_all').DataTable({
+    "lengthChange": false,
     "searching": true,  
     "responsive": "true",
     "paging": "false",
     "colReorder": "true",
-    "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
+    "aLengthMenu": [[ -1], [ "ทั้งหมด"]],
     "columnDefs": [
     { "width": "8%", "targets": 0 },
     { "width": "32%", "targets": 1 },
@@ -321,7 +322,7 @@ return $waredesc1;
     "previous": "ย้อนกลับ"
     },
     },
-    "order":[[2,'asc']],
+    "order":[[0,'desc']],
     //"ordering": false,
     "initComplete": function(settings, json) {
     setTimeout(function(){ $(".overlay").fadeOut('3000', function() {

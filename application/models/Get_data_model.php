@@ -251,6 +251,7 @@ class Get_data_model extends CI_Model {
 		$this->db->from('PR');
 		$this->db->limit(300);
 		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
 		$this->db->where('HdApprove','Y');		
 		if ($dateforstart !='N' AND $dateforend !='N') {
 		$this->db->where('prdate >=', $dateforstart);
@@ -266,6 +267,7 @@ class Get_data_model extends CI_Model {
 		$this->db->from('PR');
 		$this->db->limit(300);
 		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
 		$this->db->where('HdApprove','Y');
 		$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (PRApprove is null OR PRApprove<>'N') AND (completed is null))";
 		$this->db->where('dep', $i);
@@ -281,6 +283,52 @@ class Get_data_model extends CI_Model {
 	}
 
 	public function Get_completed($dateforstart,$dateforend)
+	{
+		$beta = $this->load->database('bo', TRUE);
+		$dep = $this->session->dep;	
+		if ($pos = strrpos($dep, ",")) {
+		$depa = array();
+		$dep1 = strstr($dep, ",", true);
+		$dep2 = strstr($dep, ",");
+		$dep2 = str_replace(",","",$dep2);
+		array_push($depa, $dep1);
+		array_push($depa, $dep2);
+		}else{
+			$depa = $dep;
+		}		
+		$leve = $this->session->type;
+		if ($leve=='admin' OR $dep=='AC' OR $dep=='EXC') {
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
+			$this->db->where('completed','Y');		
+			if ($dateforstart !='N' AND $dateforend !='N') {
+			$this->db->where('prdate >=', $dateforstart);
+			$this->db->where('prdate <=', $dateforend);
+			}			
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+		}else{
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(200);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
+			$this->db->where_in('dep', $depa);
+			$this->db->where('completed','Y');		
+			if ($dateforstart !='N' AND $dateforend !='N') {
+			$this->db->where('prdate >=', $dateforstart);
+			$this->db->where('prdate <=', $dateforend);
+			}			
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+		}
+		return $result;
+	}
+
+	public function Get_completedrc($dateforstart,$dateforend)
 	{
 		$dep = $this->session->dep;	
 		if ($pos = strrpos($dep, ",")) {
@@ -299,7 +347,8 @@ class Get_data_model extends CI_Model {
 			$this->db->from('PR');
 			$this->db->limit(200);
 			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-			$this->db->where('completed','Y');		
+			$where = "((PR_ref.GMApprove<>'N' OR PR_ref.GMApprove is null) AND (PR_ref.EFCApprove<>'N' OR PR_ref.EFCApprove is null) AND (PR_ref.PRApprove is null OR PR_ref.PRApprove<>'N') AND (chkre is null) AND (PR.warecode is not null))";
+			$this->db->where($where);	
 			if ($dateforstart !='N' AND $dateforend !='N') {
 			$this->db->where('prdate >=', $dateforstart);
 			$this->db->where('prdate <=', $dateforend);
@@ -312,7 +361,8 @@ class Get_data_model extends CI_Model {
 			$this->db->limit(200);
 			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
 			$this->db->where_in('dep', $depa);
-			$this->db->where('completed','Y');		
+			$where = "((PR_ref.GMApprove<>'N' OR PR_ref.GMApprove is null) AND (PR_ref.EFCApprove<>'N' OR PR_ref.EFCApprove is null) AND (PR_ref.PRApprove is null OR PR_ref.PRApprove<>'N') AND (chkre is null) AND (PR.warecode is not null))";
+			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
 			$this->db->where('prdate >=', $dateforstart);
 			$this->db->where('prdate <=', $dateforend);
@@ -321,7 +371,7 @@ class Get_data_model extends CI_Model {
 			$result = $this->db->get()->result_array();
 		}
 		return $result;
-	}
+	}	
 
 	public function Get_reject($dateforstart,$dateforend)
 	{
@@ -379,6 +429,24 @@ class Get_data_model extends CI_Model {
 		return $result;
 	}
 
+	public function RC_modal_head_open($prnoarray)
+	{
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(1000);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where_in('PR.prno', $prnoarray);
+		$result = $this->db->get()->result_array();
+		return $result;
+	}
+
+	public function Get_pono_model($prno)
+	{
+		$query_Coss = $this->db->get_where('Coss_PR', array('prno' => $prno));
+		$result = $query_Coss->result();
+		return $result;
+	}
+
 	public function modal_body_open($prnoopen)
 	{
 		$this->db->select('*');
@@ -390,12 +458,30 @@ class Get_data_model extends CI_Model {
 		return $result;
 	}
 
+	public function RC_modal_body_open($prnoarray)
+	{
+		$this->db->select('*');
+		$this->db->from('PR_Item');
+		$this->db->limit(1000);
+		$this->db->where_in('prno', $prnoarray);
+		$this->db->order_by("seq");
+		$result = $this->db->get()->result_array();
+		return $result;
+	}
+
 	public function approveY($primary,$approvedata,$type,$date,$username)
 	{
-		if ($type=='hod') {
+		if ($type=='hod' OR $username=='Somkid') {
+			$signature_img = $this->session->signature_img;
+			if ($signature_img=='') {
+				$signature = '';
+			}else{
+				$signature = $username;
+			}
 			$PR_ref = array(
 			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date);
+			'HdApprove_Date' => $date,
+			'Hd_signature' => $signature);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
 			$array = array(
@@ -441,9 +527,17 @@ class Get_data_model extends CI_Model {
 	public function approveX($primary,$approvedata,$type,$date,$username)
 	{
 		if ($type=='hod') {
+			$signature_img = $this->session->signature_img;
+			$username = $this->session->username;
+			if ($signature_img=='') {
+				$signature = '';
+			}else{
+				$signature = $username;
+			}
 			$PR_ref = array(
 			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date);
+			'HdApprove_Date' => $date,
+			'Hd_signature' => $signature);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
 			$array = array(
@@ -513,6 +607,381 @@ class Get_data_model extends CI_Model {
 			$result = $query->row();
 			return $result->Bot_token;
 	}
+
+	public function Getimg_hod($userhodapp)
+	{
+			$this->db->select('*');
+			$this->db->from('PR_Users');
+			$this->db->join('PR_ref', 'PR_ref.Hd_signature = PR_Users.username');
+			$this->db->where('PR_Users.username', $userhodapp);
+			$result = $this->db->get()->result_array();
+			return $result;
+	}
+
+	public function Faxsave($data)
+	{
+		$this->db->insert('Fax', $data);
+	}
+
+	public function FaxCount()
+	{
+		$count = $this->db->count_all('Fax'); 
+		return $count;
+	}
+
+	public function Faxdata()
+	{
+		$query = $this->db->get('Fax');
+		$result = $query->result_array();
+		return $result;
+	}
+
+	public function Check_BO_number($primary)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->select('*');
+		$beta->from('POFE0020');
+		$beta->where('run_code', 'PO3');	
+		$result = $beta->get()->result_array();	
+		$Old_pono = $result[0]['runno'];
+		$newpr = substr($Old_pono,0)+1;
+		if (strlen($newpr)<2) {
+			$newpr ="000000".$newpr;
+		}elseif(strlen($newpr)<3) {	
+			$newpr ="00000".$newpr;
+		}
+		elseif(strlen($newpr)<4) {	
+			$newpr ="0000".$newpr;
+		}
+		elseif(strlen($newpr)<5) {	
+			$newpr ="000".$newpr;
+		}
+		elseif(strlen($newpr)<6) {	
+			$newpr ="00".$newpr;
+		}
+		elseif(strlen($newpr)<7) {	
+			$newpr ="0".$newpr;
+		}
+		$newpr = "PO3-".$newpr;
+		return $newpr;
+	}
+
+	public function Get_Pono_primary($prno)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$query = $this->db->get_where('PR', array('prno' => $prno));
+		$result = $query->result();
+		$refno = $result[0]->refno;
+		$query2 = $beta->get_where('PXFB0010', array('refno' => $refno));
+		$result2 = $query2->result();
+		return $result2[0]->pono;
+	}	
+
+	public function run_no()
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->select('*');
+		$beta->from('POFE0020');
+		$beta->where('run_code', 'PO3');	
+		$result = $beta->get()->result_array();	
+		$Old_pono = $result[0]['runno'];
+		$newpr = substr($Old_pono,0)+1;
+		return $newpr;
+	}
+
+	public function insert_run_no($run_no)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->set('runno', $run_no);
+		$beta->where('run_code', 'PO3');
+		$beta->update('POFE0020');	
+		return;
+	}	
+
+	public function insert_pono($BO_num,$primary,$podate)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$username = $this->session->username;
+		$zzdate = $this->dateformat1();
+		$zzstrdate = $this->dateformat2();
+		$this->db->select('*');
+		$this->db->from('PR');
+		$this->db->limit(1);
+		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+		$this->db->where('PR.prno', $primary);
+		$result = $this->db->get()->result_array();	
+		$vencode = $result[0]['Vendor'];
+		$warecode = $result[0]['warecode'];	
+		$refno = $result[0]['refno'];
+		$crterm = $this->crterm($vencode);
+		$div = $result[0]['div'];
+		$dep = $result[0]['dep'];
+		$vat = $result[0]['Vat'];
+		if ($vat =='Y') {
+			$revat = '7';
+		}elseif ($vat=='N') {
+			$revat = '0';
+		}
+		if ($dep == 'HK03') {
+			$dep = '';
+		}else{
+			$dep = $dep;
+		}
+		$totamtcur = $this->totamtcur($primary);
+		if ($vat > 1) {
+			$vatamtcur = $this->vatamtcur($totamtcur);
+			$netamtcur = $this->netamtcur($totamtcur,$vatamtcur);
+		}else{
+			$vatamtcur = '';
+			$netamtcur = $totamtcur;
+		}
+
+		$query_Coss = $this->db->get_where('Coss_PR', array('prno' => $primary));
+		$result_Coss = $query_Coss->num_rows();
+		$date_now = date("Y-m-d H:i:s");
+		if ($result_Coss == '0') {
+			$data = array(
+				'prno' => $primary,
+				'refno' => $refno,
+				'pono' => $BO_num,
+				'date_update' => $date_now);
+			$this->db->insert('Coss_PR', $data);
+		}elseif ($result_Coss ==  '1') {
+			$this->db->set('pono', $BO_num);
+			$this->db->set('date_update', $date_now);
+			$this->db->where('refno', $refno);
+			$this->db->update('Coss_PR');			
+		}
+
+		$data = array(
+        'comid' => '0001', 
+        'pono' => $BO_num,
+        'podate' => $podate,
+        'buytype' => '3',
+        'vencode' => $vencode,
+        'inclusive' => 'N',
+        'warecode' => strtoupper($warecode),
+        'refno' => $refno,
+        'refdate' => $podate,
+        'crterm' => $crterm,
+        'deldate' => $podate,
+        'div' => $div,
+        'dep' => $dep,
+        'offcode' => 'N.03',
+        'currency' => 'BAHT',
+        'partflag' => 'Y',
+        'delloc1' => '',
+        'delloc2' => '',
+        'delloc3' => '',
+        'rem1' => '',
+        'rem2' => '',
+        'rem3' => '',
+        'rem4' => '',
+        'rem5' => '',
+        'placeflag' => 'N',
+        'totamtcur' => $totamtcur,
+        'discper1' => '0',
+        'discper2' => '0',
+        'discper3' => '0',
+        'totdisc3cur' => '0',
+        'discamtcur' => '0',
+        'expcode1' => '',
+        'expamtcur1' => '0',
+        'expcode2' => '',
+        'expamtcur2' => '0',
+        'totbfvatcur' => $totamtcur,
+        'vatcode' => $revat,
+        'vatloc' => '001',
+        'vatrate' => $revat,
+        'vatamtcur' => $vatamtcur,
+        'netamtcur' => $netamtcur,
+        'endflag' => 'N',
+        'holdflag' => 'N',
+        'postatus' => 'N',
+        'zzuser' => strtoupper($username),
+        'zzdate' => $zzdate,
+        'zzstrdate' => $zzstrdate,
+        'holdcode' => '',
+        'updprice' => 'Y',
+        'totcalvatcur' => $totamtcur,
+        'prno' => '',
+        'prntime' => '0',
+        'overreceived' => 'Y',
+        'jobcode' => '',
+        'approveFlag' => 'N');
+		$beta->insert('PXFB0010', $data);
+		return;
+	}
+
+	public function crterm($vencode)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->select('*');
+		$beta->from('PXFB0010');
+		$beta->where('vencode', $vencode);		
+		$result = $beta->get()->result_array();	
+		return $result[0]['crterm'];		
+	}
+
+	public function totamtcur($primary)
+	{
+		$this->db->select("(SELECT SUM(PR_Item.prprice * PR_Item.prqty) FROM PR_Item WHERE PR_Item.prno ='$primary')", FALSE);
+		$query = $this->db->get();
+		$row = $query->result_array();
+		$result = $row[0][''];
+		return $result; 
+	}
+
+	public function insert_pono2($BO_num,$primary)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$this->db->select('*');
+		$this->db->from('PR_Item');
+		$this->db->where('prno', $primary);		
+		$result = $this->db->get()->result_array();	
+		foreach ($result as $key => $row) {
+			$amountcur = $row['prqty'] * $row['prprice'];
+			$purunitdesc = $this->purunitdesc($row['prdcode']);
+			$confactor1  = $this->confactor1($row['prdcode']);
+			$data[] = array(
+				'comid' => '0001',
+				'pono' => $BO_num,
+				'seq' => $row['seq'],
+				'prdcode' => $row['prdcode'],
+				'stbarcode' => '',
+				'poqty' => $row['prqty'],
+				'price' => $row['prprice'],
+				'discper1' => '0',
+				'discper2' => '0',
+				'discprice' => '0',
+				'amountcur' => $amountcur,
+				'stockflag' => 'N',
+				'invqty' => '0',
+				'confactor' => $confactor1,
+				'purunitdesc' => $purunitdesc,
+				'whcode' => '',
+				'prflag' => '');
+		}
+		$beta->insert_batch('PXFB0011', $data);
+		return;
+	}
+
+	public function update_pono2($BO_num,$primary)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$this->db->select('*');
+		$this->db->from('PR_Item');
+		$this->db->where('prno', $primary);		
+		$result = $this->db->get()->result_array();	
+		foreach ($result as $key => $row) {
+			$amountcur = $row['prqty'] * $row['prprice'];
+			$purunitdesc = $this->purunitdesc($row['prdcode']);
+			$confactor1  = $this->confactor1($row['prdcode']);
+			$data = array(
+				'comid' => '0001',
+				'pono' => $BO_num,
+				'seq' => $row['seq'],
+				'prdcode' => $row['prdcode'],
+				'stbarcode' => '',
+				'poqty' => $row['prqty'],
+				'price' => $row['prprice'],
+				'discper1' => '0',
+				'discper2' => '0',
+				'discprice' => '0',
+				'amountcur' => $amountcur,
+				'stockflag' => 'N',
+				'invqty' => '0',
+				'confactor' => $confactor1,
+				'purunitdesc' => $purunitdesc,
+				'whcode' => '',
+				'prflag' => '');	
+				$beta->where('pono', $BO_num);		
+				$beta->update('PXFB0011', $data);			
+		}		
+		return;
+	}	
+
+	public function dateformat1() {
+	    $output = date("d m Y h:i:s A");
+	    $datearray = explode(" ", $output);
+	    $customyear = $datearray[2]+543;
+	    $output =  $customyear."".$datearray[1]."".$datearray[0]." ".$datearray[3]." ".$datearray[4];
+	  return $output;
+	}
+
+	public function dateformat2() {
+	    $output = date("d m Y h:i:s A");
+	    $datearray = explode(" ", $output);
+	    $customyear = $datearray[2]+543;
+	    $output =  $customyear."".$datearray[1]."".$datearray[0];
+	  return $output;
+	}
+
+	public function vatamtcur($total)
+	{
+		$result = ($total*7)/100;
+		return $result;
+	}
+
+	public function netamtcur($totamtcur,$vatamtcur)
+	{
+		$result = $totamtcur+$vatamtcur;
+		return $result;
+	}
+
+	public function confactor1($stcode)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->select('*');
+		$beta->from('STFA0010');
+		$beta->where('stcode', $stcode);		
+		$result = $beta->get()->result_array();	
+		return $result[0]['confactor1'];	
+	}	
+
+	public function purunitdesc($stcode)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$beta->select('*');
+		$beta->from('STFA0010');
+		$beta->where('stcode', $stcode);		
+		$result = $beta->get()->result_array();	
+		return $result[0]['purunit'];	
+	}	
+
+	public function Get_refno_pr($prno)
+	{
+		$query = $this->db->get_where('PR', array('prno' => $prno));
+		$result = $query->result();
+		return $result[0]->refno;
+	}
+
+	public function Get_Zign_Beta($refno)
+	{
+		$beta = $this->load->database('Bo1', TRUE);
+		$query = $beta->get_where('PXFB0010', array('refno' => $refno));
+		$result = $query->result_array();
+		if (empty($result)) {
+		  $pono = '0';
+		}else{
+		  $pono = '1';
+		}
+		return $pono;
+	}
+
+	public function Get_pr_004($primary)
+	{
+		$query = $this->db->get_where('PR_ref', array('prno' => $primary));
+		$result = $query->result();
+		$vendor = $result[0]->Vendor;
+		if ($vendor == 'C004') {
+			$resultvendor = '1';
+		}else{
+			$resultvendor = '0';
+		}
+		return $resultvendor;
+	}	
+
 
 
 

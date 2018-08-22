@@ -1,22 +1,30 @@
 $("#loginicon").hide();
 $(document).ready(function() {
 	$('#username').focus();
-
 });
 
+var linkurl = function linkurl() {
+	var url = "index.php/URL";
+    var Httpreq = new XMLHttpRequest(); 
+    Httpreq.open("GET",url,false);
+    Httpreq.send(null);
+    return Httpreq.responseText; 
+}
+
 function login(e) {
+	var urlresult = JSON.parse(linkurl());
 	var username = $("#username").val();
 	var password = $("#password").val();
 	var datasrting = 'username=' + username + '&password=' + password;
 	$('#loginicon').show();
 	$.ajax({
 		type: "POST",
-		url: "http://172.16.1.253/PO/index.php/Welcome/login",
+		url: urlresult.login,
 		data: datasrting,
 		cache: false,
 		success: function(result) {
 			if (result == 1) {
-				setTimeout("window.location.href = 'http://172.16.1.253/PO/index.php/Dashboard/Dashboard';", 1500);
+				setTimeout("window.location.href = 'index.php/Dashboard/UserRoute';", 500);
 			}
 			if (result == 0) {
 				document.getElementById("formlogin").reset();

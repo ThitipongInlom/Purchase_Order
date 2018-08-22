@@ -25,12 +25,14 @@ public function url()
 		'windowsdata' => $server_root.'index.php/Add_Pr/viewhistory/',
 		'ajaxopenproduct' => $server_root.'index.php/Add_Pr/listitem',
 		'ajaxopenproduct2' => $server_root.'index.php/Add_Pr/listitem2',
+		'ajaxopenproduct3' => $server_root.'index.php/Add_Pr/listitem3',
 		'ajaxopenproductv' => $server_root.'index.php/Add_Pr/listitemv',
 		'openedititem' => $server_root.'index.php/Add_Pr/openedititem',
 		'formatdateitemlastpurdate' => $server_root.'index.php/Add_Pr/formatdateitem',
 		'formatdateitemitemusedate' => $server_root.'index.php/Add_Pr/formatdateitem',
 		'editsetptoductcode' => $server_root.'index.php/Add_Pr/setproductcode',
 		'golist' => $server_root.'index.php/Add_Pr/golist',
+		'golist3' => $server_root.'index.php/Add_Pr/golist3',
 		'golist2' => $server_root.'index.php/Add_Pr/golist2',
 		'golistv' => $server_root.'index.php/Add_Pr/golistv',
 		'getvender' => $server_root.'index.php/Add_Pr/getvender',
@@ -55,6 +57,7 @@ public function url()
 		'approve' => $server_root.'index.php/Show_data/approveY',
 		'approvex' => $server_root.'index.php/Show_data/approveX',
 		'completedY' => $server_root.'index.php/Show_data/completedY',
+		'completedY_AC' => $server_root.'index.php/Show_data/completedY_AC',
 		'showwindowsmodelprview' => $server_root.'index.php/Showprview/showwindowsmodelprview/',
 		'blackupallpr' => $server_root.'index.php/Show_data/show_all',
 		'blackupacpr' => $server_root.'index.php/Show_data/Show_accounting?i=All',
@@ -85,7 +88,12 @@ public function url()
 		'savesetvenderpr' => $server_root.'index.php/Show_data/savesetvenderpr',
 		'Chanepassword' => $server_root.'index.php/Profile/Chanepassword',
 		'imgpra253' => 'http://172.16.1.253/pra/upload/file_upload/',
-		'API_Print' => $server_root.'index.php/API_Print/');
+		'API_Print' => $server_root.'index.php/API_Print/',
+		'Imghodup' => $server_root.'index.php/Usersetting/uploadimghod',
+		'Imghoddelete' => $server_root.'index.php/Usersetting/deleteimghod',
+		'RC_modal_opendata' => $server_root.'index.php/Show_data/RC_modal_opendata',
+		'Setvalue' => $server_root.'index.php/Show_data/Show_accounting',
+		'FAXSAVE' => $server_root.'index.php/Show_data/FAXSAVE');
 	echo json_encode($arry);
 }
 

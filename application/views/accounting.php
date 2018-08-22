@@ -13,6 +13,20 @@ return $waredesc1;
 }
 $querydep = $beta->get('ZZFC0020');
 $depall = $querydep->result_array();
+
+function Get_Zign_Beta($refno)
+{
+$CI =& get_instance();
+$beta = $CI->load->database('bo', TRUE);
+$query = $beta->get_where('PXFB0010', array('refno' => $refno));
+$result = $query->result_array();
+if (empty($result)) {
+  $pono = '';
+}else{
+  $pono = $result[0]['pono'];
+}
+return $pono;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,7 +141,7 @@ $depall = $querydep->result_array();
                     <?php } ?>
                   </select> 
                 </div>  
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-7 col-xs-8">
                 <div class="form-inline">
                 <div class="form-group">
                 <label for="hsearch">ค้นหาจากวันที่: </label>
@@ -142,8 +156,9 @@ $depall = $querydep->result_array();
                 </div>
                 </div>                                 
                 </div> 
-                <div class="col-md-2 col-xs-2">
+                <div class="col-md-3 col-xs-2">
                   <div align="right">
+                  <button class="btn btn-info btn-sm" onclick="accajaxopenproduct3(this)">ค้นหาPR เก่า</button><input type="hidden" data-toggle="modal" data-target="#csproduct" id="opencsproduct">
                   <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
                   <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">  
                   </div>                
@@ -178,7 +193,7 @@ $depall = $querydep->result_array();
                           } ?>
                       </td>
                       <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                      <td><?php echo $result['refno'];  ?></td>
+                      <td align="left"><?php echo $result['refno']; echo '<br>'; if (isset($result['pono'])) {echo $result['pono'];} ?></td>
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
@@ -211,7 +226,12 @@ $depall = $querydep->result_array();
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
                           }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
+                          }else{
+                            $username = $this->session->username;
+                            if ($username == 'Somkid' AND $result['pono'] == '' AND $result['HdApprove'] != '' AND $result['PRApprove'] != '' AND $result['GMApprove'] != '' AND $result['Vendor'] != 'C004') {
+                              echo '<button class="btn btn-xs btn-primary" prno="'.$result['prno'].'" onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="สร้าง ข้อมูล Brita"><i class="fa fa-fw fa-share"></i></button>';
+                            }
+                          } ?></td>
                         <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
                           echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
                           }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
@@ -343,6 +363,25 @@ $depall = $querydep->result_array();
           </div>
         </div>
       </div>
+    </div> 
+        <!-- Modal -->
+    <div id="csproduct" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">ค้นหา PR เก่า</h4>
+          </div>
+          <div class="modal-body" id="showcsproduct">
+          </div>
+          <div class="modal-footer">
+            <div align="center">
+              <button type="button" class="btn btn-danger" id="closeshowlistitem" data-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>          
     </div>
     <!-- DataTables -->
@@ -377,12 +416,13 @@ $depall = $querydep->result_array();
     $(".spinner").hide();
     $("#tabledata").show();
     $('#show_all').DataTable({
+    "lengthChange": false,  
     "searching": true,  
     "responsive": "true",
     "paging": "false",
     "fixedColumns":{  "heightMatch":"auto","leftColumns":"9"},
     "colReorder": "true",
-    "aLengthMenu": [[ 8, -1], [ 8, "ทั้งหมด"]],
+    "aLengthMenu": [[ -1], [ "ทั้งหมด"]],
     "columnDefs": [
     { "width": "10%", "targets": 0 },
     { "width": "20%", "targets": 1 },
@@ -424,17 +464,19 @@ $depall = $querydep->result_array();
     });
     });
 
-    $("#Setvaluefordata").on('select2:selecting', function(e) {
-      location.href = "http://172.16.1.253/PO/index.php/Show_data/Show_accounting?i="+e.params.args.data.id;
-    });
-
     var linkurl = function linkurl() {
-    var url = "http://172.16.1.253/PO/index.php/Controurl/url";
+    var url = "../../index.php/URL";
     var Httpreq = new XMLHttpRequest(); 
     Httpreq.open("GET",url,false);
     Httpreq.send(null);
     return Httpreq.responseText; 
     }
+
+    $("#Setvaluefordata").on('select2:selecting', function(e) {
+      var urlresult = JSON.parse(linkurl());
+      location.href = urlresult.Setvalue+"?i="+e.params.args.data.id;
+    });
+
     var statusapp = function statusapp(e) {
       var urlresult = JSON.parse(linkurl());
       var prid = $(e).attr('statusapppr');
