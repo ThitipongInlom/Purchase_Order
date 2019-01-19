@@ -149,7 +149,6 @@ return $waredesc1;
                       <th>HOD</th>
                       <th>AC</th>
                       <th>GM</th>
-                      <th>EFC</th>
                       <th>Action.</th>
                       <th>HodAV</th>
                       <th>HodAC</th>
@@ -231,11 +230,6 @@ return $waredesc1;
                           }elseif ($result['GMApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$EFCApprove.'"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
                         <td>
                           <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" rowred="<?php echo $result['NO']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
                           <?php
@@ -273,7 +267,7 @@ return $waredesc1;
         </div>
       </section>
 
-          <!-- Modal Set-->
+    <!-- Modal Set-->
     <div id="Setvenderprmodel" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
@@ -416,11 +410,10 @@ return $waredesc1;
     { "width": "1%", "targets": 6 ,"orderData": [ 6, 11 ], "type":"date-eu"},
     { "width": "1%", "targets": 7 ,"orderData": [ 7, 12 ], "type":"date-eu"},
     { "width": "1%", "targets": 8 ,"orderData": [ 8, 13 ], "type":"date-eu"},
-    { "width": "1%", "targets": 9 },
-    { "width": "6%", "targets": 10 },
+    { "width": "6%", "targets": 9 },
+    { "width": "10%", "targets": 10 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 11 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 12 ,"visible": false, "searchable": false, "type":"date-eu"},
-    { "width": "10%", "targets": 13 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "orderable": "false"}
     ],
     "language": {

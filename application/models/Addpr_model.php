@@ -100,7 +100,7 @@ class Addpr_model extends CI_Model {
 		$newrefno = $refno+1;
 		return $newrefno;
 	}
-	
+
 	public function setdepartment()
 	{
 		$dep  = $this->session->dep;

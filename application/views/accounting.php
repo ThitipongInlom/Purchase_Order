@@ -175,7 +175,6 @@ return $pono;
                       <th>HOD</th>
                       <th>AC</th>
                       <th>GM</th>
-                      <th>EFC</th>
                       <th>CP</th>
                       <th>Action.</th>
                       <th>HodAV</th>
@@ -253,18 +252,6 @@ return $pono;
                           }elseif ($result['GMApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$EFCApprove.'"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                          }else{
-                            $username = $this->session->username;
-                            /*
-                            if ($username == 'Somkid' AND $result['pono'] == '' AND $result['HdApprove'] != '' AND $result['PRApprove'] != '' AND $result['GMApprove'] != '' AND $result['Vendor'] != 'C004') {
-                              echo '<button class="btn btn-xs btn-primary" prno="'.$result['prno'].'" onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="สร้าง ข้อมูล Brita"><i class="fa fa-fw fa-share"></i></button>';
-                            }
-                            */
-                          } ?></td>
                         <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
                           echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
                           }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
@@ -490,11 +477,10 @@ return $pono;
     { "width": "1%", "targets": 7 ,"orderData": [ 7, 13 ], "type":"date-eu"},
     { "width": "1%", "targets": 8 ,"orderData": [ 8, 14 ], "type":"date-eu"},
     { "width": "1%", "targets": 9 },
-    { "width": "1%", "targets": 10 },
-    { "width": "10%", "targets": 11 },
+    { "width": "10%", "targets": 10 },
+    { "width": "10%", "targets": 11 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 12 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 13 ,"visible": false, "searchable": false, "type":"date-eu"},
-    { "width": "10%", "targets": 14 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "orderable": "false"}
     ],
     "language": {
