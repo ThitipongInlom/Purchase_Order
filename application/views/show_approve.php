@@ -225,9 +225,9 @@ return $waredesc1;
                           }elseif ($result['PRApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
-                        <td><?php if ($result['GMApprove']=='Y') {
+                        <td><?php if ($result['EFCApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$GMApprove.'"></i>';
-                          }elseif ($result['GMApprove']=='N'){
+                          }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
                         <td>

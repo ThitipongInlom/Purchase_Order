@@ -572,13 +572,17 @@ class Get_data_model extends CI_Model {
 			$PR_ref = array(
 			'HdApprove' => $approvedata,
 			'HdApprove_Date' => $date,
+			'GMApprove' => $approvedata,
+			'GMApprove_Date' => $date,
 			'Hd_signature' => $signature);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
 			}else{
 			$PR_ref = array(
 			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date);
+			'HdApprove_Date' => $date,
+			'GMApprove' => $approvedata,
+			'GMApprove_Date' => $date);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
 			}
@@ -614,7 +618,9 @@ class Get_data_model extends CI_Model {
 		if ($type=='accounting' OR $type=='accounting0') {
 			$PR_ref = array(
 			'PRApprove' => $approvedata,
-			'PRApprove_Date' => $date);
+			'PRApprove_Date' => $date,
+			'GMApprove' => $approvedata,
+			'GMApprove_Date' => $date);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
 			$array = array(
