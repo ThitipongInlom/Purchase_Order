@@ -144,72 +144,72 @@ class Addpr_model extends CI_Model {
 		// User // Admin
 		if ($type =='user' OR $type =='admin') {
 		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
+      'comid' => '0001',
+      'prno' => $prno,
+      'prdate' => $prdate,
+      'dep' => $depa,
+      'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-        'prno' => $prno,
+      'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// Hod
 		elseif($type =='hod'){
 		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
+      'comid' => '0001',
+      'prno' => $prno,
+      'prdate' => $prdate,
+      'dep' => $depa,
+      'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-        'prno' => $prno,
+      'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// accounting0
 		elseif($type =='accounting0' OR $type =='accounting'){
 		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
+      'comid' => '0001',
+      'prno' => $prno,
+      'prdate' => $prdate,
+      'dep' => $depa,
+      'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-        'prno' => $prno,
+      'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// approval
 		elseif($type =='approval'){
 		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
+      'comid' => '0001',
+      'prno' => $prno,
+      'prdate' => $prdate,
+      'dep' => $depa,
+      'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-        'prno' => $prno,
+      'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}

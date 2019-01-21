@@ -452,9 +452,9 @@ echo'<div id="dispayopendata2"><div class="row">
 			if ($data_head[0]['GMApprove'] =='Y') {
 				echo '<img src="../../assets/signature/GM.gif" width="80">';
 			}else{
-				echo '..............................';
+				echo '....................................';
 			}
-		echo '</td><td>';
+		echo '<td>';
 		if ($data_head[0]['EFCApprove'] =='Y') {
 			echo '<img src="../../assets/signature/EFC.gif" width="80">';
 		}else{
@@ -502,9 +502,9 @@ echo'<div id="dispayopendata2"><div class="row">
 				echo 'center';
 			}
 			echo'">';
-		echo 'General Manager';
+		echo 'Accounting Department';
 		echo '</td><td>';
-		echo 'Executive Financial Controller';
+		echo 'General Manager';
 	echo '</td></table></div></div></div>';
 	if ($data_head[0]['statusapp'] !='') {
 		echo '<br>';
