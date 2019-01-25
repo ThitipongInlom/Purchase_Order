@@ -280,9 +280,9 @@ echo'<div id="dispayopendata2"><div class="row">
         echo 'center';
       } 
       echo'">';
-    echo 'General Manager';
+    echo 'Accounting Department';
     echo '</td><td>';
-    echo 'Executive Financial Controller';
+    echo 'General Manager';
   echo '</td></table></div></div></div>';    
   ?>  
   </body>
