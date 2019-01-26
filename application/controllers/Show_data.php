@@ -545,7 +545,8 @@ echo'<div id="dispayopendata2"><div class="row">
 		$statusappval = $_POST['statusappval'];
 		$userby = null;
 		$datetimeupdate = date("d-m-Y");
-		if ($this->session->username=='Somkhit') {
+		$right_gm = $this->session->right_gm;
+		if ($this->session->username=='Somkhit' OR $right_gm=='Y') {
 			$userby = 'By:GM';
 		}elseif ($this->session->username=='Nalinee') {
 			$userby = 'By:EFC';

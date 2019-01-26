@@ -205,7 +205,8 @@ return $waredesc1;
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; echo namewarecode($result['warecode']); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee'){
+                          $right = $this->session->right_gm;
+                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee' OR $right=='Y'){
                             echo '';
                           }else{
                             echo 'Disabled';
@@ -237,7 +238,8 @@ return $waredesc1;
                             if ($this->session->username =='Nalinee') {
                            echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
                             }
-                          if ($this->session->username =='Somkid') {
+                          $right = $this->session->right_gm;  
+                          if ($this->session->username =='Somkid' OR $right=='Y') {
                           echo '
                           <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
                           ';
