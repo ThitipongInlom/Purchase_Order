@@ -198,15 +198,15 @@ class Addpr_model extends CI_Model {
 		// approval
 		elseif($type =='approval'){
 		$PR = array(
-      'comid' => '0001',
-      'prno' => $prno,
-      'prdate' => $prdate,
-      'dep' => $depa,
-      'refno' => $ref,
-    	'conflag' => 'N',
-    	'zzuser' => $fname,
-    	'zzstrdate' => $prdate,
-    	'chksub1' => '1');
+       'comid' => '0001',
+       'prno' => $prno,
+       'prdate' => $prdate,
+       'dep' => $depa,
+       'refno' => $ref,
+       'conflag' => 'N',
+        'zzuser' => $fname,
+        'zzstrdate' => $prdate,
+        'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
       'prno' => $prno,
@@ -397,7 +397,7 @@ class Addpr_model extends CI_Model {
 
 	public function dataviewhistory($stcode)
 	{
-		$this->db->select('PR_Item.comid, PR_Item.prdcode, PR_Item.seq, PR_Item.prno, PR_Item.prqty, PR_Item.prprice_old, PR_Item.prprice, PR_Item.lastpurdate, PR_Item.poqty,                       PR_Item.usedate, PR_Item.selected, PR_Item.iremark, PR_Item.ifileupd,pr_ref.completed');
+		$this->db->select('PR_Item.comid, PR_Item.prdcode, PR_Item.seq, PR_Item.prno, PR_Item.prqty, PR_Item.prprice_old, PR_Item.prprice, PR_Item.lastpurdate, PR_Item.poqty, PR_Item.usedate, PR_Item.selected, PR_Item.iremark, PR_Item.ifileupd,pr_ref.completed');
 		$this->db->from('PR_Item');
 		$this->db->join('PR_ref', 'PR_Item.prno = PR_ref.prno');
 		$this->db->where('PR_item.prdcode', $stcode);

@@ -132,7 +132,8 @@ if ($this->session->lang == 'english') {
         $typedep = $this->session->dep;
         $typetype = $this->session->type;
         $typeusername = $this->session->username;
-        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice') {
+        $typeright_gm = $this->session->right_gm;
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typeright_gm=='Y') {
         echo'<li class="';
         if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Show_accounting/') {
           echo 'active';
@@ -154,15 +155,6 @@ if ($this->session->lang == 'english') {
             <i class="fa  fa-check"></i><span><?php echo $this->lang->line('completed'); ?></span>
           </a>
         </li>
-        <!--
-        <li class="<?php
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed2')
-            {echo 'active';}?>">
-          <a href="<?php echo site_url('index.php/Show_data/show_completed2'); ?>">
-            <i class="fa fa-check-circle-o"></i><span><?php echo $this->lang->line('completed2'); ?></span>
-          </a>
-        </li>
-        -->
         <li class="<?php
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_reject')
             {echo 'active';}?>">

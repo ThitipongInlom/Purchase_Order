@@ -516,6 +516,7 @@ echo'<div id="dispayopendata2"><div class="row">
 		  <div align="center">';
 	$type = $this->session->type;
 	$user = $this->session->username;
+	$right_gm = $this->session->right_gm;
         if ($type=='hod' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $user=='Somkid' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
@@ -525,7 +526,7 @@ echo'<div id="dispayopendata2"><div class="row">
      	}elseif ($user=='Somkhit' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" rowred="'.$rowred.'" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger"  rowred="'.$rowred.'" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-     	}elseif ($user=='Nalinee' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+     	}elseif ($right_gm=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}
