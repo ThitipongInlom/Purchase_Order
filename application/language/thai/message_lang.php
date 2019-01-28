@@ -68,4 +68,5 @@ $lang['rc'] = 'อาร์ซี';
 $lang['sendtojob'] = 'เปิด Job';
 $lang['acappovecheck'] = 'บัญชี อนุมัติ Hod และ AC';
 $lang['about'] = 'เกี่ยวกับเรา';
+$lang['adddata'] = 'เพิ่มข้อมูล';
 ?>

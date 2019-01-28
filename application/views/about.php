@@ -59,7 +59,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-yellow"><div class="widget-user-image"><img class="direct-chat-img" style="width: 80px; height: 80px; float: unset;" src="<?php echo base_url().'assets/icon/thezignhotel.gif'; ?>"></div></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">TheZign Hotel</span>
+                            <span class="info-box-text">Continuous support !</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box-icon" style="background-color:#b51c1f;"><div class="widget-user-image"><img class="direct-chat-img" style="width: 80px; height: 80px; float: unset;" src="<?php echo base_url().'assets/icon/gardenhotel.gif'; ?>"></div></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">Garden Seaview Hotel</span>
+                            <span class="info-box-text">Coming soon !</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>    
+                    <div class="info-box">
+                        <span class="info-box-icon" style="background-color:#be036f;"><div class="widget-user-image"><img class="direct-chat-img" style="width: 80px; height: 80px; float: unset;" src="<?php echo base_url().'assets/icon/wayhotel.gif'; ?>"></div></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">Way Hotel</span>
+                            <span class="info-box-text">Coming soon !</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>                                         
+                </div>
                 <div class="col-md-4">
                     <div class="box box-widget widget-user-2">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -76,9 +101,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <ul class="nav nav-stacked">
                                 <li><a href="#">สถานที่ทำงาน <span class="pull-right badge bg-aqua">TheZign
                                             Hotel</span></a></li>
-                                <li><a href="#">เบอร์ติดต่อ <span
-                                            class="pull-right badge bg-green">086-4633160</span></a></li>
-                                <li><a href="#">Copyright © <span class="pull-right badge bg-red">2017 - 2019</span></a></li>
+                                <li><a href="#">เบอร์ติดต่อ <span class="pull-right badge bg-green">086 -
+                                            4633160</span></a></li>
+                                <li><a href="#">Copyright © <span class="pull-right badge bg-red">2017 - 2019</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>

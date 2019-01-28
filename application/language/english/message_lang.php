@@ -68,4 +68,5 @@ $lang['rc'] = 'RC';
 $lang['sendtojob'] = 'Open Job';
 $lang['acappovecheck'] = 'AC Approve Hod And AC';
 $lang['about'] = 'About';
+$lang['adddata'] = 'Add Data';
 ?>
