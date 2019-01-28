@@ -322,7 +322,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-      <!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
     <!-- Modal -->
     <div id="productmodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">

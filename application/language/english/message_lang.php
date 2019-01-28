@@ -67,4 +67,5 @@ $lang['newpassword2'] = 'New Password Again';
 $lang['rc'] = 'RC';
 $lang['sendtojob'] = 'Open Job';
 $lang['acappovecheck'] = 'AC Approve Hod And AC';
+$lang['about'] = 'About';
 ?>

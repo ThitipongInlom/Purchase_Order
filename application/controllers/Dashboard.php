@@ -51,6 +51,20 @@ class Dashboard extends CI_Controller {
 		$this->load->view('theme/footer');		
 	}
 
+	public function AddWarehouse()
+	{
+		$this->load->view('theme/head');
+		$this->load->view('Addwarehouse');
+		$this->load->view('theme/footer');		
+	}
+
+	public function About()
+	{
+		$this->load->view('theme/head');
+		$this->load->view('about');
+		$this->load->view('theme/footer');	
+	}
+
 
 		
 }

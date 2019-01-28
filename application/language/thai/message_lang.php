@@ -67,4 +67,5 @@ $lang['newpassword2'] = 'รหัสผ่านใหม่ อีกครั
 $lang['rc'] = 'อาร์ซี';
 $lang['sendtojob'] = 'เปิด Job';
 $lang['acappovecheck'] = 'บัญชี อนุมัติ Hod และ AC';
+$lang['about'] = 'เกี่ยวกับเรา';
 ?>
