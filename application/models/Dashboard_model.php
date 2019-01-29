@@ -15,6 +15,22 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
+	public function Getwarehouse()
+	{
+		$this->db->select('*');
+		$this->db->from('STFC0070');
+		$result = $this->db->get()->result_object();
+		return $result;
+	}
+
+	public function Getunittype()
+	{
+		$this->db->select('*');
+		$this->db->from('STFC0060');
+		$result = $this->db->get()->result_object();
+		return $result;
+	}
+
 	public function query_hod_apv_today()
 	{
 		$today = date('Ymd');

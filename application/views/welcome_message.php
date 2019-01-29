@@ -58,7 +58,7 @@
     </div>
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Way</b></a><br>
+            <a href="#"><b>Garden Seaview</b></a><br>
             <a href="#">Purchase Order</a>
         </div>
         <!-- /.login-logo -->

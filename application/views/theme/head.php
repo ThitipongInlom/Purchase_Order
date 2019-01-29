@@ -177,6 +177,13 @@ if ($this->session->lang == 'english') {
             <i class="fa fa-fax"></i><span><?php echo $this->lang->line('showallordersnew'); ?></span>
           </a>
         </li>
+         <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/About')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Dashboard/About'); ?>">
+            <i class="fa fa-user-md" aria-hidden="true"></i><span><?php echo $this->lang->line('about'); ?></span>
+          </a>
+        </li>              
         <?php
         if ($this->session->type =='admin' OR $this->session->dep =='IT') {
         echo '<li class="treeview';
