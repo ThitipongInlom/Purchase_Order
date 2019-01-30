@@ -139,12 +139,6 @@ if ($this->session->lang == 'english') {
         }
         echo '">';
         echo '<a href="'.site_url('index.php/Show_data/Show_accounting?i=All').'"><i class="fa  fa-calculator"></i><span>'.$this->lang->line('account').'</span></a></li>';
-        echo'<li class="';
-        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/acappovecheck/') {
-          echo 'active';
-        }
-        echo '">';
-        echo '<a href="'.site_url('index.php/Show_data/acappovecheck').'"><i class="fa  fa-plane"></i><span>'.$this->lang->line('acappovecheck').'</span></a></li>';
         }
         ?>
         <li class="<?php
@@ -154,27 +148,11 @@ if ($this->session->lang == 'english') {
             <i class="fa  fa-check"></i><span><?php echo $this->lang->line('completed'); ?></span>
           </a>
         </li>
-        <!--
-        <li class="<?php
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed2')
-            {echo 'active';}?>">
-          <a href="<?php echo site_url('index.php/Show_data/show_completed2'); ?>">
-            <i class="fa fa-check-circle-o"></i><span><?php echo $this->lang->line('completed2'); ?></span>
-          </a>
-        </li>
-        -->
         <li class="<?php
             if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_reject')
             {echo 'active';}?>">
           <a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>">
             <i class="fa fa-times"></i><span><?php echo $this->lang->line('reject'); ?></span>
-          </a>
-        </li>
-        <li class="<?php
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Fax')
-            {echo 'active';}?>">
-          <a href="<?php echo site_url('index.php/Show_data/Fax'); ?>">
-            <i class="fa fa-fax"></i><span><?php echo $this->lang->line('showallordersnew'); ?></span>
           </a>
         </li>
          <li class="<?php

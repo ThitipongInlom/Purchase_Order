@@ -46,138 +46,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <li><a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>"><i class="fa fa-dashboard"></i> <?php echo $this->lang->line('Dashboard'); ?></a></li>
         </ol>
       </section>
-      <!-- Main content -->
-<!--       <section class="content">
-      <div class="row">
-      <div class="col-md-12">  
-      <div class="box box-success">
-          <div class="box-header with-border">
-          <h3 class="box-title">PR IN <?php echo date('Y m d '."l"); ?> </h3>
-      </div>
-        <div class="box-body">
-      <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">ALL</span>
-        <div class="info-box-content">
-          <span class="info-box-text">ALL PR</span>
-          <span class="info-box-number"><?php echo $alltoday; ?> PR</span>
-        </div>
-      </div>      
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">HOD</span>
-        <div class="info-box-content">
-          <span class="info-box-text">HOD APV</span>
-          <span class="info-box-number"><?php echo $hodtoday; ?> PR</span>
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">AC</span>
-        <div class="info-box-content">
-          <span class="info-box-text">AC APV</span>
-          <span class="info-box-number"><?php echo $actoday; ?> PR</span>
-          <span class="info-box-number"><?php echo $actodayno; ?> wait approve</span> 
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">GM</span>
-        <div class="info-box-content">
-          <span class="info-box-text">GM APV</span>
-          <span class="info-box-number"><?php echo $gmtoday; ?> PR</span>
-          <span class="info-box-number"><?php echo $gmtodayno; ?> wait approve</span> 
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">EFC</span>
-        <div class="info-box-content">
-          <span class="info-box-text">EFC</span>
-          <span class="info-box-number"><?php echo $efctoday; ?> PR</span>
-          <span class="info-box-number"><?php echo $efctodayno; ?> wait approve</span>
-        </div>
-      </div>       
-      </div>
-      </div>
-        </div>
-      </div>
-      </div>
-      </div>
-      </section>
-
-      <section class="content">
-      <div class="row">
-      <div class="col-md-12">  
-      <div class="box box-success">
-          <div class="box-header with-border">
-          <h3 class="box-title">PR Mouth  <?php echo date('M Y'); ?></h3>
-      </div>
-        <div class="box-body">
-      <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">ALL</span>
-        <div class="info-box-content">
-          <span class="info-box-text">ALL PR</span>
-          <span class="info-box-number"><?php echo $allmouth; ?> PR</span>
-        </div>
-      </div>      
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">HOD</span>
-        <div class="info-box-content">
-          <span class="info-box-text">HOD APV</span>
-          <span class="info-box-number"><?php echo $hodmouth; ?> PR</span>
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">AC</span>
-        <div class="info-box-content">
-          <span class="info-box-text">AC APV</span>
-          <span class="info-box-number"><?php echo $acmouth; ?> PR</span>
-          <span class="info-box-number"><?php echo $acmouthno; ?> wait approve</span>
-
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">GM</span>
-        <div class="info-box-content">
-          <span class="info-box-text">GM APV</span>
-          <span class="info-box-number"><?php echo $gmmouth; ?> PR</span>
-          <span class="info-box-number"><?php echo $gmmouthno; ?> wait approve </span>
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-2">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">EFC</span>
-        <div class="info-box-content">
-          <span class="info-box-text">EFC</span>
-          <span class="info-box-number"><?php echo $efcmouth; ?> PR</span>
-          <span class="info-box-number"><?php echo $efcmouthno; ?> wait approve </span>
-        </div>
-      </div>       
-      </div>
-      </div>
-        </div>
-      </div>
-      </div>
-      </div>
-      </section> -->
-
 
       <section class="content">
       <div class="row">
@@ -190,11 +58,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="row">  
       <div class="col-md-4">
       <div class="info-box">
+        <span class="info-box-icon bg-aqua">PUR</span>
+        <div class="info-box-content">
+          <span class="info-box-text">PUR APV</span>
+          <span class="info-box-number"><?php echo $acnoapp; ?> wait approve
+          </span>
+        </div>
+      </div>       
+      </div>
+      <div class="col-md-4">
+      <div class="info-box">
         <span class="info-box-icon bg-aqua">AC</span>
         <div class="info-box-content">
           <span class="info-box-text">AC APV</span>
-          <span class="info-box-number"><?php echo $acnoapp; ?> wait approve
-          </span>
+          <span class="info-box-number"><?php echo $gmnoapp; ?> wait approve</span>
         </div>
       </div>       
       </div>
@@ -203,15 +80,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="info-box-icon bg-aqua">GM</span>
         <div class="info-box-content">
           <span class="info-box-text">GM APV</span>
-          <span class="info-box-number"><?php echo $gmnoapp; ?> wait approve</span>
-        </div>
-      </div>       
-      </div>
-      <div class="col-md-4">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua">EFC</span>
-        <div class="info-box-content">
-          <span class="info-box-text">EFC</span>
           <span class="info-box-number"><?php echo $efcnoapp; ?> wait approve</span>
    
         </div>

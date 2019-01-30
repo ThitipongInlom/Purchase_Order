@@ -46,6 +46,7 @@ if ($this->session->lang == 'english') {
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
   </head>
   <body>
     <div class="content-wrapper">
@@ -83,7 +84,6 @@ if ($this->session->lang == 'english') {
               </thead>
               <tbody>
                 <?php foreach ($user as $row) {
-
                 ?>
                 <tr align="center">
                   <td><?php echo  $row->username; ?></td>
@@ -168,7 +168,7 @@ if ($this->session->lang == 'english') {
           </div>
         </div>
       </div>
-      <!-- /.content-wrapper -->
+
     </div>
     <!-- DataTables -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js'; ?>"></script>

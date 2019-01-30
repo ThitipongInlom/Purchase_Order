@@ -147,9 +147,9 @@ return $waredesc1;
                       <th>Department/Warehouse</th>
                       <th>Comment PR</th>
                       <th>HOD</th>
+                      <th>PUR</th>
                       <th>AC</th>
                       <th>GM</th>
-                      <th>EFC</th>
                       <th>Action.</th>
                       <th>HodAV</th>
                       <th>HodAC</th>

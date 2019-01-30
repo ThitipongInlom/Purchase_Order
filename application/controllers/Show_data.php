@@ -502,9 +502,9 @@ echo'<div id="dispayopendata2"><div class="row">
 				echo 'center';
 			}
 			echo'">';
-		echo 'General Manager';
+		echo 'Purchase Order';
 		echo '</td><td>';
-		echo 'Executive Financial Controller';
+		echo 'General Manager';
 	echo '</td></table></div></div></div>';
 	if ($data_head[0]['statusapp'] !='') {
 		echo '<br>';

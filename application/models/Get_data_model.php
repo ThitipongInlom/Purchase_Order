@@ -69,24 +69,24 @@ class Get_data_model extends CI_Model {
 	public function getUnit($warecode)
 	{
 		$beta = $this->load->database('bo', TRUE);
-		$beta->select('STFC0060.mdesc1');
+		$beta->select('*');
 		$beta->from('STFA0010');
 		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
 		$beta->where('stcode', $warecode);
 		$result = $beta->get()->result_array();
-		$mdesc1 = $result[0]['mdesc1'];
+		$mdesc1 = $result[0]['stunit1'];
 		return $mdesc1;
 	}
 
 	public function getUniten($warecode)
 	{
 		$beta = $this->load->database('bo', TRUE);
-		$beta->select('STFC0060.mdesc1,STFC0060.mdesc2');
+		$beta->select('*');
 		$beta->from('STFA0010');
 		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
 		$beta->where('stcode', $warecode);
 		$result = $beta->get()->result_array();
-		$mdesc1 = $result[0]['mdesc2'];
+		$mdesc1 = $result[0]['stunit1'];
 		return $mdesc1;
 	}
 

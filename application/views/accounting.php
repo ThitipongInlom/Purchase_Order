@@ -173,9 +173,9 @@ return $pono;
                       <th>Department/Warehouse</th>
                       <th>Status Pr</th>
                       <th>HOD</th>
+                      <th>PUR</th>
                       <th>AC</th>
                       <th>GM</th>
-                      <th>EFC</th>
                       <th>CP</th>
                       <th>Action.</th>
                       <th>HodAV</th>

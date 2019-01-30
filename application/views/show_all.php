@@ -142,9 +142,9 @@ return $waredesc1;
                         <th width="10" align="center">Ref No.</th>
                         <th width="20" align="center">Warehouse</th>
                         <th width="1" align="center">HOD</th>
+                        <th width="1" align="center">PUR</th>
                         <th width="1" align="center">AC</th>
                         <th width="1" align="center">GM</th>
-                        <th width="1" align="center">EFC</th>
                         <th width="6" align="center">Action.</th>
                       </tr>
                     </thead>
