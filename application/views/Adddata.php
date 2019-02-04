@@ -82,7 +82,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <tr>
                                         <td align="center"><?php echo $row->warecode; ?></td>
                                         <td><?php echo $row->waredesc1; ?></td>
-                                        <td><button class="btn btn-sm btn-warning">แก้ไข</button></td>
+                                        <td>
+                                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#EditData">แก้ไข</button>
+                                        <button class="btn btn-sm btn-danger">ลบ</button>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 </table>
@@ -104,7 +107,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td align="center"><?php echo $row->mcode; ?></td>
                                         <td><?php echo $row->mdesc1; ?></td>
                                         <td><?php echo $row->mdesc2; ?></td>
-                                        <td><button class="btn btn-sm btn-warning">แก้ไข</button></td>
+                                        <td>
+                                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#EditData">แก้ไข</button>
+                                        <button class="btn btn-sm btn-danger">ลบ</button>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 </table>
@@ -128,6 +134,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div>
+        
+        <!-- Modal Edit Data -->
+        <div class="modal fade" id="EditData" tabindex="-1" role="dialog" aria-labelledby="EditLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditLabel">แก้ไขข้อมูล</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!-- Modal Add Data -->
+        <div class="modal fade" id="AddData" tabindex="-1" role="dialog" aria-labelledby="AddLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddLabel">เพิ่มข้อมูล</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+        </div>
         </section>
         <!-- /.content-wrapper -->
     </div>

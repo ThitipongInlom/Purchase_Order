@@ -516,21 +516,24 @@ echo'<div id="dispayopendata2"><div class="row">
 		  <div align="center">';
 	$type = $this->session->type;
 	$user = $this->session->username;
+	$right_ac = $this->session->right_ac;
+	$right_gm = $this->session->right_gm;
+	$right_efc = $this->session->right_efc;
         if ($type=='hod' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $user=='Somkid' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
         }elseif ($type=='accounting' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $type=='accounting0' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-     	}elseif ($user=='Somkhit' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+     	}elseif ($right_gm=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" rowred="'.$rowred.'" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger"  rowred="'.$rowred.'" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-     	}elseif ($user=='Nalinee' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+     	}elseif ($right_efc=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}
-			if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->username =='dang') {
-      echo '<button type="button" class="btn btn-primary" prno="'.$data_head[0]['prno'].'"  onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="รับของแล้ว"><i class="fa fa-fw fa-thumbs-up"></i></button>';
+		if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' AND $data_head[0]['completed'] =='Y' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' AND $data_head[0]['completed'] =='Y') {
+      	echo '<button type="button" class="btn btn-primary" prno="'.$data_head[0]['prno'].'"  onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="รับของแล้ว"><i class="fa fa-fw fa-thumbs-up"></i></button>';
      	}
     echo '<button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="ปิด" id="modelclose">ปิด</button>
           <button type="button" class="btn btn-primary"  onclick="printdata(this)" primary="'.$data_head[0]['prno'].'" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-print"></i></button>';

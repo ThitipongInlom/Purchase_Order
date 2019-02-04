@@ -256,7 +256,7 @@ class Add_Pr extends CI_Controller {
 			echo'</td>
 			<td>'.$row['stname1'].'</td>
 			<td>'.$row['stname2'].'</td>
-			<td>'.$row['mdesc1'].'</td>
+			<td align="center">'.$row['stunit1'].'</td>
 		</tr>';
 		}
 		echo'</table><div class="table-responsive">

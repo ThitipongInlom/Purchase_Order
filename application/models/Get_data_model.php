@@ -169,6 +169,9 @@ class Get_data_model extends CI_Model {
 		}
 		$leve = $this->session->type;
 		$username = $this->session->username;
+		$right_ac = $this->session->right_ac;
+		$right_gm = $this->session->right_gm;
+		$right_efc = $this->session->right_efc;
 		if ($leve=='admin' OR $dep=='AC') {
 			$this->db->select("*,row_number() OVER (ORDER BY PR_ref.prno desc) AS 'NO'");
 			$this->db->from('PR');
@@ -184,7 +187,7 @@ class Get_data_model extends CI_Model {
 			$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
-		}elseif($username=='Somkhit'){
+		}elseif($username=='Somkhit' OR $right_gm=='Y'){
 			$this->db->select("*,row_number() OVER (ORDER BY PRApprove_Date desc, PR_ref.prno desc) AS 'NO'");
 			$this->db->from('PR');
 			$this->db->limit(1000);
@@ -203,7 +206,7 @@ class Get_data_model extends CI_Model {
 			$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
-		}elseif($username=='Nalinee'){
+		}elseif($username=='Nalinee' OR $right_efc=='Y'){
 			$this->db->select("*,row_number() OVER (ORDER BY GMApprove_Date desc, PR_ref.prno desc) AS 'NO'");
 			$this->db->from('PR');
 			$this->db->limit(1000);
@@ -548,6 +551,9 @@ class Get_data_model extends CI_Model {
 
 	public function approveY($primary,$approvedata,$type,$date,$username)
 	{
+		$right_gm = $this->session->right_gm; // AC
+		$right_ac = $this->session->right_ac; // PUR
+		$right_efc = $this->session->right_efc; // GM
 		if ($type=='hod' OR $username=='Somkid') {
 			$signature_img = $this->session->signature_img;
 			if ($signature_img=='') {
@@ -587,7 +593,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'HOD approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Somkhit') {
+		if ($type=='approval' AND $username=='Somkhit' OR $right_gm=='Y') {
 			$PR_ref = array(
 			'GMApprove' => $approvedata,
 			'GMApprove_Date' => $date);
@@ -601,7 +607,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'GM approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Nalinee') {
+		if ($type=='approval' AND $username=='Nalinee' OR $right_efc=='Y') {
 			$PR_ref = array(
 			'EFCApprove' => $approvedata,
 			'EFCApprove_Date' => $date);
@@ -611,7 +617,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'EFC approve');
 			echo json_encode($array);
 		}
-		if ($type=='accounting' OR $type=='accounting0') {
+		if ($type=='accounting' OR $type=='accounting0' OR $right_ac=='Y') {
 			$PR_ref = array(
 			'PRApprove' => $approvedata,
 			'PRApprove_Date' => $date);
@@ -625,6 +631,9 @@ class Get_data_model extends CI_Model {
 
 	public function approveX($primary,$approvedata,$type,$date,$username)
 	{
+		$right_gm = $this->session->right_gm; // AC
+		$right_ac = $this->session->right_ac; // PUR
+		$right_efc = $this->session->right_efc; // GM
 		if ($type=='hod') {
 			$signature_img = $this->session->signature_img;
 			$username = $this->session->username;
@@ -643,7 +652,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'HOD approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Somkhit') {
+		if ($type=='approval' AND $username=='Somkhit' OR $right_gm=='Y') {
 			$PR_ref = array(
 			'GMApprove' => $approvedata,
 			'GMApprove_Date' => $date);
@@ -657,7 +666,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'GM approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Nalinee') {
+		if ($type=='approval' AND $username=='Nalinee' OR $right_efc=='Y') {
 			$PR_ref = array(
 			'EFCApprove' => $approvedata,
 			'EFCApprove_Date' => $date);
@@ -667,7 +676,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'EFC approve');
 			echo json_encode($array);
 		}
-		if ($type=='accounting' OR $type=='accounting0') {
+		if ($type=='accounting' OR $type=='accounting0' OR $right_ac=='Y') {
 			$PR_ref = array(
 			'PRApprove' => $approvedata,
 			'PRApprove_Date' => $date);

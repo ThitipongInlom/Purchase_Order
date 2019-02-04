@@ -9,10 +9,12 @@ class Dashboard extends CI_Controller {
 
 	public function UserRoute()
 	{
-		$user = $this->session->username;
-		if($user=='Somkhit' OR $user=='Nalinee'){
+		$right_ac = $this->session->right_ac;
+        $right_gm = $this->session->right_gm;
+	    $right_efc = $this->session->right_efc;
+		if($right_gm=='Y' OR $right_efc=='Y'){
 			redirect('index.php/Show_data/show_approve');
-		}elseif($user=='Somkid'){
+		}elseif($right_ac=='Y'){
 			redirect('index.php/Show_data/Show_accounting?i=All');
 		}else{
 			redirect('index.php/Dashboard/Dashboard');
