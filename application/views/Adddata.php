@@ -62,15 +62,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">เพิ่มข้อมูล
-                                    Warehouse</a></li>
+                                    Vendor</a></li>
                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">เพิ่มข้อมูล
-                                    ประเภทสินค้า</a></li>
-                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Tab 3</a></li>
+                                    สินค้า</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
                                 <div align="right" style="margin-bottom: 10px;">
-                                    <button class="btn btn-sm btn-success">เพิ่ม Warehouse</button>
+                                    <button class="btn btn-sm btn-success" onclick="AddDataWarehouse();">เพิ่ม
+                                        Vendor</button>
                                 </div>
                                 <table class="table table-condensed table-bordered">
                                     <tr class="bg-primary">
@@ -78,13 +78,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td>Name Code</td>
                                         <td align="center">Action</td>
                                     </tr>
-                                    <?php foreach ($warehouse as $key => $row) { ?>
+                                    <?php foreach ($Getvendor as $key => $row) { ?>
                                     <tr>
-                                        <td align="center"><?php echo $row->warecode; ?></td>
-                                        <td><?php echo $row->waredesc1; ?></td>
+                                        <td align="center"><?php echo $row->vencode; ?></td>
+                                        <td><?php echo $row->venname1; ?></td>
                                         <td>
-                                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#EditData">แก้ไข</button>
-                                        <button class="btn btn-sm btn-danger">ลบ</button>
+                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                                data-target="#EditData">แก้ไข</button>
+                                            <button class="btn btn-sm btn-danger">ลบ</button>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -93,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_2">
                                 <div align="right" style="margin-bottom: 10px;">
-                                    <button class="btn btn-sm btn-success">เพิ่ม ประเภทสินค้า</button>
+                                    <button class="btn btn-sm btn-success">เพิ่ม สินค้า</button>
                                 </div>
                                 <table class="table table-condensed table-bordered">
                                     <tr class="bg-primary">
@@ -108,25 +109,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td><?php echo $row->mdesc1; ?></td>
                                         <td><?php echo $row->mdesc2; ?></td>
                                         <td>
-                                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#EditData">แก้ไข</button>
-                                        <button class="btn btn-sm btn-danger">ลบ</button>
+                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                                data-target="#EditData">แก้ไข</button>
+                                            <button class="btn btn-sm btn-danger">ลบ</button>
                                         </td>
                                     </tr>
                                     <?php } ?>
                                 </table>
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_3">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset
-                                sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                                software
-                                like Aldus PageMaker including versions of Lorem Ipsum.
                             </div>
                             <!-- /.tab-pane -->
                         </div>
@@ -134,47 +123,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div>
-        
-        <!-- Modal Edit Data -->
-        <div class="modal fade" id="EditData" tabindex="-1" role="dialog" aria-labelledby="EditLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EditLabel">แก้ไขข้อมูล</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+
+            <!-- Modal Edit Data -->
+            <div class="modal fade" id="EditData" tabindex="-1" role="dialog" aria-labelledby="EditLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="EditLabel">แก้ไขข้อมูล</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
+
+            <!-- Modal Add Data -->
+            <div class="modal fade" id="AddDataWarehouse" tabindex="-1" role="dialog"
+                aria-labelledby="AddWarehouseLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="AddWarehouseLabel">เพิ่มข้อมูล Vendor</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="CodeWarehouse">Code</label>
+                                    <input type="text" class="form-control" id="CodeWarehouse" placeholder="Code">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="CodeWarehouse">Name Code</label>
+                                    <input type="text" class="form-control" id="WarehouseName" placeholder="Name Code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="SaveAddWarehouse();">ยืนยัน เพิ่มข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
-        </div>
-        <!-- Modal Add Data -->
-        <div class="modal fade" id="AddData" tabindex="-1" role="dialog" aria-labelledby="AddLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="AddLabel">เพิ่มข้อมูล</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
-        </div>
+
         </section>
         <!-- /.content-wrapper -->
     </div>

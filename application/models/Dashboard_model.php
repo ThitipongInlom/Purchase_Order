@@ -15,10 +15,17 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
-	public function Getwarehouse()
+	public function CheckCode_Addwarehouse()
+	{
+		$Code = $_POST['code'];
+		$query = $this->db->query("SELECT * FROM STFC0070 Where warecode = '$Code'");
+		return $query->num_rows();
+	}
+
+	public function Getvendor()
 	{
 		$this->db->select('*');
-		$this->db->from('STFC0070');
+		$this->db->from('APFA0010');
 		$result = $this->db->get()->result_object();
 		return $result;
 	}

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller {
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -51,9 +52,15 @@ class Dashboard extends CI_Controller {
 		$this->load->view('theme/footer');		
 	}
 
+	public function SaveAddWarehouse()
+	{
+		$Check_code = $this->Dashboard_model->CheckCode_Addwarehouse();
+		print_r($Check_code);
+	}
+
 	public function AddData()
 	{
-		$data['warehouse'] = $this->Dashboard_model->Getwarehouse();
+		$data['Getvendor'] = $this->Dashboard_model->Getvendor();
 		$data['unittype'] = $this->Dashboard_model->Getunittype();
 		$this->load->view('theme/head');
 		$this->load->view('Adddata', $data);

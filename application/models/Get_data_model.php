@@ -74,7 +74,7 @@ class Get_data_model extends CI_Model {
 		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
 		$beta->where('stcode', $warecode);
 		$result = $beta->get()->result_array();
-		$mdesc1 = $result[0]['stunit1'];
+		$mdesc1 = $result[0]['mdesc1'];
 		return $mdesc1;
 	}
 
@@ -86,7 +86,7 @@ class Get_data_model extends CI_Model {
 		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
 		$beta->where('stcode', $warecode);
 		$result = $beta->get()->result_array();
-		$mdesc1 = $result[0]['stunit1'];
+		$mdesc1 = $result[0]['mdesc2'];
 		return $mdesc1;
 	}
 

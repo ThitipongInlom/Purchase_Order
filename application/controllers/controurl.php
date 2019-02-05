@@ -96,7 +96,9 @@ public function url()
 		'RC_modal_opendata' => $server_root.'index.php/Show_data/RC_modal_opendata',
 		'Setvalue' => $server_root.'index.php/Show_data/Show_accounting',
 		'FAXSAVE' => $server_root.'index.php/Show_data/FAXSAVE',
-		'ACappovecheck_submit' => $server_root.'index.php/Show_data/acapproveaction');
+		'ACappovecheck_submit' => $server_root.'index.php/Show_data/acapproveaction',
+		'SaveAddWarehouse' => $server_root.'index.php/Dashboard/SaveAddWarehouse',
+	);
 	echo json_encode($arry);
 }
 

@@ -321,7 +321,7 @@ var editsetptoductcode = function editsetptoductcode(prdcode) {
       var dt = JSON.parse(data);
       $("#productcode").val(dt[0].stcode);
       $("#itemstname1").val(dt[0].stname1);
-      $("#itemmdesc1").val(dt[0].stunit1);
+      $("#itemmdesc1").val(dt[0].mdesc1);
     }
   }); 
 }
@@ -567,7 +567,7 @@ var setproductcode = function setproductcode(v_id) {
       var dt = JSON.parse(data);
       $("#productcode").val(dt[0].stcode);
       $("#itemstname1").val(dt[0].stname1);
-      $("#itemmdesc1").val(dt[0].stunit1);
+      $("#itemmdesc1").val(dt[0].mdesc1);
       $("#closeshowlistitem").click();
       $.ajax({
         url: urlresult.setproductoldpr,
