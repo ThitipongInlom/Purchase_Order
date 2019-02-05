@@ -72,23 +72,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <button class="btn btn-sm btn-success" onclick="AddDataWarehouse();">เพิ่ม
                                         Vendor</button>
                                 </div>
-                                <table class="table table-condensed table-bordered">
+                                <table class="table table-condensed table-bordered" id="table_vendor">
+                                    <thead>
                                     <tr class="bg-primary">
                                         <td align="center">Code</td>
                                         <td>Name Code</td>
                                         <td align="center">Action</td>
                                     </tr>
-                                    <?php foreach ($Getvendor as $key => $row) { ?>
-                                    <tr>
-                                        <td align="center"><?php echo $row->vencode; ?></td>
-                                        <td><?php echo $row->venname1; ?></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                                data-target="#EditData">แก้ไข</button>
-                                            <button class="btn btn-sm btn-danger">ลบ</button>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
+                                    </thead>
+                                    <tbody></tbody>
                                 </table>
                             </div>
                             <!-- /.tab-pane -->
@@ -96,25 +88,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div align="right" style="margin-bottom: 10px;">
                                     <button class="btn btn-sm btn-success">เพิ่ม สินค้า</button>
                                 </div>
-                                <table class="table table-condensed table-bordered">
-                                    <tr class="bg-primary">
-                                        <td align="center">Code</td>
-                                        <td>Thai Name</td>
-                                        <td>English Name</td>
-                                        <td align="center">Action</td>
-                                    </tr>
-                                    <?php foreach ($unittype as $key => $row) { ?>
-                                    <tr>
-                                        <td align="center"><?php echo $row->mcode; ?></td>
-                                        <td><?php echo $row->mdesc1; ?></td>
-                                        <td><?php echo $row->mdesc2; ?></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                                data-target="#EditData">แก้ไข</button>
-                                            <button class="btn btn-sm btn-danger">ลบ</button>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
+                                <table class="table table-condensed table-bordered" id="table_product" width="100%">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <td align="center">Code</td>
+                                            <td>Name Code</td>
+                                            <td>Unit</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
                                 </table>
                             </div>
                             <!-- /.tab-pane -->
@@ -168,7 +151,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                            <button type="button" class="btn btn-success" onclick="SaveAddWarehouse();">ยืนยัน เพิ่มข้อมูล</button>
+                            <button type="button" class="btn btn-success" onclick="SaveAddWarehouse();">ยืนยัน
+                                เพิ่มข้อมูล</button>
                         </div>
                     </div>
                 </div>
@@ -201,5 +185,96 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Dashboard Modifiy -->
     <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/dashdoard.js'; ?>"></script>
 </body>
+<!-- Type Script -->
+<script type="text/javascript">
+$(document).ready(function() {
+    var table_product = $('#table_product').DataTable({
+        "pageLength": 10,
+        "serverSide": true,
+        "processing": true,
+        "ajax": {
+            "url": "<?php echo site_url('index.php/Dashboard/product_table '); ?>"
+        },
+        "columns": [{
+                "data": 'stcode',
+            },
+            {
+                "data": 'stname1'
+            },
+            {
+                "data": 'stunit1'
+            },{
+                data:'id',
+                render:function(data,type,row){
+                    var Action = '<button class="btn btn-sm btn-warning">แก้ไข</button>  <button class="btn btn-sm btn-danger">ลบ</button>';
+                    return Action;
+                },
+                orderable: false
+            }
+        ],
+        "columnDefs": [
+        { "className": 'text-left', "targets": [] },
+        { "className": 'text-center', "targets": [0, ] },
+        ],
+        "language": {
+            "lengthMenu": "แสดง _MENU_ คน",
+            "search": "ค้นหา:",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ คน",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 คน",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด คน)",
+            "processing": "กำลังโหลดข้อมูล...",
+            "zeroRecords": "ไม่มีข้อมูล",
+            "paginate": {
+                "first": "หน้าแรก",
+                "last": "หน้าสุดท้าย",
+                "next": "ต่อไป",
+                "previous": "ย้อนกลับ"
+            },
+        },
+    });
+    var table_vendor = $('#table_vendor').DataTable({
+        "pageLength": 10,
+        "serverSide": true,
+        "processing": true,
+        "ajax": {
+            "url": "<?php echo site_url('index.php/Dashboard/vendor_table '); ?>"
+        },
+        "columns": [{
+                "data": 'vencode',
+            },
+            {
+                "data": 'venname1'
+            },
+            {
+                data:'id',
+                render:function(data,type,row){
+                    var Action = '<button class="btn btn-sm btn-warning">แก้ไข</button>  <button class="btn btn-sm btn-danger">ลบ</button>';
+                    return Action;
+                },
+                orderable: false
+            }
+        ],
+        "columnDefs": [
+        { "className": 'text-left', "targets": [] },
+        { "className": 'text-center', "targets": [0, ] },
+        ],
+        "language": {
+            "lengthMenu": "แสดง _MENU_ คน",
+            "search": "ค้นหา:",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ คน",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 คน",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด คน)",
+            "processing": "กำลังโหลดข้อมูล...",
+            "zeroRecords": "ไม่มีข้อมูล",
+            "paginate": {
+                "first": "หน้าแรก",
+                "last": "หน้าสุดท้าย",
+                "next": "ต่อไป",
+                "previous": "ย้อนกลับ"
+            },
+        },
+    });
+})
+</script>
 
 </html>

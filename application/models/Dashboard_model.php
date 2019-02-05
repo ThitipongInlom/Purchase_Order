@@ -15,26 +15,55 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
-	public function CheckCode_Addwarehouse()
-	{
-		$Code = $_POST['code'];
-		$query = $this->db->query("SELECT * FROM STFC0070 Where warecode = '$Code'");
-		return $query->num_rows();
-	}
-
-	public function Getvendor()
-	{
+	public function find_with_page_product($param){
+		$keyword = $param['keyword'];
 		$this->db->select('*');
-		$this->db->from('APFA0010');
-		$result = $this->db->get()->result_object();
+ 
+		$condition = "1=1";
+		if(!empty($keyword)){
+			$condition .= " and (stcode like '%{$keyword}%' or stname1 like '%{$keyword}%')";
+		}
+ 
+		$this->db->where($condition);
+		$this->db->limit($param['page_size'], $param['start']);
+		$this->db->order_by($param['column'], $param['dir']);
+ 
+		$query = $this->db->get('STFA0010');
+		if($query->num_rows() > 0){
+			foreach($query->result() as $row){
+				$data[] = $row;
+			}
+		}
+ 
+		$count_condition = $this->db->from('STFA0010')->where($condition)->count_all_results();
+		$count = $this->db->from('STFA0010')->count_all_results();
+		$result = array('count'=>$count,'count_condition'=>$count_condition,'data'=>$data,'error_message'=>'');
 		return $result;
 	}
 
-	public function Getunittype()
-	{
+	public function find_with_page_vendor($param){
+		$keyword = $param['keyword'];
 		$this->db->select('*');
-		$this->db->from('STFC0060');
-		$result = $this->db->get()->result_object();
+ 
+		$condition = "1=1";
+		if(!empty($keyword)){
+			$condition .= " and (vencode like '%{$keyword}%' or venname1 like '%{$keyword}%')";
+		}
+ 
+		$this->db->where($condition);
+		$this->db->limit($param['page_size'], $param['start']);
+		$this->db->order_by($param['column'], $param['dir']);
+ 
+		$query = $this->db->get('APFA0010');
+		if($query->num_rows() > 0){
+			foreach($query->result() as $row){
+				$data[] = $row;
+			}
+		}
+ 
+		$count_condition = $this->db->from('APFA0010')->where($condition)->count_all_results();
+		$count = $this->db->from('APFA0010')->count_all_results();
+		$result = array('count'=>$count,'count_condition'=>$count_condition,'data'=>$data,'error_message'=>'');
 		return $result;
 	}
 

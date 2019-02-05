@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Dashboard_model');
+		$this->load->library("pagination");
 	}
 
 	public function UserRoute()
@@ -58,12 +59,52 @@ class Dashboard extends CI_Controller {
 		print_r($Check_code);
 	}
 
+	public function product_table()
+	{
+        $order_index = $this->input->get('order[0][column]');
+        $param['page_size'] = $this->input->get('length');
+        $param['start'] = $this->input->get('start');
+        $param['draw'] = $this->input->get('draw');
+        $param['keyword'] = trim($this->input->get('search[value]'));
+        $param['column'] = $this->input->get("columns[{$order_index}][data]");
+        $param['dir'] = $this->input->get('order[0][dir]');
+ 
+        $results = $this->Dashboard_model->find_with_page_product($param);
+ 
+        $data['draw'] = $param['draw'];
+        $data['recordsTotal'] = $results['count'];
+        $data['recordsFiltered'] = $results['count_condition'];
+        $data['data'] = $results['data'];
+        $data['error'] = $results['error_message'];
+ 
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+		public function vendor_table()
+	{
+        $order_index = $this->input->get('order[0][column]');
+        $param['page_size'] = $this->input->get('length');
+        $param['start'] = $this->input->get('start');
+        $param['draw'] = $this->input->get('draw');
+        $param['keyword'] = trim($this->input->get('search[value]'));
+        $param['column'] = $this->input->get("columns[{$order_index}][data]");
+        $param['dir'] = $this->input->get('order[0][dir]');
+ 
+        $results = $this->Dashboard_model->find_with_page_vendor($param);
+ 
+        $data['draw'] = $param['draw'];
+        $data['recordsTotal'] = $results['count'];
+        $data['recordsFiltered'] = $results['count_condition'];
+        $data['data'] = $results['data'];
+        $data['error'] = $results['error_message'];
+ 
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
 	public function AddData()
 	{
-		$data['Getvendor'] = $this->Dashboard_model->Getvendor();
-		$data['unittype'] = $this->Dashboard_model->Getunittype();
 		$this->load->view('theme/head');
-		$this->load->view('Adddata', $data);
+		$this->load->view('Adddata');
 		$this->load->view('theme/footer');		
 	}
 
