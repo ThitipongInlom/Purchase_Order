@@ -172,10 +172,18 @@ class Dashboard_model extends CI_Model {
 	{
 		$Code = $_POST['code'];
 		$Name = $_POST['name'];
+		$Phone = $_POST['phone'];
+		$Fax = $_POST['fax'];
+		$Email = $_POST['email'];
+		$Address = $_POST['address'];
 		$this->db->select('*');
 		$this->db->from('APFA0010');
 		$this->db->where('vencode', $Code);
 		$this->db->where('venname1', $Name);
+		$this->db->where('venadd1', $Address);
+		$this->db->where('ventel', $Phone);
+		$this->db->where('venfax', $Fax);
+		$this->db->where('venemail', $Email);
 		$result = $this->db->get()->num_rows();
 		return $result;
 	}
@@ -210,11 +218,19 @@ class Dashboard_model extends CI_Model {
 	{
 		$Code = $_POST['code'];
 		$Name = $_POST['name'];
+		$Phone = $_POST['phone'];
+		$Fax = $_POST['fax'];
+		$Email = $_POST['email'];
+		$Address = $_POST['address'];
 		$data = array(
 				'comid' => '0001',
-				'vencode' => $Code,
-				'apcode' => $Code,
-				'venname1' => $Name
+				'vencode' => strtoupper($Code),
+				'apcode' => strtoupper($Code),
+				'venname1' => $Name,
+				'venadd1' => $Address,
+				'ventel' => $Phone,
+				'venfax' => $Fax,
+				'venemail' => $Email
 		);
 		$this->db->insert('APFA0010', $data);
 		return;
@@ -224,10 +240,18 @@ class Dashboard_model extends CI_Model {
 	{
 		$Code = $_POST['code'];
 		$Name = $_POST['name'];
+		$Phone = $_POST['phone'];
+		$Fax = $_POST['fax'];
+		$Email = $_POST['email'];
+		$Address = $_POST['address'];		
 		$data = array(
 				'vencode' => $Code,
 				'apcode' => $Code,
-				'venname1' => $Name
+				'venname1' => $Name,
+				'venadd1' => $Address,
+				'ventel' => $Phone,
+				'venfax' => $Fax,
+				'venemail' => $Email
 		);
 		$this->db->where('vencode', $Code);
 		$this->db->update('APFA0010', $data);

@@ -59,6 +59,10 @@ var EditDatavendor = function EditDatavendor(e) {
       var res = JSON.parse(callback);
       $("#EditCodevendor").val(res.apcode);
       $("#EditvendorName").val(res.venname1);
+      $("#Editvendorphone").val(res.ventel);
+      $("#Editvendorfax").val(res.venfax);
+      $("#Editvendoremail").val(res.venemail);
+      $("#Editvendoraddress").val(res.venadd1);
     }
   });
 }
@@ -70,6 +74,10 @@ var SaveEditvendor = function SaveEditvendor() {
   var Data = new FormData();
   Data.append('code', code);
   Data.append('name', name);
+  Data.append('phone', $("#Editvendorphone").val());
+  Data.append('fax', $("#Editvendorfax").val());
+  Data.append('email', $("#Editvendoremail").val());
+  Data.append('address', $("#Editvendoraddress").val());
   $.ajax({
     url: urlresult.SaveEditvendor,
     dataType: 'text',
@@ -106,6 +114,10 @@ var SaveAddvendor = function SaveAddvendor() {
     var Data = new FormData();
     Data.append('code', code);
     Data.append('name', name);
+    Data.append('phone', $("#vendorphone").val());
+    Data.append('fax', $("#vendorfax").val());
+    Data.append('email', $("#vendoremail").val());
+    Data.append('address', $("#vendoraddress").val());
     $.ajax({
       url: urlresult.SaveAddvendor,
       dataType: 'text',

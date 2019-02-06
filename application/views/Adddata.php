@@ -128,6 +128,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <label for="EditvendorName">Name Code</label>
                                     <input type="text" class="form-control" id="EditvendorName" placeholder="Name Code">
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Editvendorphone">Phone:</label>
+                                    <input type="text" class="form-control" id="Editvendorphone" placeholder="Phone">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Editvendorfax">Fax:</label>
+                                    <input type="text" class="form-control" id="Editvendorfax" placeholder="Fax">
+                                </div>  
+                                <div class="form-group col-md-12">
+                                    <label for="Editvendoremail">E-mail:</label>
+                                    <input type="text" class="form-control" id="Editvendoremail" placeholder="E-mail">
+                                </div>      
+                                <div class="form-group col-md-12">
+                                    <label for="Editvendoraddress">Address:</label>
+                                    <textarea rows="3" class="form-control" id="Editvendoraddress" placeholder="Address"></textarea>
+                                </div>                                
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -149,13 +165,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="CodeWarehouse">Code</label>
+                                    <label for="Codevendor">Code:</label>
                                     <input type="text" class="form-control" id="Codevendor" placeholder="Code">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="CodeWarehouse">Name Code</label>
+                                    <label for="vendorName">Name Code:</label>
                                     <input type="text" class="form-control" id="vendorName" placeholder="Name Code">
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="vendorphone">Phone:</label>
+                                    <input type="text" class="form-control" id="vendorphone" placeholder="Phone">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="vendorfax">Fax:</label>
+                                    <input type="text" class="form-control" id="vendorfax" placeholder="Fax">
+                                </div>  
+                                <div class="form-group col-md-12">
+                                    <label for="vendoremail">E-mail:</label>
+                                    <input type="text" class="form-control" id="vendoremail" placeholder="E-mail">
+                                </div>      
+                                <div class="form-group col-md-12">
+                                    <label for="vendoraddress">Address:</label>
+                                    <textarea rows="3" class="form-control" id="vendoraddress" placeholder="Address"></textarea>
+                                </div>                                                                                              
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -178,11 +210,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="product_name">Name Product</label>
+                                    <label for="product_name">Name Product:</label>
                                     <input type="text" class="form-control" id="product_name" placeholder="ชื่อสินค้า">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="product_unit">Product Unit</label>    
+                                    <label for="product_unit">Product Unit:</label>    
                                     <select class="form-control input-sm col-md-2" id="product_unit" width="100%"></select>   
                                 </div>                             
                             </div>
