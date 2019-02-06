@@ -97,7 +97,15 @@ public function url()
 		'Setvalue' => $server_root.'index.php/Show_data/Show_accounting',
 		'FAXSAVE' => $server_root.'index.php/Show_data/FAXSAVE',
 		'ACappovecheck_submit' => $server_root.'index.php/Show_data/acapproveaction',
-		'SaveAddWarehouse' => $server_root.'index.php/Dashboard/SaveAddWarehouse',
+		'SaveAddvendor' => $server_root.'index.php/Dashboard/SaveAddvendor',
+		'EditGetvendor' => $server_root.'index.php/Dashboard/EditGetvendor',
+		'SaveEditvendor' => $server_root.'index.php/Dashboard/SaveEditvendor',
+		'Deletevendor' => $server_root.'index.php/Dashboard/Deletevendor',
+		'Getunitproduct' => $server_root.'index.php/Dashboard/Getunitproduct',
+		'SaveProduct' => $server_root.'index.php/Dashboard/SaveProduct',
+		'EditGetproduct' => $server_root.'index.php/Dashboard/EditGetproduct',
+		'EditSaveProduct' => $server_root.'index.php/Dashboard/EditSaveProduct',
+		'Deleteproduct' => $server_root.'index.php/Dashboard/Deleteproduct',
 	);
 	echo json_encode($arry);
 }

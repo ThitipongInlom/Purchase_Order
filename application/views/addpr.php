@@ -154,7 +154,7 @@ $info = $beta->select("*")
                           <td align="center"><h5><b><?php echo $this->lang->line('division'); ?></b></h5></td>
                           <td><input type="text" id="divisioncode" class="form-control input-sm" readonly></td>
                           <td align="center"><input type="text" id="divisionname" class="form-control input-sm" readonly></td>
-                          <td ><select class="form-control input-sm col-md-2" id="getdivision" width="100%" onchange="setdivision(this.value)"></select></td>
+                          <td><select class="form-control input-sm col-md-2" id="getdivision" width="100%" onchange="setdivision(this.value)"></select></td>
                         </tr>
                         <tr>
                           <td align="center"><b><?php echo $this->lang->line('remark'); ?></b></td>

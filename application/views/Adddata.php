@@ -12,6 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/css/select2.min.css';?>">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet"
         href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
@@ -28,6 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/dist/css/skins/_all-skins.min.css'; ?>">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="<?php echo base_url().'assets/alertify/css/alertify.min.css'; ?>" />    
     <!-- DataTables -->
     <link rel="stylesheet"
         href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'; ?>">
@@ -35,7 +39,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         href="<?php echo base_url().'/assets/adminlte/bower_components/datatables.net-bs/css/responsive.bootstrap4.css'; ?>">
     <!-- Css Modifly -->
     <link rel="stylesheet" href="<?php echo base_url().'/assets/css_modifly/css_show_all.css'; ?>">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,10 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
                                 <div align="right" style="margin-bottom: 10px;">
-                                    <button class="btn btn-sm btn-success" onclick="AddDataWarehouse();">เพิ่ม
+                                    <button class="btn btn-sm btn-success" onclick="AddDatavendor();">เพิ่ม
                                         Vendor</button>
                                 </div>
-                                <table class="table table-condensed table-bordered" id="table_vendor">
+                                <table class="table table-condensed table-bordered" id="table_vendor" width="100%">
                                     <thead>
                                     <tr class="bg-primary">
                                         <td align="center">Code</td>
@@ -86,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_2">
                                 <div align="right" style="margin-bottom: 10px;">
-                                    <button class="btn btn-sm btn-success">เพิ่ม สินค้า</button>
+                                    <button class="btn btn-sm btn-success" onclick="AddDataproduct();">เพิ่ม สินค้า</button>
                                 </div>
                                 <table class="table table-condensed table-bordered" id="table_product" width="100%">
                                     <thead>
@@ -108,55 +111,118 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
 
             <!-- Modal Edit Data -->
-            <div class="modal fade" id="EditData" tabindex="-1" role="dialog" aria-labelledby="EditLabel"
+            <div class="modal fade" id="EditDatavendor" tabindex="-1" role="dialog" aria-labelledby="EditLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="EditLabel">แก้ไขข้อมูล</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h4 class="modal-title" id="EditvendorLabel">แก้ไขข้อมูล</h4>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="EditCodeWarehouse">Code</label>
+                                    <input type="text" class="form-control" id="EditCodevendor" placeholder="Code">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="EditvendorName">Name Code</label>
+                                    <input type="text" class="form-control" id="EditvendorName" placeholder="Name Code">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="SaveEditvendor();">ยืนยัน แก้ไขข้อมูล</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Modal Add Data -->
-            <div class="modal fade" id="AddDataWarehouse" tabindex="-1" role="dialog"
+            <div class="modal fade" id="AddDatavendor" tabindex="-1" role="dialog"
                 aria-labelledby="AddWarehouseLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="AddWarehouseLabel">เพิ่มข้อมูล Vendor</h4>
+                            <h4 class="modal-title" id="AddvendorLabel">เพิ่มข้อมูล Vendor</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="CodeWarehouse">Code</label>
-                                    <input type="text" class="form-control" id="CodeWarehouse" placeholder="Code">
+                                    <input type="text" class="form-control" id="Codevendor" placeholder="Code">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="CodeWarehouse">Name Code</label>
-                                    <input type="text" class="form-control" id="WarehouseName" placeholder="Name Code">
+                                    <input type="text" class="form-control" id="vendorName" placeholder="Name Code">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                            <button type="button" class="btn btn-success" onclick="SaveAddWarehouse();">ยืนยัน
+                            <button type="button" class="btn btn-success" onclick="SaveAddvendor();">ยืนยัน
                                 เพิ่มข้อมูล</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Modal Add Data -->
+            <div class="modal fade" id="AddDataproduct" tabindex="-1" role="dialog"
+                aria-labelledby="AddDataproductLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="AddDataproductLabel">เพิ่มข้อมูล Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="product_name">Name Product</label>
+                                    <input type="text" class="form-control" id="product_name" placeholder="ชื่อสินค้า">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="product_unit">Product Unit</label>    
+                                    <select class="form-control input-sm col-md-2" id="product_unit" width="100%"></select>   
+                                </div>                             
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="SaveProduct();">ยืนยัน เพิ่มข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Add Data -->
+            <div class="modal fade" id="EditDataproduct" tabindex="-1" role="dialog"
+                aria-labelledby="EditDataproductLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="EditDataproductLabel">แก้ไข Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <input type="hidden" id="code_product_hide">
+                                <div class="form-group col-md-6">
+                                    <label for="product_name">Name Product</label>
+                                    <input type="text" class="form-control" id="edit_product_name" placeholder="ชื่อสินค้า">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="product_unit">Product Unit</label>    
+                                    <select class="form-control input-sm col-md-2" id="edit_product_unit" width="100%"></select>   
+                                </div>                             
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="EditSaveProduct();">ยืนยัน เพิ่มข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
+            </div>           
 
         </section>
         <!-- /.content-wrapper -->
@@ -178,16 +244,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script
         src="<?php echo base_url().'/assets/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>">
     </script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url().'/assets/adminlte/bower_components/select2/dist/js/select2.full.min.js';?>"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/fastclick/lib/fastclick.js'; ?>"></script>
     <!-- charts -->
     <script src="<?php echo base_url().'/assets/adminlte/bower_components/Chart.js/Chart.js';?>"></script>
-    <!-- Dashboard Modifiy -->
-    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/dashdoard.js'; ?>"></script>
+    <!-- Alertify -->
+    <script src="<?php echo base_url().'assets/alertify/alertify.min.js'; ?>"></script>
 </body>
 <!-- Type Script -->
 <script type="text/javascript">
 $(document).ready(function() {
+    $.fn.dataTable.ext.errMode = 'throw';
+    // Product Data Table
     var table_product = $('#table_product').DataTable({
         "pageLength": 10,
         "serverSide": true,
@@ -204,9 +274,9 @@ $(document).ready(function() {
             {
                 "data": 'stunit1'
             },{
-                data:'id',
+                data:'stcode',
                 render:function(data,type,row){
-                    var Action = '<button class="btn btn-sm btn-warning">แก้ไข</button>  <button class="btn btn-sm btn-danger">ลบ</button>';
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDataproduct(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deleteproduct(this);">ลบ</button>';
                     return Action;
                 },
                 orderable: false
@@ -232,6 +302,7 @@ $(document).ready(function() {
             },
         },
     });
+    // Vendor Data Table
     var table_vendor = $('#table_vendor').DataTable({
         "pageLength": 10,
         "serverSide": true,
@@ -246,9 +317,9 @@ $(document).ready(function() {
                 "data": 'venname1'
             },
             {
-                data:'id',
+                data:'vencode',
                 render:function(data,type,row){
-                    var Action = '<button class="btn btn-sm btn-warning">แก้ไข</button>  <button class="btn btn-sm btn-danger">ลบ</button>';
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatavendor(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" id="btndel" dataid='+ data +' onclick="Deltevendor(this);">ลบ</button>';
                     return Action;
                 },
                 orderable: false
@@ -274,7 +345,44 @@ $(document).ready(function() {
             },
         },
     });
-})
-</script>
+    // Model Add vendor Hide Reset Form And Table reset
+    $('#AddDatavendor').on('hidden.bs.modal', function (e) {
+    $("#Codevendor").val('');
+    $("#vendorName").val('');
+    table_vendor.draw();
+    e.preventDefault();
+    });
+    // End Add vendor Hide Reset Form And Table reset
 
+    // Model Edit vendor Hide Reset Form And Table reset
+    $('#EditDatavendor').on('hidden.bs.modal', function (e) {
+    $("#EditCodevendor").val('');
+    $("#EditvendorName").val('');
+    table_vendor.draw();
+    e.preventDefault();
+    });    
+    // End Edit vendor Hide Reset Form And Table reset   
+
+    // Model Add Product Hide Reset Form And Table reset
+    $('#AddDataproduct').on('hidden.bs.modal', function (e) {
+    $("#product_name").val('');
+    $("#product_unit").val('');
+    table_product.draw();
+    e.preventDefault();
+    });    
+    // End Add Product Hide Reset Form And Table reset    
+
+    // Model Edit Product Hide Reset Form And Table reset
+    $('#EditDataproduct').on('hidden.bs.modal', function (e) {
+    $("#edit_product_name").val('');
+    $("#edit_product_unit").val('');
+    table_product.draw();
+    e.preventDefault();
+    });    
+    // End Edit Product Hide Reset Form And Table reset    
+
+});
+</script>
+    <!-- Dashboard Modifiy -->
+    <script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/dashdoard.js'; ?>"></script>
 </html>
