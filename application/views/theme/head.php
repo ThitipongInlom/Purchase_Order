@@ -158,13 +158,22 @@ if ($this->session->lang == 'english') {
             <i class="fa fa-times"></i><span><?php echo $this->lang->line('reject'); ?></span>
           </a>
         </li>
-         <li class="<?php
-            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/About')
-            {echo 'active';}?>">
-          <a href="<?php echo site_url('index.php/Dashboard/About'); ?>">
-            <i class="fa fa-user-md" aria-hidden="true"></i><span><?php echo $this->lang->line('about'); ?></span>
-          </a>
-        </li>              
+        <?php
+        $typedep = $this->session->dep;
+        $typetype = $this->session->type;
+        $typeusername = $this->session->username;
+        $right_ac = $this->session->right_ac;
+        $right_gm = $this->session->right_gm;
+	      $right_efc = $this->session->right_efc;
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $right_ac=='Y') {
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/AddData/') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Dashboard/AddData').'"><i class="fa  fa-cart-plus"></i><span>'.$this->lang->line('adddata').'</span></a></li>';
+        }
+        ?>           
         <?php
         if ($this->session->type =='admin' OR $this->session->dep =='IT') {
         echo '<li class="treeview';

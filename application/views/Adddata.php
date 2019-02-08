@@ -319,11 +319,11 @@ $(document).ready(function() {
         { "className": 'text-center', "targets": [0, ] },
         ],
         "language": {
-            "lengthMenu": "แสดง _MENU_ คน",
+            "lengthMenu": "แสดง _MENU_ รายการ",
             "search": "ค้นหา:",
-            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ คน",
-            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 คน",
-            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด คน)",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ รายการ",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 รายการ",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด รายการ)",
             "processing": "กำลังโหลดข้อมูล...",
             "zeroRecords": "ไม่มีข้อมูล",
             "paginate": {
@@ -362,11 +362,11 @@ $(document).ready(function() {
         { "className": 'text-center', "targets": [0, ] },
         ],
         "language": {
-            "lengthMenu": "แสดง _MENU_ คน",
+            "lengthMenu": "แสดง _MENU_ รายการ",
             "search": "ค้นหา:",
-            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ คน",
-            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 คน",
-            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด คน)",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ รายการ",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 รายการ",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด รายการ)",
             "processing": "กำลังโหลดข้อมูล...",
             "zeroRecords": "ไม่มีข้อมูล",
             "paginate": {

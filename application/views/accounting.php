@@ -276,7 +276,8 @@ return $pono;
                           <?php
                           $type = $this->session->type;
                           $user = $this->session->username;
-                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $type=='accounting0' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
+                          $dep  = $this->session->dep;
+                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $dep=='AC' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
                           echo '<button type="button" class="btn btn-warning btn-xs" prno="'.$result['prno'].'"" onclick="completedModal(this)" data-toggle="tooltip" data-placement="bottom" title="สั้งซื้อแล้ว"><i class="fa fa-fw fa-exchange"></i></button>';
                           }
                           ?>

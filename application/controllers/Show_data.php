@@ -438,7 +438,6 @@ echo'<div id="dispayopendata2"><div class="row">
 						echo '<img src="../../assets/signature/'.$resultimg[0]['signature_img'].'" width="100">';
 						}
 					}
-
 				}else{
 						echo '...............................';
 				}
@@ -522,7 +521,7 @@ echo'<div id="dispayopendata2"><div class="row">
         if ($type=='hod' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $user=='Somkid' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-        }elseif ($type=='accounting' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $type=='accounting0' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+        }elseif ($right_ac=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}elseif ($right_gm=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
@@ -532,7 +531,7 @@ echo'<div id="dispayopendata2"><div class="row">
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}
-		if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' AND $data_head[0]['completed'] =='Y' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' AND $data_head[0]['completed'] =='Y') {
+		if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' AND $data_head[0]['completed'] =='Y' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $data_head[0]['completed'] =='Y') {
       	echo '<button type="button" class="btn btn-primary" prno="'.$data_head[0]['prno'].'"  onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="รับของแล้ว"><i class="fa fa-fw fa-thumbs-up"></i></button>';
      	}
     echo '<button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="ปิด" id="modelclose">ปิด</button>
@@ -872,13 +871,13 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($value['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/GM.gif" width="80">';
+				echo '<img src="../../assets/signature/wit.gif" width="80">';
 			}else{
 				echo '..............................';
 			}
 		echo '</td><td>';
 		if ($value['EFCApprove'] =='Y') {
-			echo '<img src="../../assets/signature/EFC.gif" width="80">';
+			echo '<img src="../../assets/signature/wit.gif" width="80">';
 		}else{
 			echo '........................................';
 		}

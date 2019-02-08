@@ -192,7 +192,7 @@ return $waredesc1;
                           } ?></td>
                         <td>
                           <?php
-                          if ($result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' OR $result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->username =='dang') {
+                          if ($result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $result['chkre']=='' AND $this->session->dep =='AC') {
                           echo '<button type="button" class="btn btn-xs  btn-primary"  primary="'.$result["prno"].'" onclick="receive(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-thumbs-up"></i></button>';
                           }
                           ?>
