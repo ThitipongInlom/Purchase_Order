@@ -423,7 +423,6 @@ echo'<div id="dispayopendata2"><div class="row">
 						$dep ='RM';
 					}
 					$resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
-
 					if ($userhodapp=='') {
 
 					if ($dep =='EN01'){

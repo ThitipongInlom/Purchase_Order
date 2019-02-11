@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,8 +58,9 @@
     </div>
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Garden Seaview</b></a><br>
-            <a href="#">Purchase Order</a>
+            <img src="assets/icon/gardenhotel.gif" width="100">
+            <h3><b>Garden Seaview</b></h3<br>
+                <h3>Purchase Order</h3>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">

@@ -240,10 +240,10 @@ return $waredesc1;
                           <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" rowred="<?php echo $result['NO']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
                           <?php
                           if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee') {
+                            if ($this->session->username =='nitis') {
                            echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
                             }
-                          if ($this->session->username =='Somkid') {
+                          if ($this->session->username =='nalumon') {
                           echo '
                           <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
                           ';
