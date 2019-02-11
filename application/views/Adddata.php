@@ -68,6 +68,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     Vendor</a></li>
                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">เพิ่มข้อมูล
                                     สินค้า</a></li>
+                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">เพิ่มข้อมูล
+                                    Warehouse</a></li>        
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
@@ -104,6 +106,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </table>
                             </div>
                             <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_3">
+                                <div align="right" style="margin-bottom: 10px;">
+                                    <button class="btn btn-sm btn-success" onclick="AddDatawarehouse();">เพิ่มข้อมูล Warehouse</button>
+                                </div>
+                                <table class="table table-condensed table-bordered" id="table_warehouse" width="100%">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <td align="center">Code</td>
+                                            <td>Name Code</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <!-- /.tab-pane -->                            
                         </div>
                         <!-- /.tab-content -->
                     </div>
@@ -254,7 +272,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-            </div>           
+            </div>   
+
+            <!-- Modal Add Data -->
+            <div class="modal fade" id="AddDatawarehouse" tabindex="-1" role="dialog"
+                aria-labelledby="AddDatawarehouseLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="AddDatawarehouseLabel">เพิ่ม Warehouse</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <input type="hidden" id="code_product_hide">
+                                <div class="col-md-4"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="product_name">Name Warehouse</label>
+                                    <input type="text" class="form-control" id="warehouse_name" placeholder="Warehouse">
+                                </div>                           
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="SaveWarehouse();">ยืนยัน เพิ่มข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            <!-- Modal Add Data -->
+            <div class="modal fade" id="EditDatawarehouse" tabindex="-1" role="dialog"
+                aria-labelledby="EditDatawarehouseLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="EditDatawarehouseLabel">แก้ไข Warehouse</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <input type="hidden" id="code_warehouse_hide">
+                                <div class="col-md-4"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="product_name">Name Warehouse</label>
+                                    <input type="text" class="form-control" id="edit_warehouse_name" placeholder="Warehouse">
+                                </div>                           
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-success" onclick="SaveEditwarehouse();">ยืนยัน เพิ่มข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
+            </div>        
 
         </section>
         <!-- /.content-wrapper -->
@@ -304,7 +374,7 @@ $(document).ready(function() {
                 "data": 'stname1'
             },
             {
-                "data": 'stunit1'
+                "data": 'mdesc1'
             },{
                 data:'stcode',
                 render:function(data,type,row){
@@ -377,6 +447,49 @@ $(document).ready(function() {
             },
         },
     });
+    // warehouse Data Table
+    var table_warehouse = $('#table_warehouse').DataTable({
+        "pageLength": 10,
+        "serverSide": true,
+        "processing": true,
+        "ajax": {
+            "url": "<?php echo site_url('index.php/Dashboard/warehouse_table'); ?>"
+        },
+        "columns": [{
+                "data": 'warecode',
+            },
+            {
+                "data": 'waredesc1'
+            },
+            {
+                data:'warecode',
+                render:function(data,type,row){
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatawarehouse(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deletewarehouse(this);">ลบ</button>';
+                    return Action;
+                },
+                orderable: false
+            }
+        ],
+        "columnDefs": [
+        { "className": 'text-left', "targets": [] },
+        { "className": 'text-center', "targets": [0, ] },
+        ],
+        "language": {
+            "lengthMenu": "แสดง _MENU_ รายการ",
+            "search": "ค้นหา:",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ รายการ",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 รายการ",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด รายการ)",
+            "processing": "กำลังโหลดข้อมูล...",
+            "zeroRecords": "ไม่มีข้อมูล",
+            "paginate": {
+                "first": "หน้าแรก",
+                "last": "หน้าสุดท้าย",
+                "next": "ต่อไป",
+                "previous": "ย้อนกลับ"
+            },
+        },
+    });   
     // Model Add vendor Hide Reset Form And Table reset
     $('#AddDatavendor').on('hidden.bs.modal', function (e) {
     $("#Codevendor").val('');
@@ -386,6 +499,14 @@ $(document).ready(function() {
     });
     // End Add vendor Hide Reset Form And Table reset
 
+    // Model Add warehouseHide Reset Form And Table reset
+    $('#AddDatawarehouse').on('hidden.bs.modal', function (e) {
+    $("#warehouse_name").val('');
+    table_warehouse.draw();
+    e.preventDefault();
+    });
+    // End Add warehouse Hide Reset Form And Table reset
+
     // Model Edit vendor Hide Reset Form And Table reset
     $('#EditDatavendor').on('hidden.bs.modal', function (e) {
     $("#EditCodevendor").val('');
@@ -394,6 +515,14 @@ $(document).ready(function() {
     e.preventDefault();
     });    
     // End Edit vendor Hide Reset Form And Table reset   
+
+    // Model Edit warehouse Hide Reset Form And Table reset
+    $('#EditDatawarehouse').on('hidden.bs.modal', function (e) {
+    $("#edit_warehouse_name").val('');
+    table_warehouse.draw();
+    e.preventDefault();
+    });    
+    // End Edit warehouse Hide Reset Form And Table reset  
 
     // Model Add Product Hide Reset Form And Table reset
     $('#AddDataproduct').on('hidden.bs.modal', function (e) {

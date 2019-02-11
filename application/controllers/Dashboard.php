@@ -76,6 +76,28 @@ class Dashboard extends CI_Controller {
 		print_r($Jsonencode);
 	}
 
+	public function EditGetwarehouse()
+	{
+		$Data = $this->Dashboard_model->Edit_warehouse();
+		// Encode To Json
+		$Jsonencode = json_encode($Data);
+		print_r($Jsonencode);
+	}
+
+	public function SaveEditwarehouse()
+	{
+		$Check_code = $this->Dashboard_model->CheckCode_EditAddwarehouse();
+		if ($Check_code == '0') {
+			$this->Dashboard_model->Update_warehouse();
+			$Status = "Update";
+		}else{
+			$Status = "Error";
+		}
+		// Encode To Json
+		$Jsonencode = json_encode(array('Numm_rows' => $Check_code,'Status' => $Status));
+		print_r($Jsonencode);
+	}
+
 	public function SaveEditvendor()
 	{
 		$Check_code = $this->Dashboard_model->CheckCode_EditAddvendor();
@@ -91,6 +113,35 @@ class Dashboard extends CI_Controller {
 		print_r($Jsonencode);
 	}
 
+	public function Savewarehouse()
+	{
+		$CheckNum_rows = $this->Dashboard_model->CheckNum_rows_warehouse();
+		if ($CheckNum_rows == '0') {
+			$New_Code = 'C01';
+		}else{
+			$New_Code = $this->Set_code_warehouse($CheckNum_rows);
+		}
+		$Check_Name = $this->Dashboard_model->Check_Name_warehouse();
+		if ($Check_Name >= '1') {
+			echo 'Error';
+		}else{
+			$this->Dashboard_model->Insert_warehouse($New_Code);
+			echo 'Insert';
+		}
+	}
+
+	public function Set_code_warehouse($num_rows)
+	{
+		$Code_old = $num_rows;
+		$m_code = substr($Code_old,0)+1;
+		if (strlen($m_code)<2) {
+			$m_code ="C0".$m_code;
+		}elseif(strlen($m_code)<3) {
+			$m_code ="C".$m_code;
+		}
+		return $m_code;
+	}
+
 	public function Deletevendor()
 	{
 		$this->Dashboard_model->Delete_Vendor();
@@ -100,6 +151,12 @@ class Dashboard extends CI_Controller {
 	public function Deleteproduct()
 	{
 		$this->Dashboard_model->Delete_product();
+		echo 'Delete';
+	}
+
+	public function Deletewarehouse()
+	{
+		$this->Dashboard_model->Deletewarehouse();
 		echo 'Delete';
 	}
 
@@ -124,7 +181,7 @@ class Dashboard extends CI_Controller {
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-		public function vendor_table()
+	public function vendor_table()
 	{
         $order_index = $this->input->get('order[0][column]');
         $param['page_size'] = $this->input->get('length');
@@ -135,6 +192,27 @@ class Dashboard extends CI_Controller {
         $param['dir'] = $this->input->get('order[0][dir]');
  
         $results = $this->Dashboard_model->find_with_page_vendor($param);
+ 
+        $data['draw'] = $param['draw'];
+        $data['recordsTotal'] = $results['count'];
+        $data['recordsFiltered'] = $results['count_condition'];
+        $data['data'] = $results['data'];
+        $data['error'] = $results['error_message'];
+ 
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+	public function warehouse_table()
+	{
+        $order_index = $this->input->get('order[0][column]');
+        $param['page_size'] = $this->input->get('length');
+        $param['start'] = $this->input->get('start');
+        $param['draw'] = $this->input->get('draw');
+        $param['keyword'] = trim($this->input->get('search[value]'));
+        $param['column'] = $this->input->get("columns[{$order_index}][data]");
+        $param['dir'] = $this->input->get('order[0][dir]');
+ 
+        $results = $this->Dashboard_model->find_with_page_warehouse($param);
  
         $data['draw'] = $param['draw'];
         $data['recordsTotal'] = $results['count'];
@@ -158,8 +236,13 @@ class Dashboard extends CI_Controller {
 		}else{
 			$New_Code = $this->Set_code_product($CheckNum_rows);
 		}
-		$this->Dashboard_model->Insert_product($New_Code);
-		echo 'Insert';
+		$Check_Name = $this->Dashboard_model->Check_Name_product();
+		if ($Check_Name >= '1') {
+			echo 'Error';
+		}else{
+			$this->Dashboard_model->Insert_product($New_Code);
+			echo 'Insert';
+		}
 	}
 
 	public function Set_code_product($num_rows)

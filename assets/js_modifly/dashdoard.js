@@ -10,6 +10,10 @@ var AddDatavendor = function AddDatavendor() {
   $('#AddDatavendor').modal('show');
 }
 
+var AddDatawarehouse = function AddDatawarehouse() {
+  $('#AddDatawarehouse').modal('show');
+}
+
 var AddDataproduct = function AddDataproduct() {
   var urlresult = JSON.parse(linkurl());
   $('#AddDataproduct').modal('show');
@@ -63,6 +67,56 @@ var EditDatavendor = function EditDatavendor(e) {
       $("#Editvendorfax").val(res.venfax);
       $("#Editvendoremail").val(res.venemail);
       $("#Editvendoraddress").val(res.venadd1);
+    }
+  });
+}
+
+var EditDatawarehouse = function EditDatawarehouse(e) {
+  var urlresult = JSON.parse(linkurl());
+  $('#EditDatawarehouse').modal('show');
+  var Code = $(e).attr('dataid');
+  var Data = new FormData();
+  Data.append('code', Code);
+  $.ajax({
+    url: urlresult.EditGetwarehouse,
+    dataType: 'text',
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST',
+    data: Data,
+    success: function (callback) {
+      var res = JSON.parse(callback);
+      $("#code_warehouse_hide").val(res.warecode);
+      $("#edit_warehouse_name").val(res.waredesc1);
+    }
+  });
+}
+
+var SaveEditwarehouse = function SaveEditwarehouse() {
+  var urlresult = JSON.parse(linkurl());
+  var Code = $("#code_warehouse_hide").val();
+  var Name = $("#edit_warehouse_name").val();
+  var Data = new FormData();
+  Data.append('code', Code);
+  Data.append('name', Name);
+  $.ajax({
+    url: urlresult.SaveEditwarehouse,
+    dataType: 'text',
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST',
+    data: Data,
+    success: function (callback) {
+      var res = JSON.parse(callback);
+      if (res.Status == 'Error') {
+        alert('ไม่มีการเปลี่ยนแปลงข้อมูล');
+      } else {
+        $('#EditDatawarehouse').modal('hide');
+        alertify.set('notifier', 'position', 'บันทึกเสร็จสิ้น');
+        alertify.success('แจ้งเตือน : ' + alertify.get('notifier', 'position'));
+      }
     }
   });
 }
@@ -190,6 +244,31 @@ var Deleteproduct = function Deleteproduct(e) {
   });
 }
 
+var Deletewarehouse = function Deletewarehouse(e) {
+  var urlresult = JSON.parse(linkurl());
+  var Code = $(e).attr('dataid');
+  var Data = new FormData();
+  Data.append('code', Code);
+  $.ajax({
+    url: urlresult.Deletewarehouse,
+    dataType: 'text',
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST',
+    data: Data,
+    success: function (res) {
+      if (res == 'Delete') {
+        alertify.set('notifier', 'position', 'ลบข้อมูลเสร็จสิ้น');
+        alertify.success('แจ้งเตือน : ' + alertify.get('notifier', 'position'));
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+      }
+    }
+  });
+}
+
 var SaveProduct = function SaveProduct() {
   var urlresult = JSON.parse(linkurl());
   var Name = $("#product_name").val();
@@ -217,6 +296,38 @@ var SaveProduct = function SaveProduct() {
           $('#AddDataproduct').modal('hide');
           alertify.set('notifier', 'position', 'เพิ่มข้อมูลเสร็จสิ้น');
           alertify.success('แจ้งเตือน : ' + alertify.get('notifier', 'position'));
+        }else if (res == 'Error') {
+          alert('Name Product ซ้ำที่มีอยู่');
+        }
+      }
+    });
+  }
+}
+
+var SaveWarehouse = function SaveWarehouse() {
+  var urlresult = JSON.parse(linkurl());
+  var Name = $("#warehouse_name").val();
+  if (Name == '') {
+    alert('กรุณากรอก Warehouse');
+    $("#warehouse_name").focus();
+  }else{
+    var Data = new FormData();
+    Data.append('Name', Name);
+    $.ajax({
+      url: urlresult.Savewarehouse,
+      dataType: 'text',
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      data: Data,
+      success: function (res) {
+        if (res == 'Insert') {
+          $('#AddDatawarehouse').modal('hide');
+          alertify.set('notifier', 'position', 'เพิ่มข้อมูลเสร็จสิ้น');
+          alertify.success('แจ้งเตือน : ' + alertify.get('notifier', 'position'));
+        } else if (res == 'Error') {
+          alert('Name Warehouse ซ้ำที่มีอยู่');
         }
       }
     });

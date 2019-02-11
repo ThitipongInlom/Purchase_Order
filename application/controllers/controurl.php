@@ -106,6 +106,10 @@ public function url()
 		'EditGetproduct' => $server_root.'index.php/Dashboard/EditGetproduct',
 		'EditSaveProduct' => $server_root.'index.php/Dashboard/EditSaveProduct',
 		'Deleteproduct' => $server_root.'index.php/Dashboard/Deleteproduct',
+		'Savewarehouse' => $server_root.'index.php/Dashboard/Savewarehouse',
+		'EditGetwarehouse' => $server_root.'index.php/Dashboard/EditGetwarehouse',
+		'SaveEditwarehouse' => $server_root.'index.php/Dashboard/SaveEditwarehouse',
+		'Deletewarehouse' => $server_root.'index.php/Dashboard/Deletewarehouse',
 	);
 	echo json_encode($arry);
 }

@@ -17,13 +17,14 @@ class Dashboard_model extends CI_Model {
 
 	public function find_with_page_product($param){
 		$keyword = $param['keyword'];
-		$this->db->select('*');
+		$this->db->select('stcode,stname1,stunit1,mdesc1');
  
 		$condition = "1=1";
 		if(!empty($keyword)){
 			$condition .= " and (stcode like '%{$keyword}%' or stname1 like '%{$keyword}%')";
 		}
  
+		$this->db->join('STFC0060', 'STFC0060.mcode = STFA0010.stunit1', 'left');
 		$this->db->where($condition);
 		$this->db->limit($param['page_size'], $param['start']);
 		$this->db->order_by($param['column'], $param['dir']);
@@ -100,6 +101,35 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
+	public function find_with_page_warehouse($param){
+		$keyword = $param['keyword'];
+		$this->db->select('*');
+ 
+		$condition = "1=1";
+		if(!empty($keyword)){
+			$condition .= " and (warecode like '%{$keyword}%' or waredesc1 like '%{$keyword}%')";
+		}
+ 
+		$this->db->where($condition);
+		$this->db->limit($param['page_size'], $param['start']);
+		$this->db->order_by($param['column'], $param['dir']);
+ 
+		$query = $this->db->get('STFC0070');
+		if($query->num_rows() > 0){
+			foreach($query->result() as $row){
+				$data[] = $row;
+			}
+		}else{
+			$data = '';
+		}
+ 
+		$count_condition = $this->db->from('STFC0070')->where($condition)->count_all_results();
+		$count = $this->db->from('STFC0070')->count_all_results();
+
+		$result = array('count'=>$count,'count_condition'=>$count_condition,'data'=>$data,'error_message'=>'');
+		return $result;
+	}
+
 	public function CheckCode_SaveAddvendor()
 	{
 		$Code = $_POST['code'];
@@ -116,6 +146,34 @@ class Dashboard_model extends CI_Model {
 		return $result;		
 	}
 
+	public function CheckNum_rows_warehouse()
+	{
+		$result = $this->db->count_all_results('STFC0070');
+
+		return $result;		
+	}
+
+	public function Check_Name_product()
+	{
+		$Name = $_POST['Name'];
+		$Unit = $_POST['Unit'];	
+		$this->db->select('*');
+		$this->db->from('STFA0010');
+		$this->db->where('stname1', $Name);
+		$result = $this->db->get()->num_rows();
+		return $result;
+	}
+
+	public function Check_Name_warehouse()
+	{
+		$Name = $_POST['Name'];
+		$this->db->select('*');
+		$this->db->from('STFC0070');
+		$this->db->where('waredesc1', $Name);
+		$result = $this->db->get()->num_rows();
+		return $result;
+	}
+
 	public function Insert_product($newcode)
 	{
 		$Name = $_POST['Name'];
@@ -128,6 +186,19 @@ class Dashboard_model extends CI_Model {
 				'stunit1' => $Unit
 		);
 		$this->db->insert('STFA0010', $data);
+		return;
+	}
+
+	public function Insert_warehouse($newcode)
+	{
+		$Name = $_POST['Name'];
+		$data = array(
+				'comid' => '0001',
+				'warecode' => $newcode,
+				'waredesc1' => $Name,
+				'div' => 'Z01'
+		);		
+		$this->db->insert('STFC0070', $data);
 		return;
 	}
 
@@ -168,6 +239,16 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
+	public function CheckCode_EditAddwarehouse()
+	{
+		$Name = $_POST['name'];
+		$this->db->select('*');
+		$this->db->from('STFC0070');
+		$this->db->where('waredesc1', $Name);
+		$result = $this->db->get()->num_rows();
+		return $result;
+	}
+
 	public function CheckCode_EditAddvendor()
 	{
 		$Code = $_POST['code'];
@@ -204,12 +285,30 @@ class Dashboard_model extends CI_Model {
 		return;
 	}
 
+	public function Deletewarehouse()
+	{
+		$Code = $_POST['code'];
+		$this->db->where('warecode', $Code);
+		$this->db->delete('STFC0070');
+		return;
+	}
+
 	public function Edit_Getvendor()
 	{
 		$Code = $_POST['code'];
 		$this->db->select('*');
 		$this->db->from('APFA0010');
 		$this->db->where('vencode', $Code);
+		$result = $this->db->get()->row_array();
+		return $result;
+	}
+
+	public function Edit_warehouse()
+	{
+		$Code = $_POST['code'];
+		$this->db->select('*');
+		$this->db->from('STFC0070');
+		$this->db->where('warecode', $Code);
 		$result = $this->db->get()->row_array();
 		return $result;
 	}
@@ -255,6 +354,18 @@ class Dashboard_model extends CI_Model {
 		);
 		$this->db->where('vencode', $Code);
 		$this->db->update('APFA0010', $data);
+		return;
+	}
+
+	public function Update_warehouse()
+	{
+		$Code = $_POST['code'];
+		$Name = $_POST['name'];
+		$data = array(
+				'waredesc1' => $Name
+		);
+		$this->db->where('warecode', $Code);
+		$this->db->update('STFC0070', $data);
 		return;
 	}
 	

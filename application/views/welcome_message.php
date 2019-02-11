@@ -58,8 +58,7 @@
     </div>
     <div class="login-box">
         <div class="login-logo">
-            <img src="assets/icon/gardenhotel.gif" width="100">
-            <h3><b>Garden Seaview</b></h3<br>
+            <img src="assets/icon/garden.png" width="250">
                 <h3>Purchase Order</h3>
         </div>
         <!-- /.login-logo -->
