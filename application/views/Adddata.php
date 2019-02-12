@@ -378,7 +378,7 @@ $(document).ready(function() {
             },{
                 data:'stcode',
                 render:function(data,type,row){
-                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDataproduct(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deleteproduct(this);">ลบ</button>';
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDataproduct(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deleteproduct(this);" disabled>ลบ</button>';
                     return Action;
                 },
                 orderable: false
@@ -421,7 +421,7 @@ $(document).ready(function() {
             {
                 data:'vencode',
                 render:function(data,type,row){
-                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatavendor(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" id="btndel" dataid='+ data +' onclick="Deltevendor(this);">ลบ</button>';
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatavendor(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" id="btndel" dataid='+ data +' onclick="Deltevendor(this);" disabled>ลบ</button>';
                     return Action;
                 },
                 orderable: false
@@ -464,7 +464,7 @@ $(document).ready(function() {
             {
                 data:'warecode',
                 render:function(data,type,row){
-                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatawarehouse(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deletewarehouse(this);">ลบ</button>';
+                    var Action = '<button class="btn btn-sm btn-warning" dataid='+ data +' onclick="EditDatawarehouse(this);">แก้ไข</button>  <button class="btn btn-sm btn-danger" dataid='+ data +' onclick="Deletewarehouse(this);" disabled>ลบ</button>';
                     return Action;
                 },
                 orderable: false

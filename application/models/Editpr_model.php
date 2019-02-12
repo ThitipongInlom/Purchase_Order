@@ -315,7 +315,7 @@ class Editpr_model extends CI_Model {
 
 	public function receiveupper($prno,$div,$remark,$warecode,$dc,$dc_a,$vat,$vendor,$vendorname,$depname,$depcode,$typuser,$username,$date,$gmremark,$efcremark)
 	{
-		if ($typuser=='user' OR $typuser=='admin' OR $typuser=='accounting' OR $typuser=='approval') {
+		if ($typuser=='user' OR $typuser=='admin' OR $typuser=='hod' OR $typuser=='accounting' OR $typuser=='approval') {
 			$PR_ref = array(
 				'chkre' => 'Y');
 			$this->db->where('prno', $prno);
