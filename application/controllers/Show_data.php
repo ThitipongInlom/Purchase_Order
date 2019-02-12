@@ -424,12 +424,7 @@ echo'<div id="dispayopendata2"><div class="row">
 					}
 					$resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
 					if ($userhodapp=='') {
-
-					if ($dep =='EN01'){
-					 	echo '<img src="../../assets/signature/EN01.gif" width="100">';
-					}else{
-						echo '<img src="../../assets/signature/'.$dep.'.gif" width="100">';
-					}
+						echo '<img src="../../assets/signature/wit.gif" width="100">';
 					}else{
 						if ($resultimg[0]['signature_img'] == '') {
 						echo '<img src="../../assets/signature/'.$dep.'.gif" width="100">';
@@ -448,13 +443,13 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($data_head[0]['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/GM.gif" width="80">';
+				echo '<img src="../../assets/signature/wit.gif" width="100">';
 			}else{
 				echo '..............................';
 			}
 		echo '</td><td>';
 		if ($data_head[0]['EFCApprove'] =='Y') {
-			echo '<img src="../../assets/signature/EFC.gif" width="80">';
+			echo '<img src="../../assets/signature/wit.gif" width="100">';
 		}else{
 			echo '........................................';
 		}

@@ -206,7 +206,10 @@ return $waredesc1;
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; echo namewarecode($result['warecode']); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee'){
+                          $right_ac = $this->session->right_ac;
+                          $right_gm = $this->session->right_gm;
+                          $right_efc= $this->session->right_efc;
+                          if($this->session->dep =='AC' OR $right_gm =='Y' OR $right_efc == 'Y'){
                             echo '';
                           }else{
                             echo 'Disabled';
