@@ -132,11 +132,7 @@ class Dashboard_model extends CI_Model {
 
 	public function CheckCode_SaveAddvendor()
 	{
-		$Code = $_POST['code'];
-		$this->db->select('*');
-		$this->db->from('APFA0010');
-		$this->db->where('vencode', $Code);
-		$result = $this->db->get()->num_rows();
+		$result = $this->db->count_all_results('APFA0010');
 		return $result;
 	}
 
@@ -149,8 +145,13 @@ class Dashboard_model extends CI_Model {
 	public function CheckNum_rows_warehouse()
 	{
 		$result = $this->db->count_all_results('STFC0070');
-
 		return $result;		
+	}
+
+	public function CheckNum_rows_vendor()
+	{
+		$result = $this->db->count_all_results('APFA0010');
+		return $result;	
 	}
 
 	public function Check_Name_product()
@@ -313,9 +314,8 @@ class Dashboard_model extends CI_Model {
 		return $result;
 	}
 
-	public function Insert_vendor()
+	public function Insert_vendor($Code)
 	{
-		$Code = $_POST['code'];
 		$Name = $_POST['name'];
 		$Phone = $_POST['phone'];
 		$Fax = $_POST['fax'];

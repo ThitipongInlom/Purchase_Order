@@ -138,12 +138,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="EditCodeWarehouse">Code</label>
-                                    <input type="text" class="form-control" id="EditCodevendor" placeholder="Code">
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="EditvendorName">Name Code</label>
+                                    <input type="hidden" id="EditvendorCode">
                                     <input type="text" class="form-control" id="EditvendorName" placeholder="Name Code">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -182,11 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="Codevendor">Code:</label>
-                                    <input type="text" class="form-control" id="Codevendor" placeholder="Code">
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="vendorName">Name Code:</label>
                                     <input type="text" class="form-control" id="vendorName" placeholder="Name Code">
                                 </div>
@@ -492,8 +485,11 @@ $(document).ready(function() {
     });   
     // Model Add vendor Hide Reset Form And Table reset
     $('#AddDatavendor').on('hidden.bs.modal', function (e) {
-    $("#Codevendor").val('');
     $("#vendorName").val('');
+    $("#vendorphone").val('');
+    $("#vendorfax").val('');
+    $("#vendoremail").val('');
+    $("#vendoraddress").val('');
     table_vendor.draw();
     e.preventDefault();
     });
@@ -509,8 +505,11 @@ $(document).ready(function() {
 
     // Model Edit vendor Hide Reset Form And Table reset
     $('#EditDatavendor').on('hidden.bs.modal', function (e) {
-    $("#EditCodevendor").val('');
     $("#EditvendorName").val('');
+    $("#Editvendorphone").val('');
+    $("#Editvendorfax").val('');
+    $("#Editvendoremail").val('');
+    $("#Editvendoraddress").val('');
     table_vendor.draw();
     e.preventDefault();
     });    

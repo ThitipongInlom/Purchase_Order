@@ -61,7 +61,7 @@ var EditDatavendor = function EditDatavendor(e) {
     data: Data,
     success: function (callback) {
       var res = JSON.parse(callback);
-      $("#EditCodevendor").val(res.apcode);
+      $("#EditvendorCode").val(res.vencode);
       $("#EditvendorName").val(res.venname1);
       $("#Editvendorphone").val(res.ventel);
       $("#Editvendorfax").val(res.venfax);
@@ -123,7 +123,7 @@ var SaveEditwarehouse = function SaveEditwarehouse() {
 
 var SaveEditvendor = function SaveEditvendor() {
   var urlresult = JSON.parse(linkurl());
-  var code = $("#EditCodevendor").val();
+  var code = $("#EditvendorCode").val();
   var name = $("#EditvendorName").val();
   var Data = new FormData();
   Data.append('code', code);
@@ -155,18 +155,13 @@ var SaveEditvendor = function SaveEditvendor() {
 
 var SaveAddvendor = function SaveAddvendor() {
   var urlresult = JSON.parse(linkurl());
-  var code = $("#Codevendor").val();
   var name = $("#vendorName").val();
   // Check Value Not Null
-  if (code == '') {
-    alert('กรุณากรอก Code');
-    $("#Codevendor").focus();
-  } else if (name == '') {
+  if (name == '') {
     alert('กรุณากรอก Name Code');
     $("#vendorName").focus();
   } else {
     var Data = new FormData();
-    Data.append('code', code);
     Data.append('name', name);
     Data.append('phone', $("#vendorphone").val());
     Data.append('fax', $("#vendorfax").val());

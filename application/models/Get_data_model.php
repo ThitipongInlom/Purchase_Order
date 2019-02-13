@@ -617,7 +617,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'EFC approve');
 			echo json_encode($array);
 		}
-		if ($type=='accounting' OR $type=='accounting0' OR $right_ac=='Y') {
+		if ($type=='accounting'  OR $right_ac=='Y' AND $type=='hod') {
 			$PR_ref = array(
 			'PRApprove' => $approvedata,
 			'PRApprove_Date' => $date);
