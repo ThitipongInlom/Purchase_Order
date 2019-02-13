@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller {
 		$Check_code = $this->Dashboard_model->CheckCode_SaveAddvendor();
 		$CheckNum_rows = $this->Dashboard_model->CheckNum_rows_vendor();
 		if ($Check_code == '0') {
-			$New_Code = '001';
+			$New_Code = '0001';
 		}else{
 			$New_Code = $this->Set_code_vendor($CheckNum_rows);
 		}
@@ -151,10 +151,12 @@ class Dashboard extends CI_Controller {
 		$Code_old = $num_rows;
 		$m_code = substr($Code_old,0)+1;
 		if (strlen($m_code)<2) {
-			$m_code ="00".$m_code;
+			$m_code ="000".$m_code;
 		}elseif(strlen($m_code)<3) {
-			$m_code ="0".$m_code;
+			$m_code ="00".$m_code;
 		}elseif(strlen($m_code)<4) {
+			$m_code = "0".$m_code;
+		}elseif(strlen($m_code)<5) {
 			$m_code = $m_code;
 		}
 		return $m_code;

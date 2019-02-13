@@ -158,7 +158,7 @@ var SaveAddvendor = function SaveAddvendor() {
   var name = $("#vendorName").val();
   // Check Value Not Null
   if (name == '') {
-    alert('กรุณากรอก Name Code');
+    alert('กรุณากรอก Company Name');
     $("#vendorName").focus();
   } else {
     var Data = new FormData();

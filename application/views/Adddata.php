@@ -139,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label for="EditvendorName">Name Code</label>
+                                    <label for="EditvendorName">Company Name:</label>
                                     <input type="hidden" id="EditvendorCode">
                                     <input type="text" class="form-control" id="EditvendorName" placeholder="Name Code">
                                 </div>
@@ -180,7 +180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label for="vendorName">Name Code:</label>
+                                    <label for="vendorName">Company Name:</label>
                                     <input type="text" class="form-control" id="vendorName" placeholder="Name Code">
                                 </div>
                                 <div class="form-group col-md-6">

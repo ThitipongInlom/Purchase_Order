@@ -97,7 +97,25 @@ class Addpr_model extends CI_Model {
 		$this->db->order_by('prno', 'DESC');
 		$result = $this->db->get()->result_array();
 		$refno = $result[0]['refno'];
-		$newrefno = $refno+1;
+
+		$newrefno = substr($refno,0)+1;
+		if (strlen($newrefno)<2) {
+			$newrefno ="00000".$newrefno;
+		}elseif(strlen($newrefno)<3) {
+			$newrefno ="0000".$newrefno;
+		}
+		elseif(strlen($newrefno)<4) {
+			$newrefno ="000".$newrefno;
+		}
+		elseif(strlen($newpr)<5) {
+			$newrefno ="00".$newrefno;
+		}
+		elseif(strlen($newrefno)<6) {
+			$newrefno ="0".$newrefno;
+		}
+		elseif(strlen($newrefno)<7) {
+			$newrefno = $newrefno;
+		}
 		return $newrefno;
 	}
 	
