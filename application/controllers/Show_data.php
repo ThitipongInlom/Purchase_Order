@@ -495,7 +495,7 @@ echo'<div id="dispayopendata2"><div class="row">
 				echo 'center';
 			}
 			echo'">';
-		echo 'Purchase Order';
+		echo 'Chief Accountan';
 		echo '</td><td>';
 		echo 'General Manager';
 	echo '</td></table></div></div></div>';
