@@ -286,7 +286,7 @@ return $pono;
                           ?>
                           <?php
                           if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee') {
+                            if ($this->session->username =='nitis') {
                            echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
                             }
                           }else{
