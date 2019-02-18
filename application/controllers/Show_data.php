@@ -443,13 +443,13 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($data_head[0]['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/wit.gif" width="100">';
+				echo '<img src="../../assets/signature/pichayaluk.gif" width="100">';
 			}else{
 				echo '..............................';
 			}
 		echo '</td><td>';
 		if ($data_head[0]['EFCApprove'] =='Y') {
-			echo '<img src="../../assets/signature/wit.gif" width="100">';
+			echo '<img src="../../assets/signature/nitis.gif" width="100">';
 		}else{
 			echo '........................................';
 		}
