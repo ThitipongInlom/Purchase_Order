@@ -148,7 +148,8 @@ return $waredesc1;
                       <th>Comment PR</th>
                       <th>HOD</th>
                       <th>AC</th>
-                      <th>GM</th>
+                      <th>HM</th>
+                      <th>EFC</th>
                       <th>Action.</th>
                       <th>HodAV</th>
                       <th>HodAC</th>
@@ -205,8 +206,10 @@ return $waredesc1;
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; echo namewarecode($result['warecode']); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          $right = $this->session->right_gm;
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee' OR $right=='Y'){
+                          $right_ac = $this->session->right_ac;
+                          $right_gm = $this->session->right_gm;
+                          $right_efc= $this->session->right_efc;
+                          if($this->session->dep =='AC' OR $right_gm =='Y' OR $right_efc == 'Y'){
                             echo '';
                           }else{
                             echo 'Disabled';
@@ -226,8 +229,13 @@ return $waredesc1;
                           }elseif ($result['PRApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
+                        <td><?php if ($result['GMApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$GMApprove.'"></i>';
+                          }elseif ($result['GMApprove']=='N'){
+                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
+                        } ?></td>
+                        <td><?php if ($result['EFCApprove']=='Y') {
+                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$EFCApprove.'"></i>';
                           }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
@@ -235,11 +243,10 @@ return $waredesc1;
                           <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" rowred="<?php echo $result['NO']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
                           <?php
                           if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee') {
+                            if ($this->session->username =='nitis') {
                            echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
                             }
-                          $right = $this->session->right_gm;  
-                          if ($this->session->username =='Somkid' OR $right=='Y') {
+                          if ($this->session->username =='nalumon') {
                           echo '
                           <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
                           ';
@@ -269,7 +276,7 @@ return $waredesc1;
         </div>
       </section>
 
-    <!-- Modal Set-->
+          <!-- Modal Set-->
     <div id="Setvenderprmodel" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
@@ -322,7 +329,7 @@ return $waredesc1;
           </div>
         </div>
       </div>
-    <!-- /.content-wrapper -->
+      <!-- /.content-wrapper -->
     <!-- Modal -->
     <div id="productmodel" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -412,10 +419,11 @@ return $waredesc1;
     { "width": "1%", "targets": 6 ,"orderData": [ 6, 11 ], "type":"date-eu"},
     { "width": "1%", "targets": 7 ,"orderData": [ 7, 12 ], "type":"date-eu"},
     { "width": "1%", "targets": 8 ,"orderData": [ 8, 13 ], "type":"date-eu"},
-    { "width": "6%", "targets": 9 },
-    { "width": "10%", "targets": 10 ,"visible": false, "searchable": false, "type":"date-eu"},
+    { "width": "1%", "targets": 9 },
+    { "width": "6%", "targets": 10 },
     { "width": "10%", "targets": 11 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 12 ,"visible": false, "searchable": false, "type":"date-eu"},
+    { "width": "10%", "targets": 13 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "orderable": "false"}
     ],
     "language": {

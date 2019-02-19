@@ -255,7 +255,7 @@ class Show_data extends CI_Controller {
 echo'<div id="dispayopendata2"><div class="row">
 		<div class="col-md-12 col-xs-12">
 				<div align="center">
-					<img src="'.base_url().'assets/icon/thezign.gif'.'" width="120">
+					<img src="'.base_url().'assets/icon/wayhotel.png'.'" width="100">
 				</div>
 		</div>
 		<div class="col-md-12 col-xs-12">
@@ -423,14 +423,8 @@ echo'<div id="dispayopendata2"><div class="row">
 						$dep ='RM';
 					}
 					$resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
-
 					if ($userhodapp=='') {
-
-					if ($dep =='EN01'){
-					 	echo '<img src="../../assets/signature/EN01.gif" width="100">';
-					}else{
-						echo '<img src="../../assets/signature/'.$dep.'.gif" width="100">';
-					}
+						echo '<img src="../../assets/signature/wit.gif" width="100">';
 					}else{
 						if ($resultimg[0]['signature_img'] == '') {
 						echo '<img src="../../assets/signature/'.$dep.'.gif" width="100">';
@@ -438,7 +432,6 @@ echo'<div id="dispayopendata2"><div class="row">
 						echo '<img src="../../assets/signature/'.$resultimg[0]['signature_img'].'" width="100">';
 						}
 					}
-
 				}else{
 						echo '...............................';
 				}
@@ -450,13 +443,13 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($data_head[0]['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/GM.gif" width="80">';
+				echo '<img src="../../assets/signature/pichayaluk.gif" width="100">';
 			}else{
-				echo '....................................';
+				echo '..............................';
 			}
-		echo '<td>';
+		echo '</td><td>';
 		if ($data_head[0]['EFCApprove'] =='Y') {
-			echo '<img src="../../assets/signature/EFC.gif" width="80">';
+			echo '<img src="../../assets/signature/nitis.gif" width="100">';
 		}else{
 			echo '........................................';
 		}
@@ -502,7 +495,7 @@ echo'<div id="dispayopendata2"><div class="row">
 				echo 'center';
 			}
 			echo'">';
-		echo 'Accounting Department';
+		echo 'Chief Accountan';
 		echo '</td><td>';
 		echo 'General Manager';
 	echo '</td></table></div></div></div>';
@@ -516,22 +509,24 @@ echo'<div id="dispayopendata2"><div class="row">
 		  <div align="center">';
 	$type = $this->session->type;
 	$user = $this->session->username;
+	$right_ac = $this->session->right_ac;
 	$right_gm = $this->session->right_gm;
+	$right_efc = $this->session->right_efc;
         if ($type=='hod' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $user=='Somkid' AND $data_head[0]['HdApprove'] =='' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-        }elseif ($type=='accounting' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='' OR $type=='accounting0' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+        }elseif ($right_ac=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == '' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-     	}elseif ($user=='Somkhit' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+     	}elseif ($right_gm=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" rowred="'.$rowred.'" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger"  rowred="'.$rowred.'" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
-     	}elseif ($right_gm=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+     	}elseif ($right_efc=='Y' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}
-			if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->username =='dang') {
-      echo '<button type="button" class="btn btn-primary" prno="'.$data_head[0]['prno'].'"  onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="รับของแล้ว"><i class="fa fa-fw fa-thumbs-up"></i></button>';
+		if ($data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' AND $data_head[0]['completed'] =='Y' OR $data_head[0]['chkre']=='' AND $this->session->dep =='AC' AND $data_head[0]['completed'] =='Y') {
+      	echo '<button type="button" class="btn btn-primary" prno="'.$data_head[0]['prno'].'"  onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="รับของแล้ว"><i class="fa fa-fw fa-thumbs-up"></i></button>';
      	}
     echo '<button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="ปิด" id="modelclose">ปิด</button>
           <button type="button" class="btn btn-primary"  onclick="printdata(this)" primary="'.$data_head[0]['prno'].'" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-print"></i></button>';
@@ -545,8 +540,7 @@ echo'<div id="dispayopendata2"><div class="row">
 		$statusappval = $_POST['statusappval'];
 		$userby = null;
 		$datetimeupdate = date("d-m-Y");
-		$right_gm = $this->session->right_gm;
-		if ($this->session->username=='Somkhit' OR $right_gm=='Y') {
+		if ($this->session->username=='Somkhit') {
 			$userby = 'By:GM';
 		}elseif ($this->session->username=='Nalinee') {
 			$userby = 'By:EFC';
@@ -871,13 +865,13 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($value['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/GM.gif" width="80">';
+				echo '<img src="../../assets/signature/wit.gif" width="80">';
 			}else{
 				echo '..............................';
 			}
 		echo '</td><td>';
 		if ($value['EFCApprove'] =='Y') {
-			echo '<img src="../../assets/signature/EFC.gif" width="80">';
+			echo '<img src="../../assets/signature/wit.gif" width="80">';
 		}else{
 			echo '........................................';
 		}
@@ -923,9 +917,9 @@ echo'<div id="dispayopendata2"><div class="row">
 				echo 'center';
 			}
 			echo'">';
-		echo 'Accounting Department';
-		echo '</td><td>';
 		echo 'General Manager';
+		echo '</td><td>';
+		echo 'Executive Financial Controller';
 	echo '</td></table></div></div></div><hr>';
 	echo '</page>';
 	}

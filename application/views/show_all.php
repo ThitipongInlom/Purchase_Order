@@ -143,7 +143,8 @@ return $waredesc1;
                         <th width="20" align="center">Warehouse</th>
                         <th width="1" align="center">HOD</th>
                         <th width="1" align="center">AC</th>
-                        <th width="1" align="center">GM</th>
+                        <th width="1" align="center">HM</th>
+                        <th width="1" align="center">EFC</th>
                         <th width="6" align="center">Action.</th>
                       </tr>
                     </thead>
@@ -200,6 +201,7 @@ return $waredesc1;
                           }elseif ($result['PRApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
+                        <td></td>
                         <td></td>
                         <td>
                           <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
@@ -329,7 +331,8 @@ return $waredesc1;
     { "width": "1%", "targets": 5 },
     { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
-    { "width": "12%", "targets": 8 }
+    { "width": "1%", "targets": 8 },
+    { "width": "12%", "targets": 9 }
     ],
     "language": {
     "lengthMenu":"แสดง _MENU_ แถว",

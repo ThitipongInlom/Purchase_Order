@@ -96,7 +96,21 @@ public function url()
 		'RC_modal_opendata' => $server_root.'index.php/Show_data/RC_modal_opendata',
 		'Setvalue' => $server_root.'index.php/Show_data/Show_accounting',
 		'FAXSAVE' => $server_root.'index.php/Show_data/FAXSAVE',
-		'ACappovecheck_submit' => $server_root.'index.php/Show_data/acapproveaction');
+		'ACappovecheck_submit' => $server_root.'index.php/Show_data/acapproveaction',
+		'SaveAddvendor' => $server_root.'index.php/Dashboard/SaveAddvendor',
+		'EditGetvendor' => $server_root.'index.php/Dashboard/EditGetvendor',
+		'SaveEditvendor' => $server_root.'index.php/Dashboard/SaveEditvendor',
+		'Deletevendor' => $server_root.'index.php/Dashboard/Deletevendor',
+		'Getunitproduct' => $server_root.'index.php/Dashboard/Getunitproduct',
+		'SaveProduct' => $server_root.'index.php/Dashboard/SaveProduct',
+		'EditGetproduct' => $server_root.'index.php/Dashboard/EditGetproduct',
+		'EditSaveProduct' => $server_root.'index.php/Dashboard/EditSaveProduct',
+		'Deleteproduct' => $server_root.'index.php/Dashboard/Deleteproduct',
+		'Savewarehouse' => $server_root.'index.php/Dashboard/Savewarehouse',
+		'EditGetwarehouse' => $server_root.'index.php/Dashboard/EditGetwarehouse',
+		'SaveEditwarehouse' => $server_root.'index.php/Dashboard/SaveEditwarehouse',
+		'Deletewarehouse' => $server_root.'index.php/Dashboard/Deletewarehouse',
+	);
 	echo json_encode($arry);
 }
 

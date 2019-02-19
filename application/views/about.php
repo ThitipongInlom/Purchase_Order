@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">
                 <div class="col-md-4">
                     <div class="info-box">
-                        <span class="info-box-icon bg-yellow"><div class="widget-user-image"><img class="direct-chat-img" style="width: 80px; height: 80px; float: unset;" src="<?php echo base_url().'assets/icon/thezignhotel.gif'; ?>"></div></span>
+                        <span class="info-box-icon" style="background-color: #ea5e30 !important;"><div class="widget-user-image"><img class="direct-chat-img" style="width: 80px; height: 80px; float: unset;" src="<?php echo base_url().'assets/icon/thezignhotel.gif'; ?>"></div></span>
                         <div class="info-box-content">
                             <span class="info-box-number">TheZign Hotel</span>
                             <span class="info-box-text">Continuous support !</span>
@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-4">
                     <div class="box box-widget widget-user-2">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-yellow">
+                        <div class="widget-user-header" style="background-color: #ea5e30 !important;">
                             <div class="widget-user-image">
                                 <img class="img-circle" src="<?php echo base_url().'assets/icon/thitiponginlom.jpg'; ?>"
                                     alt="User Avatar">

@@ -174,7 +174,8 @@ return $pono;
                       <th>Status Pr</th>
                       <th>HOD</th>
                       <th>AC</th>
-                      <th>GM</th>
+                      <th>HM</th>
+                      <th>EFC</th>
                       <th>CP</th>
                       <th>Action.</th>
                       <th>HodAV</th>
@@ -206,8 +207,10 @@ return $pono;
                       <td><?php
                         echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
                         <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          $right = $this->session->right_gm;  
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee' OR $right == 'Y'){
+                          $right_ac = $this->session->right_ac;
+                          $right_gm = $this->session->right_gm;
+                          $right_efc= $this->session->right_efc;
+                          if($this->session->dep =='AC' OR $right_gm =='Y' OR $right_efc == 'Y'){
                             echo '';
                           }else{
                             echo 'Disabled';
@@ -230,6 +233,11 @@ return $pono;
                         }else{
                           $GMApprove = '';
                         }
+                        if ($result['EFCApprove']=='Y') {
+                          $EFCApprove = nice_date($result['EFCApprove_Date'], 'd-m-Y');
+                        }else{
+                          $EFCApprove = '';
+                        }
                         if ($result['statusdatetime']!='') {
                         echo '<div align="left">'.nice_date($result['statusdatetime'], 'd-m-Y').''.' <b>'.$result['statusby'].'</b></div>';
                         } ?></td>
@@ -243,11 +251,23 @@ return $pono;
                           }elseif ($result['PRApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
+                        <td><?php if ($result['GMApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$GMApprove.'"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
+                          }elseif ($result['GMApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
+                        <td><?php if ($result['EFCApprove']=='Y') {
+                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$EFCApprove.'"></i>';
+                          }elseif ($result['EFCApprove']=='N'){
+                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
+                          }else{
+                            $username = $this->session->username;
+                            /*
+                            if ($username == 'Somkid' AND $result['pono'] == '' AND $result['HdApprove'] != '' AND $result['PRApprove'] != '' AND $result['GMApprove'] != '' AND $result['Vendor'] != 'C004') {
+                              echo '<button class="btn btn-xs btn-primary" prno="'.$result['prno'].'" onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="สร้าง ข้อมูล Brita"><i class="fa fa-fw fa-share"></i></button>';
+                            }
+                            */
+                          } ?></td>
                         <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
                           echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
                           }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
@@ -259,13 +279,14 @@ return $pono;
                           <?php
                           $type = $this->session->type;
                           $user = $this->session->username;
-                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $type=='accounting0' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
+                          $dep  = $this->session->dep;
+                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $dep=='AC' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
                           echo '<button type="button" class="btn btn-warning btn-xs" prno="'.$result['prno'].'"" onclick="completedModal(this)" data-toggle="tooltip" data-placement="bottom" title="สั้งซื้อแล้ว"><i class="fa fa-fw fa-exchange"></i></button>';
                           }
                           ?>
                           <?php
                           if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee') {
+                            if ($this->session->username =='nitis') {
                            echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
                             }
                           }else{
@@ -473,10 +494,11 @@ return $pono;
     { "width": "1%", "targets": 7 ,"orderData": [ 7, 13 ], "type":"date-eu"},
     { "width": "1%", "targets": 8 ,"orderData": [ 8, 14 ], "type":"date-eu"},
     { "width": "1%", "targets": 9 },
-    { "width": "10%", "targets": 10 },
-    { "width": "10%", "targets": 11 ,"visible": false, "searchable": false, "type":"date-eu"},
+    { "width": "1%", "targets": 10 },
+    { "width": "10%", "targets": 11 },
     { "width": "10%", "targets": 12 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "width": "10%", "targets": 13 ,"visible": false, "searchable": false, "type":"date-eu"},
+    { "width": "10%", "targets": 14 ,"visible": false, "searchable": false, "type":"date-eu"},
     { "orderable": "false"}
     ],
     "language": {

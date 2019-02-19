@@ -97,10 +97,28 @@ class Addpr_model extends CI_Model {
 		$this->db->order_by('prno', 'DESC');
 		$result = $this->db->get()->result_array();
 		$refno = $result[0]['refno'];
-		$newrefno = $refno+1;
+
+		$newrefno = substr($refno,0)+1;
+		if (strlen($newrefno)<2) {
+			$newrefno ="00000".$newrefno;
+		}elseif(strlen($newrefno)<3) {
+			$newrefno ="0000".$newrefno;
+		}
+		elseif(strlen($newrefno)<4) {
+			$newrefno ="000".$newrefno;
+		}
+		elseif(strlen($newpr)<5) {
+			$newrefno ="00".$newrefno;
+		}
+		elseif(strlen($newrefno)<6) {
+			$newrefno ="0".$newrefno;
+		}
+		elseif(strlen($newrefno)<7) {
+			$newrefno = $newrefno;
+		}
 		return $newrefno;
 	}
-
+	
 	public function setdepartment()
 	{
 		$dep  = $this->session->dep;
@@ -144,72 +162,72 @@ class Addpr_model extends CI_Model {
 		// User // Admin
 		if ($type =='user' OR $type =='admin') {
 		$PR = array(
-      'comid' => '0001',
-      'prno' => $prno,
-      'prdate' => $prdate,
-      'dep' => $depa,
-      'refno' => $ref,
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-      'prno' => $prno,
+        'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// Hod
 		elseif($type =='hod'){
 		$PR = array(
-      'comid' => '0001',
-      'prno' => $prno,
-      'prdate' => $prdate,
-      'dep' => $depa,
-      'refno' => $ref,
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-      'prno' => $prno,
+        'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// accounting0
 		elseif($type =='accounting0' OR $type =='accounting'){
 		$PR = array(
-      'comid' => '0001',
-      'prno' => $prno,
-      'prdate' => $prdate,
-      'dep' => $depa,
-      'refno' => $ref,
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
     	'conflag' => 'N',
     	'zzuser' => $fname,
     	'zzstrdate' => $prdate,
     	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-      'prno' => $prno,
+        'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
 		// approval
 		elseif($type =='approval'){
 		$PR = array(
-       'comid' => '0001',
-       'prno' => $prno,
-       'prdate' => $prdate,
-       'dep' => $depa,
-       'refno' => $ref,
-       'conflag' => 'N',
-        'zzuser' => $fname,
-        'zzstrdate' => $prdate,
-        'chksub1' => '1');
+        'comid' => '0001',
+        'prno' => $prno,
+        'prdate' => $prdate,
+        'dep' => $depa,
+        'refno' => $ref,
+    	'conflag' => 'N',
+    	'zzuser' => $fname,
+    	'zzstrdate' => $prdate,
+    	'chksub1' => '1');
 		$this->db->insert('PR', $PR);
 		$PR_ref = array(
-      'prno' => $prno,
+        'prno' => $prno,
     	'Dep_name' => $sqldepname1);
 		$this->db->insert('PR_ref', $PR_ref);
 		}
@@ -397,7 +415,7 @@ class Addpr_model extends CI_Model {
 
 	public function dataviewhistory($stcode)
 	{
-		$this->db->select('PR_Item.comid, PR_Item.prdcode, PR_Item.seq, PR_Item.prno, PR_Item.prqty, PR_Item.prprice_old, PR_Item.prprice, PR_Item.lastpurdate, PR_Item.poqty, PR_Item.usedate, PR_Item.selected, PR_Item.iremark, PR_Item.ifileupd,pr_ref.completed');
+		$this->db->select('PR_Item.comid, PR_Item.prdcode, PR_Item.seq, PR_Item.prno, PR_Item.prqty, PR_Item.prprice_old, PR_Item.prprice, PR_Item.lastpurdate, PR_Item.poqty,                       PR_Item.usedate, PR_Item.selected, PR_Item.iremark, PR_Item.ifileupd,pr_ref.completed');
 		$this->db->from('PR_Item');
 		$this->db->join('PR_ref', 'PR_Item.prno = PR_ref.prno');
 		$this->db->where('PR_item.prdcode', $stcode);

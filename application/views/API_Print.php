@@ -47,7 +47,7 @@
 echo'<div id="dispayopendata2"><div class="row">
     <div class="col-md-12 col-xs-12">
         <div align="center">
-          <img src="'.base_url().'assets/icon/thezign.gif'.'" width="120">
+          <img src="'.base_url().'assets/icon/wayhotel.png'.'" width="100">
         </div>
     </div>
     <div class="col-md-12 col-xs-12">
@@ -212,11 +212,7 @@ echo'<div id="dispayopendata2"><div class="row">
           }
           $resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
           if ($userhodapp=='') {
-          if ($dep =='EN01'){
-            echo '<img src="../../assets/signature/EN01.gif" width="80">';
-          }else{
-            echo '<img src="../../assets/signature/'.$dep.'.gif" width="80">';
-          }
+            echo '<img src="../../assets/signature/wit.gif" width="100">';
           }else{
             if ($resultimg[0]['signature_img'] == '') {
             echo '<img src="../../assets/signature/'.$dep.'.gif" width="80">';
@@ -236,13 +232,13 @@ echo'<div id="dispayopendata2"><div class="row">
       }
       echo'">';
       if ($data_head[0]['GMApprove'] =='Y') {
-        echo '<img src="../../assets/signature/GM.gif" width="80">';
+        echo '<img src="../../assets/signature/pichayaluk.gif" width="100">';
       }else{
         echo '..............................';
       }
     echo '</td><td>';
     if ($data_head[0]['EFCApprove'] =='Y') {
-      echo '<img src="../../assets/signature/EFC.gif" width="80">';
+      echo '<img src="../../assets/signature/nitis.gif" width="100">';
     }else{
       echo '........................................';
     }
@@ -288,7 +284,7 @@ echo'<div id="dispayopendata2"><div class="row">
         echo 'center';
       }
       echo'">';
-    echo 'Accounting Department';
+    echo 'Chief Accountan';
     echo '</td><td>';
     echo 'General Manager';
   echo '</td></table></div></div></div>';

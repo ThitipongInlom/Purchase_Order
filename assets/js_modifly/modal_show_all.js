@@ -176,7 +176,7 @@ var completedY_No_Po = function completedY_No_Po(e) {
 var completedModal = function completedModal(e) {
 	var prno = $(e).attr('prno');
 	$("#completedModal").modal('show');
-	var DataHtml = '<div align="center"><button type="button" class="btn btn-success" onclick="completedYA(this);" prno="'+ prno +'">ยืนยันสั่งสินค้า</button></div>';
+	var DataHtml = '<div align="center"><button type="button" class="btn btn-success" onclick="completedY_No_Po(this);" prno="'+ prno +'">ยืนยันสั่งของ</button></div>';
 	$("#completedModal_display").html(DataHtml);
 }
 

@@ -155,7 +155,7 @@ class Add_Pr extends CI_Controller {
 		$stcode = $row['stcode'];
 		echo '
 		<tr>
-			<td align="center"><span class="badge bg-red" onclick="setproductcode(this);" value="'.$row['stcode'].'">'.$row['stcode'].'</span></td>
+			<td align="center"><span style="cursor: pointer;" class="badge bg-red" onclick="setproductcode(this);" value="'.$row['stcode'].'">'.$row['stcode'].'</span></td>
 			<td align="center">';
 			$cholddata = $this->Addpr_model->checkoldata($stcode);
 			if ($cholddata =='0') {
@@ -256,7 +256,7 @@ class Add_Pr extends CI_Controller {
 			echo'</td>
 			<td>'.$row['stname1'].'</td>
 			<td>'.$row['stname2'].'</td>
-			<td>'.$row['mdesc1'].'</td>
+			<td align="center">'.$row['mdesc1'].'</td>
 		</tr>';
 		}
 		echo'</table><div class="table-responsive">

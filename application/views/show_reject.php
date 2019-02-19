@@ -139,6 +139,7 @@ return $waredesc1;
                       <th>Ref No.</th>
                       <th>Department/Warehouse</th>
                       <th>HOD</th>
+                      <th>PUR</th>
                       <th>AC</th>
                       <th>GM</th>
                       <th>Action.</th>
@@ -174,6 +175,11 @@ return $waredesc1;
                         <td><?php if ($result['GMApprove']=='Y') {
                           echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
                           }elseif ($result['GMApprove']=='N'){
+                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
+                        } ?></td>
+                        <td><?php if ($result['EFCApprove']=='Y') {
+                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
+                          }elseif ($result['EFCApprove']=='N'){
                           echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
                         } ?></td>
                         <td>
@@ -294,7 +300,8 @@ return $waredesc1;
     { "width": "1%", "targets": 5 },
     { "width": "1%", "targets": 6 },
     { "width": "1%", "targets": 7 },
-    { "width": "10%", "targets": 8 },
+    { "width": "1%", "targets": 8 },
+    { "width": "10%", "targets": 9 },
     { "orderable": "false"}
     ],
     "language": {
