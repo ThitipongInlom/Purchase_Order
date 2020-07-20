@@ -1,8 +1,8 @@
   <footer class="main-footer">
     <div class="pull-right">
-      <b>Version</b> 0.0.2
+      <?php echo $this->lang->line('version'); echo ' '.$this->lang->line('numberv'); ?>
     </div>
-    <strong>Copyright &copy; 2017 - <a href="https://github.com/ingnice">Thitipong Inlom</a></strong> 
+    <strong>Copyright &copy; 2017 </strong> 
   </footer>
   </div>
 </body> 

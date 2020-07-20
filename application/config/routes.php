@@ -52,5 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['Dashboard'] = 'Dashboard/Dashboard';
-
+$route['receive/(:any)'] = 'Edit_Pr/receive/$1';
+$route['editprice/(:any)'] = 'Edit_Pr/editprice/$1';
+$route['edit/(:any)'] = 'Edit_Pr/edit/$1';
+$route['API_Print/(:any)'] = 'Showprview/API_Print/$1';
+$route['API_View/(:any)'] = 'Showprview/API_View/$1';
+$route['API_email'] = 'Showprview/API_email';
+$route['URL'] = 'Controurl/url';
+$route['Login'] = 'Welcome/index';
+$route['Coss'] = 'Welcome/Coss_PR';
+$route['Clear_Pr'] = 'Welcome/Clear_Pr';

@@ -1,10 +1,14 @@
-<?php  
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/*
-if (empty($this->session->user_id)) {
-   redirect('', 'refresh');
+
+if (empty($this->session->username)) {
+  redirect('', 'refresh');
 }
-*/
+if ($this->session->lang == 'english') {
+  $this->lang->load('message','english');
+}else{
+  $this->lang->load('message','thai');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +20,7 @@ if (empty($this->session->user_id)) {
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css'; ?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/font-awesome/css/font-awesome.min.css'; ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/adminlte/bower_components/font-awesome/css/font-awesome.css'; ?>">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url().'/assets/adminlte/bower_components/Ionicons/css/ionicons.min.css'; ?>">
   <!-- Theme style -->
@@ -32,28 +36,23 @@ if (empty($this->session->user_id)) {
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
 </head>
-<body class="hold-transition skin-purple fixed sidebar-mini">
-<input type="hidden" id="id_alert" value="<?php echo $this->session->user_id; ?>">
+<body class="hold-transition skin-purple sidebar-collapse sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-  <input type="hidden" id="id_alert" value="<?php echo $this->session->user_id; ?>">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo site_url('Home'); ?>" class="logo">
+    <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>QR</span>
+      <span class="logo-mini"><b>P</b>O</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Purchase</b> <b>Order</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" id="headmanu" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -62,37 +61,29 @@ if (empty($this->session->user_id)) {
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning" id="num_alert"></span>
+            <a href="#"><b>The Zign</b></a>
+          </li>       
+          <li class="dropdown notifications-menu">
+            <a href="<?php echo site_url('index.php/Profile'); ?>">
+              <?php echo $this->session->fname; echo ' '; echo $this->session->lname; echo ' <b>['; echo $this->session->dep; echo']</b>'; ?>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">คุณมีการแจ้งเตือนทั้งหมด<span id="num_alert2" style="padding-left: 2px; padding-right: 2px;"></span>การแจ้งเตือน</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <div id="ceremenu">
-                <ul class="menu">
-                </ul>
-                </div>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-gears"></i>
             </a>
              <ul class="dropdown-menu" style="right: 0;">
-               <li>
-                  <a href="<?php echo site_url('Profile'); ?>">
-                  <button type="button" class="btn btn-primary btn-flat btn-block" >โปรไฟล์</button>
+               <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Profile')
+            {echo 'active';}?>">
+                  <a href="<?php echo site_url('index.php/Profile'); ?>">
+                  <button type="button" class="btn btn-primary  btn-block" >โปรไฟล์</button>
                   </a>
               </li>
               <li>
-                  <a data-toggle="modal" data-target="#modal-default">  
-                  <button type="button" class="btn btn-danger btn-flat btn-block">ออกจากระบบ</button>
+                  <a data-toggle="modal" data-target="#modal-default">
+                  <button type="button" class="btn btn-danger  btn-block">ออกจากระบบ</button>
                   </a>
               </li>
             </ul>
@@ -111,42 +102,121 @@ if (empty($this->session->user_id)) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">เมนูหลัก</li>
-        <li class="treeview <?php 
-            if(
-              $this->input->server('REQUEST_URI') == '/Home' ||
-              $this->input->server('REQUEST_URI') == '/AddType'
-            ){echo 'active';}?>">
-          <a href="#">
-            <i class="fa fa-cog"></i> <span>ระบบ</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+        <li class="header"><?php echo $this->lang->line('mainmenu');?></li>
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Dashboard/Dashboard')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Dashboard/Dashboard'); ?>">
+            <i class="fa fa-dashboard"></i><span><?php echo $this->lang->line('Dashboard'); ?></span>
           </a>
-          <ul class="treeview-menu">
-            <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/Home') 
-            {echo 'active';}?>"><a href="<?php echo site_url('Home'); ?>"><i class="fa fa-dashboard"></i> หน้าหลัก</a></li>
-          <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/AddType') 
-            {echo 'active';}?>"><a href="<?php echo site_url('AddType'); ?>"><i class="fa fa-plus"></i> เพิ่มประเภทสินค้า</a></li>
-          </ul>
         </li>
-        <li class="treeview <?php 
-            if(
-              $this->input->server('REQUEST_URI') == '/GenItem'
-            ){echo 'active';}?>">
-          <a href="#">
-            <i class="fa fa-folder-open"></i> <span>สร้าง</span>
-            <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-            </span></a>
-          <ul class="treeview-menu">
-            <li class="<?php 
-            if($this->input->server('REQUEST_URI') == '/GenItem') 
-            {echo 'active';}?>"><a href="<?php echo site_url('GenItem'); ?>"><i class="fa fa-plus-circle"></i> เพิ่มสินค้า</a></li>
-          </ul>  
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Add_Pr/')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Add_Pr/'); ?>">
+            <i class="fa fa-plus"></i><span><?php echo $this->lang->line('addpr'); ?></span>
+          </a>
         </li>
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_all')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_all'); ?>">
+            <i class="fa fa-book"></i><span><?php echo $this->lang->line('showallorders'); ?></span>
+          </a>
+        </li>
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_approve')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_approve'); ?>">
+            <i class="fa  fa-handshake-o"></i><span><?php echo $this->lang->line('approvedprocessing'); ?></span>
+          </a>
+        </li>
+        <?php
+        $typedep = $this->session->dep;
+        $typetype = $this->session->type;
+        $typeusername = $this->session->username;
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice' OR $typeusername=='Somkidc') {
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Show_accounting/') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Show_data/Show_accounting?i=All').'"><i class="fa  fa-calculator"></i><span>'.$this->lang->line('account').'</span></a></li>';
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/acappovecheck/') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Show_data/acappovecheck').'"><i class="fa  fa-plane"></i><span>'.$this->lang->line('acappovecheck').'</span></a></li>';
+        }
+        ?>
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_completed'); ?>">
+            <i class="fa  fa-check"></i><span><?php echo $this->lang->line('completed'); ?></span>
+          </a>
+        </li>
+        <!--
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_completed2')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_completed2'); ?>">
+            <i class="fa fa-check-circle-o"></i><span><?php echo $this->lang->line('completed2'); ?></span>
+          </a>
+        </li>
+        -->
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_reject')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/show_reject'); ?>">
+            <i class="fa fa-times"></i><span><?php echo $this->lang->line('reject'); ?></span>
+          </a>
+        </li>
+        <li class="<?php
+            if($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Fax')
+            {echo 'active';}?>">
+          <a href="<?php echo site_url('index.php/Show_data/Fax'); ?>">
+            <i class="fa fa-fax"></i><span><?php echo $this->lang->line('showallordersnew'); ?></span>
+          </a>
+        </li>
+        <?php
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice' OR $typedep=='AC') {
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/sendtojob/') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="http://172.16.0.240/app/pra/pr.php" target="_blank"><i class="fa  fa-paper-plane"></i><span>'.$this->lang->line('sendtojob').'</span></a></li>';
+        }
+        ?>
+        <?php
+        if ($this->session->type =='admin' OR $this->session->dep =='IT') {
+        echo '<li class="treeview';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/show_allnew'
+        OR  $this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="#">
+              <i class="fa fa-cog"></i> <span>ระบบ</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+        <ul class="treeview-menu">';
+
+        echo'<li class="';
+        if ($this->input->server('REQUEST_URI') == '/PO/index.php/Usersetting/Settinguser') {
+          echo 'active';
+        }
+        echo '">';
+        echo '<a href="'.site_url('index.php/Usersetting/Settinguser').'"><i class="fa fa-dashboard"></i><span>'.$this->lang->line('settinguser').'</span></a></li>';
+
+        echo '</ul>';
+        }
+        ?>
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -163,11 +233,11 @@ if (empty($this->session->user_id)) {
                 <h4 class="modal-title">ยืนยันการออกจากระบบ</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body…</p>
+                <p>ออกจากระบบ PO </p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger pull-left btn-flat" data-dismiss="modal">ยกเลิก</button>
-                <button type="button" class="btn btn-success btn-flat" id="logout">ยืนยัน <i class="fa fa-refresh fa-spin fa-fw" id="loginicon" style="margin-right: 2px;"></i> </button>
+                <button type="button" class="btn btn-danger pull-left " data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-success " id="logout">ยืนยัน <i class="fa fa-refresh fa-spin fa-fw" id="logouticon" style="margin-right: 2px;"></i> </button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -182,9 +252,8 @@ if (empty($this->session->user_id)) {
 <script src="<?php echo base_url().'/assets/adminlte//bower_components/jquery-slimscroll/jquery.slimscroll.min.js'; ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url().'assets/adminlte/dist/js/adminlte.min.js'; ?>"></script>
-<!-- JS Logout -->
-<script src="<?php echo base_url().'/assets/js_modifly/logout.js'; ?>"></script>
-<!-- JS Alert Load -->
-<script type="text/javascript" src="<?php echo base_url().'/assets/js_modifly/alert_load.js'; ?>"></script>
-</body>
+<!-- Logout -->
+<script src="<?php echo base_url().'assets/js_modifly/logout.js'; ?>"></script>
+<!-- Cookie -->
+<script src="<?php echo base_url().'/assets/js_modifly/jquery_cookie.js'; ?>"></script>
 </html>
