@@ -123,19 +123,7 @@ return $waredesc1;
             <div class="box-body">
               <div class="row" style="margin-bottom:10px;">
                 <div class="col-md-9 col-xs-8">
-                <div class="form-inline">
-                <div class="form-group">
-                <label for="hsearch">ค้นหาจากวันที่: </label>
-                <div class="input-group">
-                <input type="text" class="form-control datepicker" disabled id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-                <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-                </div>
-                <button class="btn btn-primary" disabled onclick="searchcompleted(this);" disabled="">ค้นหา</button>
-                <button class="btn btn-success" disabled onclick="blackupcompleted(this);" disabled="">แสดงทั้งหมด</button>
-                </div>
-                </div>                   
+                                  
                 </div>
                 <div class="col-md-3 col-xs-4">
                   <div align="right">

@@ -113,19 +113,7 @@ return $waredesc1;
             <div class="box-body">
               <div class="row" style="margin-bottom:10px;">
                 <div class="col-md-9 col-xs-8">
-                <div class="form-inline">
-                <div class="form-group">
-                <label for="hsearch">ค้นหาจากวันที่: </label>
-                <div class="input-group">
-                <input type="text" class="form-control datepicker" disabled id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-                <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-                </div>
-                <button class="btn btn-primary" disabled onclick="searchapprove(this);">ค้นหา</button>
-                <button class="btn btn-success" disabled onclick="blackupapprove(this);">รีเฟรช</button>
-                </div>
-                </div>
+                
                 </div>
                 <div class="col-md-3 col-xs-4">
                   <div align="right">
@@ -404,8 +392,7 @@ return $waredesc1;
       },
       "order":[[0,'desc']],
       "initComplete": function(settings, json) {
-      setTimeout(function(){ $(".overlay").fadeOut('3000', function() {
-      }); }, 1000);
+        setTimeout(function(){ $(".overlay").fadeOut('3000', function() {}); }, 1000);
       },
       "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         if (aData.hold_pr != "") {
@@ -418,11 +405,11 @@ return $waredesc1;
     });
 
     var linkurl = function linkurl() {
-    var url = "../../index.php/URL";
-    var Httpreq = new XMLHttpRequest();
-    Httpreq.open("GET",url,false);
-    Httpreq.send(null);
-    return Httpreq.responseText;
+      var url = "../../index.php/URL";
+      var Httpreq = new XMLHttpRequest();
+      Httpreq.open("GET",url,false);
+      Httpreq.send(null);
+      return Httpreq.responseText;
     }
     var statusapp = function statusapp(e) {
       var urlresult = JSON.parse(linkurl());

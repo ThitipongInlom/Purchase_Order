@@ -209,6 +209,7 @@ class Get_table_data_model extends CI_Model {
 			$this->db->where('EFCApprove IS NULL',null, false);
 			$this->db->where('completed IS NULL',null, false);
 			$this->db->order_by('PRApprove_Date', 'DESC');
+			$this->db->where('div','Z01');
 			$result = $this->db->get('PR');
 			$count_condition = $this->db->from('PR')
 										->join('PR_ref', 'PR_ref.prno = PR.prno')
@@ -218,6 +219,7 @@ class Get_table_data_model extends CI_Model {
 										->where('GMApprove IS NULL',null, false)
 										->where('EFCApprove IS NULL',null, false)
 										->where('completed IS NULL',null, false)
+										->where('div','Z01')
 										->count_all_results();
 			$count = $this->db->from('PR')
 							  ->join('PR_ref', 'PR_ref.prno = PR.prno')
@@ -226,6 +228,36 @@ class Get_table_data_model extends CI_Model {
 							  ->where('GMApprove IS NULL',null, false)
 						      ->where('EFCApprove IS NULL',null, false)
 							  ->where('completed IS NULL',null, false)
+							  ->where('div','Z01')
+							  ->where($where)->count_all_results(); 
+		}elseif ($username == 'Nuntaporn2') {
+			$this->db->where($condition);
+			$this->db->where('HdApprove','Y');
+			$this->db->where('PRApprove','Y');
+			$this->db->where('GMApprove IS NULL',null, false);
+			$this->db->where('EFCApprove IS NULL',null, false);
+			$this->db->where('completed IS NULL',null, false);
+			$this->db->order_by('PRApprove_Date', 'DESC');
+			$this->db->where('div !=','Z01');
+			$result = $this->db->get('PR');
+			$count_condition = $this->db->from('PR')
+										->join('PR_ref', 'PR_ref.prno = PR.prno')
+										->where($where)->where($condition)
+										->where('HdApprove','Y')
+										->where('PRApprove','Y')
+										->where('GMApprove IS NULL',null, false)
+										->where('EFCApprove IS NULL',null, false)
+										->where('completed IS NULL',null, false)
+										->where('div !=','Z01')
+										->count_all_results();
+			$count = $this->db->from('PR')
+							  ->join('PR_ref', 'PR_ref.prno = PR.prno')
+							  ->where('HdApprove','Y')
+							  ->where('PRApprove','Y')
+							  ->where('GMApprove IS NULL',null, false)
+						      ->where('EFCApprove IS NULL',null, false)
+							  ->where('completed IS NULL',null, false)
+							  ->where('div !=','Z01')
 							  ->where($where)->count_all_results(); 
 		}elseif ($username == 'Nalinee') {
 			$this->db->where($condition);

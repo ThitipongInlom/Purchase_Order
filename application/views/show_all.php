@@ -52,27 +52,27 @@ return $waredesc1;
     <![endif]-->
     <style type="text/css">
     @media screen {
-    #printSection {
-    display: none;
-    }
+      #printSection {
+        display: none;
+      } 
     }
     @media print {
-    body * {
-    visibility:hidden;
-    }
-    #printSection, #printSection * {
-    visibility:visible;
-    }
-    #printSection {
-    position:absolute;
-    left:0;
-    top:0;
-    font-size: 10px;
-    }
+      body * {
+        visibility:hidden;
+      }
+      #printSection, #printSection * {
+        visibility:visible;
+      }
+      #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 10px;
+      }
     }
     .table-stripedstyle > tbody > tr:nth-child(2n+1) > td, .table-stripedstyle > tbody > tr:nth-child(2n+1) > th {
-    background-color: #D4E6F1;
-    background-repeat: no-repeat;
+      background-color: #D4E6F1;
+      background-repeat: no-repeat;
 	  }
     #loginicon{
       display: none;
@@ -111,19 +111,7 @@ return $waredesc1;
               <div class="box-body">
               	<div class="row" style="margin-bottom:10px;">
               	<div  class="col-md-9 col-xs-8">
-              	<div class="form-inline">
-						    <div class="form-group">
-						  	<label for="hsearch">ค้นหาจากวันที่: </label>
-						  	<div class="input-group">
-						    <input type="text" class="form-control datepicker" disabled id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-						    <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-							  </div>
-							  <button class="btn btn-primary" disabled onclick="searchpr(this);">ค้นหา</button>
-							  <button class="btn btn-success" disabled onclick="blackupallpr(this);">รีเฟรช</button>
-						    </div>
-                </div>
+
                 </div>
               	<div class="col-md-3 col-xs-4">
                   <div align="right">
@@ -147,89 +135,7 @@ return $waredesc1;
                         <th width="6" align="center">Action.</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <!--
-                      <?php
-                      foreach ($row as $result) {
-                      $Newdate = nice_date($result['prdate'], 'd-m-Y');
-                      if ($result['HdApprove']=='Y') {
-                        $HdApprove = nice_date($result['HdApprove_Date'], 'd-m-Y');
-                      }else{
-                        $HdApprove = '';
-                      }
-                      if ($result['PRApprove']=='Y') {
-                        $PRApprove = nice_date($result['PRApprove_Date'], 'd-m-Y');
-                      }else{
-                        $HdApprove = '';
-                      }
-                      if ($result['GMApprove']=='Y') {
-                        $GMApprove = nice_date($result['GMApprove_Date'], 'd-m-Y');
-                      }else{
-                        $GMApprove = '';
-                      }
-                      if ($result['EFCApprove']=='Y') {
-                        $EFCApprove = nice_date($result['EFCApprove_Date'], 'd-m-Y');
-                      }else{
-                        $EFCApprove = '';
-                      }
-                      ?>
-                      <tr align="center">
-                        <td><?php echo $result['prno']; ?></td>
-                        <td><div align="left"><?php echo $result['Vendor_name'].' - <b>'.$result['Vendor'].'</b>'; ?>
-                        <?php
-                        if ($result['express'] == 'true') {
-                          echo "  <img width='55' src='".base_url().'/assets/icon/express.gif'."'>";
-                        }
-                        ?>
-                        </div>
-                        </td>
-                        <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                        <td><?php echo $result['refno'];  ?></td>
-                        <td><?php
-                          if (empty($result['warecode'])) {
-                          echo '';
-                          }else{
-                          echo  '<div align="left">';print_r(namewarecode($result['warecode'])); echo ' - <b>'.$result['warecode'].'</b></div>';
-                        }?></td>
-                        <td><?php if ($result['HdApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$HdApprove.'"></i>';
-                          }elseif ($result['HdApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['PRApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$PRApprove.'"></i>';
-                          }elseif ($result['PRApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
-                          <button type="button" class="btn btn-xs  btn-warning" primary="<?php echo $result['prno']; ?>" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
-                          <button type="button" class="btn btn-xs btn-danger" primary="<?php echo $result['prno']; ?>" onclick="deletedata(this)"  data-toggle="tooltip" data-placement="left" title="ลบข้อมูล"
-                          <?php
-            						  if ($result['HdApprove']=='Y') {
-            							  if ($this->session->username == 'Somkid') {
-            								 echo 'Somkid';
-            							  }else{
-            								  echo 'disabled';	
-            							  }
-                          }
-                          ?>><i class="fa fa-fw fa-close"></i></button>
-                          <?php
-                          $prdate_c = nice_date($result['prdate'], 'Y');
-                          $now_c =  date('Y');
-                          $sum_Date_c = $now_c - $prdate_c;
-                          if ($this->session->username =='Somkid' AND $sum_Date_c >= '1') {
-                            echo '<button type="button" class="btn btn-xs btn-danger" primary="'.$result['prno'].'" onclick="rejet_oldar(this);" data-toggle="tooltip" data-placement="left" title="ยกเลิก ข้อมูลเก่า"><i class="fa fa-eject" aria-hidden="true"></i></button>';
-                          }                          
-                          ?>
-                        </td>
-                      </tr>
-                      <? } ?>
-                      -->
-                    </tbody>
+                    <tbody></tbody>
                   </table>
                 </div>
               </div>
@@ -324,84 +230,85 @@ return $waredesc1;
     <script src="<?php echo base_url().'/assets/js_modifly/addpr.js'; ?>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('.datepicker').daterangepicker();
-    $(".spinner").hide();
-    $("#tabledata").show();
-    $('#show_all').DataTable({
-    "lengthMenu": [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
-    "serverSide": true,
-    "processing": true,
-    "ajax": {
-        "url": "<?php echo site_url('index.php/Get_table_data/Show_Table_all'); ?>",
-        "type": "POST",
-    },
-    "columnDefs": [{
-            "data": 'refno',
-            "width": "6%", 
-            "targets": 0,
-            "className": 'text-center'
-        },{
-            "data": 'vendor',
-            "width": "32%", 
-            "targets": 1
-        },{
-            "data": 'warecode',
-            "width": "24%", 
-            "targets": 2
-        },{
-            "data": 'prdate',
-            "width": "7%", 
-            "type":"date-eu",
-            "targets": 3
-        },{
-            "data": 'HdApprove',
-            "width": "1%", 
-            "targets": 4,
-            "className": 'text-center'
-        },{
-            "data": 'PRApprove',
-            "width": "1%", 
-            "targets": 5,
-            "className": 'text-center'
-        },{
-            "data": 'GMApprove',
-            "width": "1%", 
-            "targets": 6,
-            "className": 'text-center'
-        },{
-            "data": 'EFCApprove',
-            "width": "1%", 
-            "targets": 7,
-            "className": 'text-center'
-        },{
-            "data": 'action',
-            "width": "12%", 
-            "targets": 8
+      $('[data-toggle="tooltip"]').tooltip();
+      $('.datepicker').daterangepicker();
+      $(".spinner").hide();
+      $("#tabledata").show();
+      $('#show_all').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
+        "serverSide": true,
+        "processing": true,
+        "ajax": {
+            "url": "<?php echo site_url('index.php/Get_table_data/Show_Table_all'); ?>",
+            "type": "POST",
+        },
+        "columnDefs": [{
+                "data": 'refno',
+                "width": "6%", 
+                "targets": 0,
+                "className": 'text-center'
+            },{
+                "data": 'vendor',
+                "width": "32%", 
+                "targets": 1
+            },{
+                "data": 'warecode',
+                "width": "24%", 
+                "targets": 2
+            },{
+                "data": 'prdate',
+                "width": "7%", 
+                "type":"date-eu",
+                "targets": 3
+            },{
+                "data": 'HdApprove',
+                "width": "1%", 
+                "targets": 4,
+                "className": 'text-center'
+            },{
+                "data": 'PRApprove',
+                "width": "1%", 
+                "targets": 5,
+                "className": 'text-center'
+            },{
+                "data": 'GMApprove',
+                "width": "1%", 
+                "targets": 6,
+                "className": 'text-center'
+            },{
+                "data": 'EFCApprove',
+                "width": "1%", 
+                "targets": 7,
+                "className": 'text-center'
+            },{
+                "data": 'action',
+                "width": "12%", 
+                "targets": 8
+            }
+        ],
+        "language": {
+        "lengthMenu":"แสดง _MENU_ แถว",
+        "search":"ค้นหา:",
+        "info":"แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ แถว",
+        "infoEmpty":"แสดง 0 ถึง 0 ทั้งหมด 0 แถว",
+        "infoFiltered":"(จาก ทั้งหมด _MAX_ ทั้งหมด แถว)",
+        "processing": "กำลังโหลดข้อมูล...",
+        "zeroRecords": "ไม่มีข้อมูล",
+        "paginate": {
+        "first": "หน้าแรก",
+        "last": "หน้าสุดท้าย",
+        "next": "ต่อไป",
+        "previous": "ย้อนกลับ"
+        },
+        },
+        "order":[[3,'desc']],
+        //"ordering": false,
+        "initComplete": function(settings, json) {
+          setTimeout(function(){ 
+            $(".overlay").fadeOut('3000', function() {}); }, 1000
+          );
         }
-    ],
-    "language": {
-    "lengthMenu":"แสดง _MENU_ แถว",
-    "search":"ค้นหา:",
-    "info":"แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ แถว",
-    "infoEmpty":"แสดง 0 ถึง 0 ทั้งหมด 0 แถว",
-    "infoFiltered":"(จาก ทั้งหมด _MAX_ ทั้งหมด แถว)",
-    "processing": "กำลังโหลดข้อมูล...",
-    "zeroRecords": "ไม่มีข้อมูล",
-    "paginate": {
-    "first": "หน้าแรก",
-    "last": "หน้าสุดท้าย",
-    "next": "ต่อไป",
-    "previous": "ย้อนกลับ"
-    },
-    },
-    "order":[[3,'desc']],
-    //"ordering": false,
-    "initComplete": function(settings, json) {
-    setTimeout(function(){ $(".overlay").fadeOut('3000', function() {
-    }); }, 1000);
-    }
-    });
+      });
     });
     </script>
   </body>

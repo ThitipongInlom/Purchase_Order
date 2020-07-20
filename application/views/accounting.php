@@ -135,30 +135,20 @@ return $pono;
                     <option value="All" <?php if ($getv=='All') {echo 'selected';} ?>>All Department</option>
                     <?php
                     foreach ($depall as $depz) { ?>
-                    <option value="<?php echo $depz['depcode']; ?>" <?php if ($getv==$depz['depcode']) {echo 'selected';} ?>><?php echo $depz['depname1']; ?></option>
+                      <option value="<?php echo $depz['depcode']; ?>" <?php if ($getv==$depz['depcode']) {echo 'selected';} ?>><?php echo $depz['depname1']; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="col-md-7 col-xs-8">
-                <div class="form-inline">
-                <div class="form-group">
-                <label for="hsearch">ค้นหาจากวันที่: </label>
-                <div class="input-group">
-                <input type="text" class="form-control datepicker" disabled id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-                <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-                </div>
-                <button class="btn btn-primary" disabled onclick="searchprac(this);">ค้นหา</button>
-                <button class="btn btn-success" disabled onclick="blackupacpr(this);">รีเฟรช</button>
-                </div>
-                </div>
+
                 </div>
                 <div class="col-md-3 col-xs-2">
                   <div align="right">
-                  <button class="btn btn-info btn-sm" onclick="accajaxopenproduct3(this)">ค้นหาPR เก่า</button><input type="hidden" data-toggle="modal" data-target="#csproduct" id="opencsproduct">
-                  <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
-                  <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">
+                    <!--
+                    <button class="btn btn-info btn-sm" onclick="accajaxopenproduct3(this)">ค้นหาPR เก่า</button><input type="hidden" data-toggle="modal" data-target="#csproduct" id="opencsproduct">
+                    -->
+                    <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
+                    <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">
                   </div>
                 </div>
                 </div>
@@ -185,123 +175,7 @@ return $pono;
                       -->
                     </tr>
                   </thead>
-                  <tbody>
-                    <!--
-                    <?php
-                    foreach ($row as $result) { ?>
-                    <tr align="center">
-                      <td><?php echo $result['prno']; ?>
-                      <?php
-                        if ($result['express'] == 'true') {
-                          echo "<br><img width='55' src='".base_url().'/assets/icon/express.gif'."'>";
-                        }
-                      ?>
-                      </td>
-                      <td><div align="left">
-                        <?php echo  $result['Vendor_name'].' - <b>'.$result['Vendor'].'</b>';?>
-                        <br>
-                        <?php  if ($this->session->dep =='AC') {
-                            echo '<button type="button" class="btn btn-xs btn-warning" prid="'.$result['prno'].'" onclick="Setvenderprmodel(this)" venderold="'.$result['Vendor'].'"><i class="fa fa-fw fa-refresh"></i></button></div><input type="hidden" id="Setvenderprmodelshow" data-toggle="modal" data-target="#Setvenderprmodel">';
-                          } ?>
-                      </div>
-                      </td>
-                      <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                      <td align="left"><?php echo $result['refno']; echo '<br>'; if (isset($result['pono'])) {echo $result['pono'];} ?></td>
-                      <td><?php
-                        echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
-                        <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Somkhitc' OR $this->session->username == 'Nalinee'){
-                            echo '';
-                          }else{
-                            echo 'Disabled';
-                          }
-                        ?> value="<?php echo $result['statusapp'];?>">
-                        <?php
-                        $Newdate = nice_date($result['prdate'], 'd-m-Y');
-                        if ($result['HdApprove']=='Y') {
-                          $HdApprove = nice_date($result['HdApprove_Date'], 'd-m-Y');
-                        }else{
-                          $HdApprove = '';
-                        }
-                        if ($result['PRApprove']=='Y') {
-                          $PRApprove = nice_date($result['PRApprove_Date'], 'd-m-Y');
-                        }else{
-                          $HdApprove = '';
-                        }
-                        if ($result['GMApprove']=='Y') {
-                          $GMApprove = nice_date($result['GMApprove_Date'], 'd-m-Y');
-                        }else{
-                          $GMApprove = '';
-                        }
-                        if ($result['EFCApprove']=='Y') {
-                          $EFCApprove = nice_date($result['EFCApprove_Date'], 'd-m-Y');
-                        }else{
-                          $EFCApprove = '';
-                        }
-                        if ($result['statusdatetime']!='') {
-                        echo '<div align="left">'.nice_date($result['statusdatetime'], 'd-m-Y').''.' <b>'.$result['statusby'].'</b></div>';
-                        } ?></td>
-                        <td><?php if ($result['HdApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$HdApprove.'"></i>';
-                          }elseif ($result['HdApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['PRApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$PRApprove.'"></i>';
-                          }elseif ($result['PRApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['GMApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$GMApprove.'"></i>';
-                          }elseif ($result['GMApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;" data-toggle="tooltip" data-placement="bottom" title="'.$EFCApprove.'"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                          }else{
-                            $username = $this->session->username;
-                            /*
-                            if ($username == 'Somkid' AND $result['pono'] == '' AND $result['HdApprove'] != '' AND $result['PRApprove'] != '' AND $result['GMApprove'] != '' AND $result['Vendor'] != 'C004') {
-                              echo '<button class="btn btn-xs btn-primary" prno="'.$result['prno'].'" onclick="completedY_AC(this)" data-toggle="tooltip" data-placement="bottom" title="สร้าง ข้อมูล Brita"><i class="fa fa-fw fa-share"></i></button>';
-                            }
-                            */
-                          } ?></td>
-                        <td><?php if ($result['completed']=='Y' AND $result['chkre'] =='Y') {
-                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
-                          }elseif ($result['completed']=='Y' AND $result['chkre'] =='Y'){
-                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
-                        } ?></td>
-                        <td>
-                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
-                          <?php
-                          $type = $this->session->type;
-                          $user = $this->session->username;
-                          if ($type=='accounting' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='' OR $type=='accounting0' AND $result['HdApprove'] =='Y' AND $result['PRApprove'] == 'Y' AND $result['GMApprove'] =='Y' AND $result['EFCApprove'] =='Y' AND $result['completed'] =='') {
-                          echo '<button type="button" class="btn btn-warning btn-xs" prno="'.$result['prno'].'"" onclick="completedModal(this)" data-toggle="tooltip" data-placement="bottom" title="สั้งซื้อแล้ว"><i class="fa fa-fw fa-exchange"></i></button>';
-                          }
-                          ?>
-                          <?php
-                          if ($result['GMApprove']=='Y' OR $result['EFCApprove']=='Y') {
-                            if ($this->session->username =='Nalinee' or $this->session->username =='Somkhitc') {
-                           echo '<button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมัติ"><i class="fa fa-fw fa-edit"></i></button>';
-                            }
-                          }else{
-                          echo '
-                          <button type="button" class="btn btn-xs  btn-warning" primary="'.$result['prno'].'" onclick="edit(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขข้อมูล"><i class="fa fa-fw fa-edit"></i></button>
-                          ';
-                          }
-                          ?>
-                        </td>
-                        <td><?php echo $HdApprove; ?></td>
-                        <td><?php echo $PRApprove;  ?></td>
-                        <td><?php echo $GMApprove;  ?></td>
-                      </tr>
-                      <? } ?>
-                      -->
-                    </tbody>
+                  <tbody></tbody>
                   </table>
                 </div>
               </div>

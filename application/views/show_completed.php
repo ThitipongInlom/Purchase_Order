@@ -110,24 +110,7 @@ return $waredesc1;
             <div class="box-body">
               <div class="row">
                 <div class="col-md-9 col-xs-8">
-                <div class="form-inline">
-                <label for="searchpraa">ค้นหา PR: </label>
-                <div class="input-group">
-                <input type="text" class="form-control" id="searchpraa" placeholder="prno,refno,vendor,dep" value="">
-                </div>
-                <button class="btn btn-danger" onclick="searchcompletedtext(this);">ค้นหา</button>
-                <div class="form-group">
-                <label for="hsearch">ค้นหาจากวันที่: </label>
-                <div class="input-group">
-                <input type="text" class="form-control datepicker" id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-                <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </div>
-                </div>
-                <button class="btn btn-primary" onclick="searchcompleted(this);">ค้นหา</button>
-                <button class="btn btn-success" onclick="blackupcompleted(this);">รีเฟรช</button>
-                </div>
-                </div>
+
                 </div>
                 <div class="col-md-3 col-xs-4">
                   <div align="right">
@@ -152,65 +135,7 @@ return $waredesc1;
                       <th>Action.</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  <!--
-                    <?php
-                    foreach ($row as $result) { ?>
-                    <tr align="center">
-                      <td><?php echo $result['prno']; ?>
-                      <?php
-                        if ($result['express'] == 'true') {
-                          echo "<br><img width='55' src='".base_url().'/assets/icon/express.gif'."'>";
-                        }
-                      ?>
-                      </td>
-                      <td><div align="left">
-                          <?php echo $result['Vendor_name'].' - <b>'.$result['Vendor'].'</b>'; ?>
-                          <br>
-                          <?php  if ($this->session->username =='Somkid') {
-                            echo '<button type="button" class="btn btn-xs btn-warning" prid="'.$result['prno'].'" onclick="Setvenderprmodel(this)" venderold="'.$result['Vendor'].'"><i class="fa fa-fw fa-refresh"></i></button></div><input type="hidden" id="Setvenderprmodelshow" data-toggle="modal" data-target="#Setvenderprmodel">';
-                          } ?>
-                          </div>
-                      </td>
-                      <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                      <td align="left"><?php echo $result['refno']; echo '<br>'; if (isset($result['pono'])) {echo $result['pono'];} ?></td>
-                      <td><?php
-                        echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
-                        <td><input type="text" onchange="statusapp(this);" style="font-size: 13px; width: 100%; height: 17px;" statusapppr="<?php echo $result['prno']; ?>" deppr="<?php echo$result['Dep_name']; ?>" class="form-control"  <?php
-                          if($this->session->dep =='AC' OR $this->session->username =='Somkhit' OR $this->session->username == 'Nalinee'){
-                            echo '';
-                          }else{
-                            echo 'Disabled';
-                          }
-                        ?> value="<?php echo $result['statusapp'];?>">
-                        <?php
-                        if ($result['statusdatetime']!='') {
-                        echo '<div align="left">'.nice_date($result['statusdatetime'], 'd-m-Y').''.' <b>'.$result['statusby'].'</b></div>';
-                        } ?></td>
-                        <td><?php if ($result['completed']=='Y') {
-                          echo '<i class="fa fa-exchange fa-2x" aria-hidden="true" style="color: #ff9933;"></i>';
-                          } ?></td>
-                        <td><?php if ($result['chkre']=='Y') {
-                          echo '<i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color: #337ab7;"></i>';
-                          } ?></td>
-                        <td>
-                          <?php
-                          if ($result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting' OR $result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->type =='accounting0' OR $result['chkre']=='' AND $this->session->dep =='AC' AND $this->session->username =='dang') {
-                          echo '<button type="button" class="btn btn-xs  btn-primary"  primary="'.$result["prno"].'" onclick="receive(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-thumbs-up"></i></button>';
-                          }
-                          ?>
-                          <button type="button" class="btn btn-xs  btn-warning"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
-                          <?php
-                          if ($this->session->username =='Somkid') {
-                          echo '<button class="btn btn-xs btn-danger"  primary="'.$result["prno"].'" onclick="editprice(this)" data-toggle="tooltip" data-placement="bottom" title="แก้ไขราคา"><i class="fa fa-fw fa-edit"></i></button>';
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                      <? } ?>
-                    -->
-                    </tbody>
+                  <tbody></tbody>
                   </table>
                 </div>
               </div>

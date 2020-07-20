@@ -107,22 +107,10 @@ return $waredesc1;
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
               <div class="row" style="margin-bottom:10px;">
-                <div class="col-md-10 col-xs-8">
-                <div class="form-inline">
-                <div class="form-group">
-                <label for="hsearch">ค้นหาจากวันที่: </label>
-                <div class="input-group">
-                <input type="text" class="form-control datepicker" disabled id="hsearch" placeholder="วันที่ค้นหาเริ่ม" value="">
-                <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
+                <div class="col-md-9 col-xs-8">
+
                 </div>
-                </div>
-                <button class="btn btn-primary" disabled onclick="searchreject(this);">ค้นหา</button>
-                <button class="btn btn-success" disabled onclick="blackupreject(this);">รีเฟรช</button>
-                </div>
-                </div>
-                </div>
-                <div class="col-md-2 col-xs-4">
+                <div class="col-md-3 col-xs-4">
                   <div align="right">
                   <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
                   <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">
@@ -145,52 +133,7 @@ return $waredesc1;
                       <th>Action.</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <!--
-                    <?php
-                    foreach ($row as $result) { ?>
-                    <tr align="center">
-                      <td><?php echo $result['prno']; ?>
-                      <?php
-                        if ($result['express'] == 'true') {
-                          echo "<br><img width='55' src='".base_url().'/assets/icon/express.gif'."'>";
-                        }
-                      ?>
-                      </td>
-                      <td><div align="left"><?php echo $result['Vendor_name'].' - <b>'.$result['Vendor'].'</b>'; ?>
-                      </div></td>
-                      <td><?php $Newdate = nice_date($result['prdate'], 'd-m-Y'); echo $Newdate; ?></td>
-                      <td><?php echo $result['refno'];  ?></td>
-                      <td><?php
-                        echo  '<div align="left">[D] '; echo '<b>'.$result['dep'].'</b> => '; echo $result['Dep_name'].'<br>[W] '; echo '<b>'.$result['warecode'].'</b> => '; print_r(namewarecode($result['warecode'])); echo'</div>';?></td>
-                        <td><?php if ($result['HdApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['HdApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['PRApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['PRApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['GMApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['GMApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td><?php if ($result['EFCApprove']=='Y') {
-                          echo '<i class="fa fa-check fa-2x" aria-hidden="true" style="color: #00a65a;"></i>';
-                          }elseif ($result['EFCApprove']=='N'){
-                          echo '<i class="fa fa-times fa-2x" aria-hidden="true" style="color: #dd4b39;"></i>';
-                        } ?></td>
-                        <td>
-                          <button type="button" class="btn btn-xs  btn-primary"  primary="<?php echo $result['prno']; ?>" onclick="opendata(this)" data-toggle="tooltip" data-placement="bottom" title="ดูข้อมูล"><i class="fa fa-fw fa-search"></i></button>
-                          <button type="button" class="btn btn-xs  btn-success" primary="<?php echo $result['prno']; ?>" onclick="btnprint(this)" data-toggle="tooltip" data-placement="bottom" title="พิมพ์ข้อมูล"><i class="fa fa-fw fa-print"></i></button>
-                        </td>
-                      </tr>
-                      <? } ?>
-                      -->
-                    </tbody>
+                  <tbody></tbody>
                   </table>
                 </div>
               </div>
