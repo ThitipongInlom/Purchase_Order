@@ -39,7 +39,6 @@ var deletedata = function deletedata(e) {
 			}
 		}
 	});
-
 }
 
 var edit = function edit(e) {
@@ -251,7 +250,6 @@ var printdata = function printdata(e) {
 
 function printElement(elem) {
 	var domClone = elem.cloneNode(true);
-
 	var $printSection = document.getElementById("printSection");
 
 	if (!$printSection) {

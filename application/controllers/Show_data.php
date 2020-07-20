@@ -441,7 +441,6 @@ echo'<div id="dispayopendata2"><div class="row">
 					$resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
 
 					if ($userhodapp=='') {
-
 					if ($dep =='EN01'){
 					 	echo '<img src="../../assets/signature/EN01.gif" width="100">';
 					}else{
@@ -917,7 +916,6 @@ echo'<div id="dispayopendata2"><div class="row">
 					}
 					$resultimg = $this->Get_data_model->Getimg_hod($userhodapp);
 					if ($userhodapp=='') {
-
 					if ($dep =='EN01'){
 					 	echo '<img src="../../assets/signature/EN01.gif" width="100">';
 					}else{
@@ -1015,7 +1013,6 @@ echo'<div id="dispayopendata2"><div class="row">
 	{
 		// Token
 		$token = $this->Get_data_model->get_tokenbot();
-
 		// Message
 		$message = "PR: $prid
 		แผนก: $deppr

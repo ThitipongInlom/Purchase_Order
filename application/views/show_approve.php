@@ -226,7 +226,6 @@ return $waredesc1;
         </div>
       </div>
     </div>
-
       <!-- Modal -->
       <div id="opendata" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">

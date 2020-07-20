@@ -439,7 +439,6 @@ class Editpr_model extends CI_Model {
 		echo json_encode($arrt);
 	}
 
-
 }
 
 /* End of file Editpr_model.php */

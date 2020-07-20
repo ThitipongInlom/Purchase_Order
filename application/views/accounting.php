@@ -1,25 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$CI =& get_instance();
-$beta = $this->load->database('bo', TRUE);
+  $CI =& get_instance();
+  $beta = $this->load->database('bo', TRUE);
 function namewarecode($warecode)
 {
-$CI =& get_instance();
-$beta = $CI->load->database('bo', TRUE);
-$query = $beta->get_where('STFC0070', array('warecode' => $warecode));
-$result = $query->result_array();
-$waredesc1 = $result[0]['waredesc1'];
-return $waredesc1;
+  $CI =& get_instance();
+  $beta = $CI->load->database('bo', TRUE);
+  $query = $beta->get_where('STFC0070', array('warecode' => $warecode));
+  $result = $query->result_array();
+  $waredesc1 = $result[0]['waredesc1'];
+  return $waredesc1;
 }
 $querydep = $beta->get('ZZFC0020');
 $depall = $querydep->result_array();
 
 function Get_Zign_Beta($refno)
 {
-$CI =& get_instance();
-$beta = $CI->load->database('bo', TRUE);
-$query = $beta->get_where('PXFB0010', array('refno' => $refno));
-$result = $query->result_array();
+  $CI =& get_instance();
+  $beta = $CI->load->database('bo', TRUE);
+  $query = $beta->get_where('PXFB0010', array('refno' => $refno));
+  $result = $query->result_array();
 if (empty($result)) {
   $pono = '';
 }else{

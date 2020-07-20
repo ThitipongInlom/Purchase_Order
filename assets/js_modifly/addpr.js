@@ -151,7 +151,6 @@ var updataitem = function updataitem(e) {
         $("#updataitem").removeAttr('prdcode');
       }
    });
-
 }
 
 var windowsdata = function windowsdata(e) {
