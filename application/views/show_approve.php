@@ -129,7 +129,7 @@ return $waredesc1;
                   <thead>
                     <?php  
                     $username = $this->session->username; 
-                    if ($username == 'Somkhit') {
+                    if ($username == 'Somkhit' OR $username == 'Nuntaporn2') {
                       echo '
                           <tr align="center">
                             <th>Action.</th>
@@ -302,7 +302,7 @@ return $waredesc1;
     $("#tabledata").show();
     var username = '<?php echo $username = $this->session->username; ?>';
     
-    if (username == 'Somkhit') {
+    if (username == 'Somkhit' || username == 'Nuntaporn2') {
       $('#show_all').DataTable({
       "lengthMenu": [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
       "serverSide": true,
@@ -319,7 +319,7 @@ return $waredesc1;
       { "data": 'comment', "width": "16%", "targets": 4 },
       { "data": 'warecode', "width": "20%", "targets": 5 },
       { "data": 'refno', "width": "8%", "targets": 6 },
-	  { "data": 'prdate_desc', "type":"date-eu", "targets": 7, "visible": false, "searchable": false },
+	    { "data": 'prdate_desc', "type":"date-eu", "targets": 7, "visible": false, "searchable": false },
       { "orderable": "false"}
       ],
       "language": {
@@ -349,7 +349,7 @@ return $waredesc1;
         }
       }
       });    
-    }else {
+    } else {
       $('#show_all').DataTable({
       "lengthMenu": [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
       "serverSide": true,

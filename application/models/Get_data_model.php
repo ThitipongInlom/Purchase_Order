@@ -28,6 +28,8 @@ class Get_data_model extends CI_Model {
 	{
 		if ($this->session->username=='Somkhit') {
 			$userby = 'GM';
+		}elseif ($this->session->username=='Nuntaporn2') {
+			$userby = 'GM';
 		}elseif ($this->session->username=='Nalinee') {
 			$userby = 'EFC';
 		}elseif ($this->session->dep=='AC') {
@@ -646,7 +648,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'HOD approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Somkhit') {
+		if ($type=='approval' AND $username=='Somkhit' OR $type=='approval' AND $username=='Nuntaporn2') {
 			$PR_ref = array(
 			'GMApprove' => $approvedata,
 			'GMApprove_Date' => $date,
@@ -703,7 +705,7 @@ class Get_data_model extends CI_Model {
 				'data' => 'HOD approve');
 			echo json_encode($array);
 		}
-		if ($type=='approval' AND $username=='Somkhit') {
+		if ($type=='approval' AND $username=='Somkhit' OR $type=='approval' AND $username=='Nuntaporn2') {
 			$PR_ref = array(
 			'GMApprove' => $approvedata,
 			'GMApprove_Date' => $date,

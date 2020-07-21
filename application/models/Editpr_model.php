@@ -137,7 +137,7 @@ class Editpr_model extends CI_Model {
 			}
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
-		}elseif ($typuser == 'approval' AND $username == 'Somkhit') {
+		}elseif ($typuser == 'approval' AND $username == 'Somkhit' OR $typuser == 'approval' AND $username == 'Nuntaporn2') {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,
@@ -316,7 +316,7 @@ class Editpr_model extends CI_Model {
 			$this->db->update('PR_ref', $PR_ref);
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
-		}elseif ($typuser == 'approval' AND $username == 'Somkhit') {
+		}elseif ($typuser == 'approval' AND $username == 'Somkhit' OR $typuser == 'approval' AND $username == 'Nuntaporn2') {
 			$PR = array(
 				'div' => $div,
 				'remark' => $remark,

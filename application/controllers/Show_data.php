@@ -238,12 +238,12 @@ class Show_data extends CI_Controller {
 	{
 		function namewarecode($warecode)
 		{
-		$CI =& get_instance();
-		$beta = $CI->load->database('bo', TRUE);
-		$query = $beta->get_where('STFC0070', array('warecode' => $warecode));
-		$result = $query->result_array();
-		$waredesc1 = isset($result[0]['waredesc1']);
-		return $waredesc1;
+			$CI =& get_instance();
+			$beta = $CI->load->database('bo', TRUE);
+			$query = $beta->get_where('STFC0070', array('warecode' => $warecode));
+			$result = $query->result_array();
+			$waredesc1 = isset($result[0]['waredesc1']);
+			return $waredesc1;
 		}
 
 		function Getimgshowpr($prno)
@@ -261,7 +261,7 @@ class Show_data extends CI_Controller {
 		$data_body = $this->Get_data_model->modal_body_open($prnoopen);
 		$pono_model = $this->Get_data_model->Get_pono_model($prnoopen);
 		$Newdate = nice_date($data_head[0]['prdate'], 'd/m/Y');
-echo'<div id="dispayopendata2"><div class="row">
+		echo'<div id="dispayopendata2"><div class="row">
 		<div class="col-md-12 col-xs-12">
 				<div align="center">
 					<img src="'.base_url().'assets/icon/thezign.gif'.'" width="120">
@@ -465,7 +465,11 @@ echo'<div id="dispayopendata2"><div class="row">
 			}
 			echo'">';
 			if ($data_head[0]['GMApprove'] =='Y') {
-				echo '<img src="../../assets/signature/GM.gif" width="80">';
+				if($data_head[0]['div'] == 'Z01') {
+					echo '<img src="../../assets/signature/GM.gif" width="80">';
+				}else {
+					echo '<img src="../../assets/signature/FO02.gif" width="80">';
+				}
 			}else{
 				echo '..............................';
 			}
@@ -543,6 +547,9 @@ echo'<div id="dispayopendata2"><div class="row">
      	}elseif ($user=='Somkidc' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
+     	}elseif ($user=='Nuntaporn2' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
+        echo '<button type="button" class="btn btn-success" rowred="'.$rowred.'" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
+              <button type="button" class="btn btn-danger"  rowred="'.$rowred.'" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
      	}elseif ($user=='Nalinee' AND $data_head[0]['HdApprove'] =='Y' AND $data_head[0]['PRApprove'] == 'Y' AND $data_head[0]['GMApprove'] =='Y' AND $data_head[0]['EFCApprove'] =='' AND $data_head[0]['completed'] =='') {
         echo '<button type="button" class="btn btn-success" onclick="approve(this)" data-toggle="tooltip" data-placement="bottom" title="อนุมันติPR">อนุมันติPR</button>
               <button type="button" class="btn btn-danger" onclick="approvex(this)" data-toggle="tooltip" data-placement="bottom" title="ไม่อนุมันติPR">ไม่อนุมันติPR</button>';
@@ -563,6 +570,8 @@ echo'<div id="dispayopendata2"><div class="row">
 		$userby = null;
 		$datetimeupdate = date("d-m-Y");
 		if ($this->session->username=='Somkhit') {
+			$userby = 'By:GM';
+		}elseif ($this->session->username=='Nuntaporn2') {
 			$userby = 'By:GM';
 		}elseif ($this->session->username=='Nalinee') {
 			$userby = 'By:EFC';

@@ -318,7 +318,7 @@ class Get_table_data_model extends CI_Model {
 				$EFCApprove = $row->EFCApprove == 'Y' ? nice_date($row->EFCApprove_Date, 'd-m-Y') : "";
 				$statusdatetime = $row->statusdatetime != '' ? nice_date($row->statusdatetime, 'd-m-Y')." <b>".$row->statusby."</b>": "";
 				// Date Time
-				if ($username == 'Somkhit') {
+				if ($username == 'Somkhit' OR $username =='Nuntaporn2') {
 					$prdate = "<b>ACC: </b>".$PRApprove."<br><b>HOD: </b>".$HdApprove;
 					if($row->hold_pr != '') {
 						$ref_no = $row->refno.'<br> <span class="badge badge-primary">H '.nice_date($row->hold_pr, 'd-m-Y').'</span>';
@@ -333,7 +333,7 @@ class Get_table_data_model extends CI_Model {
 					$ref_no = $row->refno;
 				}
 				// Cemment
-                if($dep =='AC' OR $username =='Somkhit' OR $username == 'Nalinee'){
+                if($dep =='AC' OR $username =='Somkhit' OR $username == 'Nalinee' OR $username =='Nuntaporn2'){
                     $comment_disabled = '';
                 }else{
                     $comment_disabled = 'Disabled';
@@ -372,7 +372,7 @@ class Get_table_data_model extends CI_Model {
 						<button type='button' class='btn btn-xs  btn-warning' primary='$row->prno' onclick='edit(this)' data-toggle='tooltip' data-placement='bottom' title='แก้ไขข้อมูล'><i class='fa fa-fw fa-edit'></i></button>
 					";
 							$hold_pr = '';
-					if ($username == 'Somkhit') {
+					if ($username == 'Somkhit' OR $username == 'Nuntaporn2') {
 						if ($row->hold_pr != '') {
 							$action = "
 								<button type='button' class='btn btn-xs  btn-primary'  primary='$row->prno' onclick='opendata(this)' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูล'><i class='fa fa-fw fa-search'></i></button>

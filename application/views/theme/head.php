@@ -135,7 +135,7 @@ if ($this->session->lang == 'english') {
         $typedep = $this->session->dep;
         $typetype = $this->session->type;
         $typeusername = $this->session->username;
-        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice' OR $typeusername=='Somkidc') {
+        if ($typedep=='AC' AND $typetype=='accounting' OR $typedep=='AC' AND $typetype=='accounting0' OR $typedep=='EXC' AND $typeusername=='Somkhit' OR $typedep=='EXC' AND $typeusername=='Nalinee' OR $typeusername=='nice' OR $typeusername=='Somkidc'  OR $typeusername=='Nuntaporn2') {
         echo'<li class="';
         if ($this->input->server('REQUEST_URI') == '/PO/index.php/Show_data/Show_accounting/') {
           echo 'active';

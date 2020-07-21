@@ -332,7 +332,7 @@ class Addpr_model extends CI_Model {
 		$dep = $this->session->dep;
 		$username = $this->session->username;
 		if ($vgolist=='') {
-		if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn') {
+		if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
 		$this->db->select('*');
 		$this->db->from('PR');
 		$this->db->limit(100);
@@ -349,7 +349,7 @@ class Addpr_model extends CI_Model {
 		$result = $this->db->get()->result_array();
 		}
 		}else{
-		if ($dep =='AC' OR $username =='Somkhit') {
+		if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
 		$this->db->select('*');
 		$this->db->from('PR');
 		$this->db->limit(100);
