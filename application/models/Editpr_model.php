@@ -109,31 +109,31 @@ class Editpr_model extends CI_Model {
 			$this->db->where('prno', $prno);
 			$this->db->update('PR', $PR);
 			if ($username=='Somkid') {
-			$PR_ref = array(
-				'DC' => $dc,
-				'DC_A' => $dc_a,
-				'Vat' => $vat,
-				'Vendor' => $vendor,
-				'Vendor_name' => $vendorname,
-				'Dep_name' => $depname,
-				'HdApprove' => 'Y',
-				'HdApprove_Date' => $date,
-				'PRApprove' => 'Y',
-				'PRApprove_Date' => $date);
-			$this->db->where('prno', $prno);
-			$this->db->update('PR_ref', $PR_ref);
+				$PR_ref = array(
+					'DC' => $dc,
+					'DC_A' => $dc_a,
+					'Vat' => $vat,
+					'Vendor' => $vendor,
+					'Vendor_name' => $vendorname,
+					'Dep_name' => $depname,
+					'HdApprove' => 'Y',
+					'HdApprove_Date' => $date,
+					'PRApprove' => 'Y',
+					'PRApprove_Date' => $date);
+				$this->db->where('prno', $prno);
+				$this->db->update('PR_ref', $PR_ref);
 			}else{
-			$PR_ref = array(
-				'DC' => $dc,
-				'DC_A' => $dc_a,
-				'Vat' => $vat,
-				'Vendor' => $vendor,
-				'Vendor_name' => $vendorname,
-				'Dep_name' => $depname,
-				'PRApprove' => 'Y',
-				'PRApprove_Date' => $date);
-			$this->db->where('prno', $prno);
-			$this->db->update('PR_ref', $PR_ref);
+				$PR_ref = array(
+					'DC' => $dc,
+					'DC_A' => $dc_a,
+					'Vat' => $vat,
+					'Vendor' => $vendor,
+					'Vendor_name' => $vendorname,
+					'Dep_name' => $depname,
+					'PRApprove' => 'Y',
+					'PRApprove_Date' => $date);
+				$this->db->where('prno', $prno);
+				$this->db->update('PR_ref', $PR_ref);
 			}
 			$Data = 'อัพเดตสำเร็จสำเร็จ';
 			$Code = '2';
@@ -337,8 +337,7 @@ class Editpr_model extends CI_Model {
 				'GMApprove_Date' => $date);
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_ref', $PR_ref);
-			$PR_Item = array(
-				'selected' => 'N');
+			$PR_Item = array('selected' => 'N');
 			$this->db->where('prno', $prno);
 			$this->db->update('PR_Item', $PR_Item);
 			$Data = 'อัพเดตสำเร็จสำเร็จ';

@@ -88,7 +88,7 @@ class Dashboard_model extends CI_Model {
 	{
 		$dep  = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$dep1 = strstr($dep, ",", true);
+			$dep1 = strstr($dep, ",", true);
 		}else{
 			$dep1 = $dep;
 		}

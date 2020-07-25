@@ -11,13 +11,13 @@ class Get_data_model extends CI_Model {
 	public function statusapp($prid,$statusappval,$userby)
 	{
 		if ($statusappval!='') {
-		$renewuserby = $statusappval.' '.$userby;
-		$data = array(
-        'statusapp' => $renewuserby);
+			$renewuserby = $statusappval.' '.$userby;
+			$data = array(
+			'statusapp' => $renewuserby);
 		}else{
-		$renewuserby = "";
-		$data = array(
-        'statusapp' => $renewuserby);
+			$renewuserby = "";
+			$data = array(
+			'statusapp' => $renewuserby);
 		}
 		$this->db->where('prno', $prid);
 		$this->db->update('PR_ref', $data);
@@ -54,13 +54,13 @@ class Get_data_model extends CI_Model {
 	public function restatusapp($prid,$statusappval,$userby)
 	{
 		if ($statusappval!='') {
-		$renewuserby = $statusappval.' '.$userby;
-		$data = array(
-        'rc_statusapp' => $renewuserby);
+			$renewuserby = $statusappval.' '.$userby;
+			$data = array(
+			'rc_statusapp' => $renewuserby);
 		}else{
-		$renewuserby = "";
-		$data = array(
-        'rc_statusapp' => $renewuserby);
+			$renewuserby = "";
+			$data = array(
+			'rc_statusapp' => $renewuserby);
 		}
 		$this->db->where('prno', $prid);
 		$this->db->update('PR_ref', $data);
@@ -154,12 +154,7 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -201,12 +196,7 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -223,8 +213,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
 		}elseif($username=='Somkhit'){
@@ -242,8 +232,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
 		}elseif($username=='Somkidc'){
@@ -260,8 +250,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
 		}elseif($username=='Nalinee'){
@@ -278,8 +268,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
 		}elseif ($dep=='EXC' AND $leve=='user' OR $dep=='EXC' AND $leve=='hod') {
@@ -293,8 +283,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$result = $this->db->get()->result_array();
 		}else{
@@ -309,8 +299,8 @@ class Get_data_model extends CI_Model {
 			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (HdApprove<>'N' OR HdApprove is null) AND (PRApprove<>'N' OR PRApprove is null))";
 			$this->db->where($where);
 			if ($dateforstart !='N' AND $dateforend !='N') {
-			$this->db->where('prdate >=', $dateforstart);
-			$this->db->where('prdate <=', $dateforend);
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
 			}
 			$this->db->order_by("PR_ref.GMApprove_Date", "desc");
 			$result = $this->db->get()->result_array();
@@ -321,38 +311,38 @@ class Get_data_model extends CI_Model {
 	public function Get_accounting($dateforstart,$dateforend,$i)
 	{
 		if ($i=='All') {
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(300);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		//$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
-		$this->db->where('HdApprove','Y');
-		if ($dateforstart !='N' AND $dateforend !='N') {
-		$this->db->where('prdate >=', $dateforstart);
-		$this->db->where('prdate <=', $dateforend);
-		}
-		$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (PRApprove is null OR PRApprove<>'N') AND (completed is null))";
-		$this->db->where($where);
-		$this->db->order_by("PR_ref.prno", "desc");
-		$result = $this->db->get()->result_array();
-		return $result;
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(300);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			//$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
+			$this->db->where('HdApprove','Y');
+			if ($dateforstart !='N' AND $dateforend !='N') {
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
+			}
+			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (PRApprove is null OR PRApprove<>'N') AND (completed is null))";
+			$this->db->where($where);
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+			return $result;
 		}else{
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(300);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		//$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
-		$this->db->where('HdApprove','Y');
-		$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (PRApprove is null OR PRApprove<>'N') AND (completed is null))";
-		$this->db->where('dep', $i);
-		$this->db->where($where);
-		if ($dateforstart !='N' AND $dateforend !='N') {
-		$this->db->where('prdate >=', $dateforstart);
-		$this->db->where('prdate <=', $dateforend);
-		}
-		$this->db->order_by("PR_ref.prno", "desc");
-		$result = $this->db->get()->result_array();
-		return $result;
+			$this->db->select('*');
+			$this->db->from('PR');
+			$this->db->limit(300);
+			$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+			//$this->db->join('Coss_PR', 'Coss_PR.prno = PR.prno');
+			$this->db->where('HdApprove','Y');
+			$where = "((GMApprove<>'N' OR GMApprove is null) AND (EFCApprove<>'N' OR EFCApprove is null) AND (PRApprove is null OR PRApprove<>'N') AND (completed is null))";
+			$this->db->where('dep', $i);
+			$this->db->where($where);
+			if ($dateforstart !='N' AND $dateforend !='N') {
+				$this->db->where('prdate >=', $dateforstart);
+				$this->db->where('prdate <=', $dateforend);
+			}
+			$this->db->order_by("PR_ref.prno", "desc");
+			$result = $this->db->get()->result_array();
+			return $result;
 		}
 	}
 
@@ -361,12 +351,7 @@ class Get_data_model extends CI_Model {
 		$beta = $this->load->database('bo', TRUE);
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -423,12 +408,7 @@ class Get_data_model extends CI_Model {
 		$beta = $this->load->database('bo', TRUE);
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -470,12 +450,7 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -515,12 +490,7 @@ class Get_data_model extends CI_Model {
 	{
 		$dep = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$depa = array();
-		$dep1 = strstr($dep, ",", true);
-		$dep2 = strstr($dep, ",");
-		$dep2 = str_replace(",","",$dep2);
-		array_push($depa, $dep1);
-		array_push($depa, $dep2);
+			$depa = explode(",",$dep);
 		}else{
 			$depa = $dep;
 		}
@@ -617,32 +587,32 @@ class Get_data_model extends CI_Model {
 				$signature = $username;
 			}
 			if ($type=='hod') {
-			$PR_ref = array(
-			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date,
-			'Hd_signature' => $signature);
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
+				$PR_ref = array(
+				'HdApprove' => $approvedata,
+				'HdApprove_Date' => $date,
+				'Hd_signature' => $signature);
+				$this->db->where('prno', $primary);
+				$this->db->update('PR_ref', $PR_ref);
 			}elseif ($username=='Somkid') {
-			$query = $this->db->get_where('PR_ref', array('prno' => $primary));
-			$result = $query->result_array();
-			$signatureref = $result[0]['Hd_signature'];
-			$namedep = $result[0]['Dep_name'];
-			// signature Null
-			if ($signatureref == '' AND $namedep == 'Accounting') {
-			$PR_ref = array(
-			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date,
-			'Hd_signature' => $signature);
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
-			}else{
-			$PR_ref = array(
-			'HdApprove' => $approvedata,
-			'HdApprove_Date' => $date);
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
-			}
+				$query = $this->db->get_where('PR_ref', array('prno' => $primary));
+				$result = $query->result_array();
+				$signatureref = $result[0]['Hd_signature'];
+				$namedep = $result[0]['Dep_name'];
+				// signature Null
+				if ($signatureref == '' AND $namedep == 'Accounting') {
+					$PR_ref = array(
+					'HdApprove' => $approvedata,
+					'HdApprove_Date' => $date,
+					'Hd_signature' => $signature);
+					$this->db->where('prno', $primary);
+					$this->db->update('PR_ref', $PR_ref);
+				}else{
+					$PR_ref = array(
+					'HdApprove' => $approvedata,
+					'HdApprove_Date' => $date);
+					$this->db->where('prno', $primary);
+					$this->db->update('PR_ref', $PR_ref);
+				}
 			}
 			$array = array(
 				'data' => 'HOD approve');
@@ -712,8 +682,7 @@ class Get_data_model extends CI_Model {
 		    'hold_pr' => null);
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_ref', $PR_ref);
-			$PR_Item = array(
-			'selected' => 'N');
+			$PR_Item = array('selected' => 'N');
 			$this->db->where('prno', $primary);
 			$this->db->update('PR_Item', $PR_Item);
 			$array = array(
@@ -744,104 +713,104 @@ class Get_data_model extends CI_Model {
 
 	public function approveX_sd($primary,$approvedata,$type,$date,$username)
 	{
-			$query = $this->db->get_where('PR_ref', array('prno' => $primary));
-			foreach ($query->result() as $row) {
-				if ($row->HdApprove == '') {
-					$PR_ref = array(
-					'HdApprove' => $approvedata,
-					'HdApprove_Date' => $date);
-					$this->db->where('prno', $primary);
-					$this->db->update('PR_ref', $PR_ref);					
-				}elseif ($row->PRApprove == '') {
-					$PR_ref = array(
-					'PRApprove' => $approvedata,
-					'PRApprove_Date' => $date);
-					$this->db->where('prno', $primary);
-					$this->db->update('PR_ref', $PR_ref);
-				}elseif ($row->GMApprove == '') {
-					$PR_ref = array(
-					'GMApprove' => $approvedata,
-					'GMApprove_Date' => $date);
-					$this->db->where('prno', $primary);
-					$this->db->update('PR_ref', $PR_ref);	
-				}elseif ($row->EFCApprove == '') {
-					$PR_ref = array(
-					'EFCApprove' => $approvedata,
-					'EFCApprove_Date' => $date);
-					$this->db->where('prno', $primary);
-					$this->db->update('PR_ref', $PR_ref);	
-				}
+		$query = $this->db->get_where('PR_ref', array('prno' => $primary));
+		foreach ($query->result() as $row) {
+			if ($row->HdApprove == '') {
+				$PR_ref = array(
+				'HdApprove' => $approvedata,
+				'HdApprove_Date' => $date);
+				$this->db->where('prno', $primary);
+				$this->db->update('PR_ref', $PR_ref);					
+			}elseif ($row->PRApprove == '') {
+				$PR_ref = array(
+				'PRApprove' => $approvedata,
+				'PRApprove_Date' => $date);
+				$this->db->where('prno', $primary);
+				$this->db->update('PR_ref', $PR_ref);
+			}elseif ($row->GMApprove == '') {
+				$PR_ref = array(
+				'GMApprove' => $approvedata,
+				'GMApprove_Date' => $date);
+				$this->db->where('prno', $primary);
+				$this->db->update('PR_ref', $PR_ref);	
+			}elseif ($row->EFCApprove == '') {
+				$PR_ref = array(
+				'EFCApprove' => $approvedata,
+				'EFCApprove_Date' => $date);
+				$this->db->where('prno', $primary);
+				$this->db->update('PR_ref', $PR_ref);	
 			}
+		}
 	}
 
 	public function approveXold($primary,$approvedata,$type,$date,$username)
 	{
-			$PR_ref = array(
-			'EFCApprove' => $approvedata,
-			'EFCApprove_Date' => $date);
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
-			$array = array(
-				'data' => 'EFC approve');
-			echo json_encode($array);
+		$PR_ref = array(
+		'EFCApprove' => $approvedata,
+		'EFCApprove_Date' => $date);
+		$this->db->where('prno', $primary);
+		$this->db->update('PR_ref', $PR_ref);
+		$array = array(
+			'data' => 'EFC approve');
+		echo json_encode($array);
 	}
 
 	public function hold_pr($primary,$date)
 	{
-			$query = $this->db->get_where('PR_ref', array('prno' => $primary));
+		$query = $this->db->get_where('PR_ref', array('prno' => $primary));
 
-			foreach ($query->result() as $row) {
-				if($row->hold_pr == '') {
-					$PR_ref = array('hold_pr' => $date);
-				}else {
-					$PR_ref = array('hold_pr' => null);
-				}
+		foreach ($query->result() as $row) {
+			if($row->hold_pr == '') {
+				$PR_ref = array('hold_pr' => $date);
+			}else {
+				$PR_ref = array('hold_pr' => null);
 			}
+		}
 
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
-			$array = array(
-				'data' => 'Completed');
-			echo json_encode($array);
+		$this->db->where('prno', $primary);
+		$this->db->update('PR_ref', $PR_ref);
+		$array = array(
+			'data' => 'Completed');
+		echo json_encode($array);
 	}
 
 	public function completedY($primary,$approvedata)
 	{
-			$PR_ref = array(
-			'completed' => $approvedata);
-			$this->db->where('prno', $primary);
-			$this->db->update('PR_ref', $PR_ref);
-			$array = array(
-				'data' => 'Completed');
-			echo json_encode($array);
+		$PR_ref = array(
+		'completed' => $approvedata);
+		$this->db->where('prno', $primary);
+		$this->db->update('PR_ref', $PR_ref);
+		$array = array(
+			'data' => 'Completed');
+		echo json_encode($array);
 	}
 
 	public function savesetvenderpr($vendorcode,$vendorname,$prno)
 	{
-			$PR_ref = array(
-			'Vendor' => $vendorcode,
-			'Vendor_name' => $vendorname);
-			$this->db->where('prno', $prno);
-			$this->db->update('PR_ref', $PR_ref);
-			return;
+		$PR_ref = array(
+		'Vendor' => $vendorcode,
+		'Vendor_name' => $vendorname);
+		$this->db->where('prno', $prno);
+		$this->db->update('PR_ref', $PR_ref);
+		return;
 	}
 
 	public function get_tokenbot()
 	{
-			$query = $this->db->get('Bot');
-			$result = $query->row();
-			return $result->Bot_token;
+		$query = $this->db->get('Bot');
+		$result = $query->row();
+		return $result->Bot_token;
 	}
 
 	public function Getimg_hod($userhodapp)
 	{
-			$this->db->select('*');
-			$this->db->from('PR_Users');
-			$this->db->join('PR_ref', 'PR_ref.Hd_signature = PR_Users.username');
-			$this->db->where('PR_Users.username', $userhodapp);
-			$this->db->limit(1);
-			$result = $this->db->get()->result_array();
-			return $result;
+		$this->db->select('*');
+		$this->db->from('PR_Users');
+		$this->db->join('PR_ref', 'PR_ref.Hd_signature = PR_Users.username');
+		$this->db->where('PR_Users.username', $userhodapp);
+		$this->db->limit(1);
+		$result = $this->db->get()->result_array();
+		return $result;
 	}
 
 	public function Faxsave($data)
@@ -937,7 +906,6 @@ class Get_data_model extends CI_Model {
 		$this->db->where('PR.prno', $primary);
 		$result = $this->db->get()->result_array();
 		$refno = $result[0]['refno'];
-
 
 		$query_Coss = $this->db->get_where('Coss_PR', array('prno' => $primary));
 		$result_Coss = $query_Coss->num_rows();

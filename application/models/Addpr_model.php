@@ -104,7 +104,7 @@ class Addpr_model extends CI_Model {
 	{
 		$dep  = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-			$dep1 = strstr($dep, ",", true);
+			$dep1 = explode(",",$dep);
 		}else{
 			$dep1 = $dep;
 		}
@@ -123,8 +123,8 @@ class Addpr_model extends CI_Model {
 		$type = $this->session->type;
 		$dep  = $this->session->dep;
 		if ($pos = strrpos($dep, ",")) {
-		$dep1 = strstr($dep, ",", true);
-		$depa = $dep1;
+			$dep1 = strstr($dep, ",", true);
+			$depa = $dep1;
 		}else{
 			$depa = $dep;
 		}
@@ -138,79 +138,79 @@ class Addpr_model extends CI_Model {
 			$data = array(
 				'prno' => $prno,
 				'refno' => $ref);
-    $this->db->insert('Coss_PR', $data);
+    		$this->db->insert('Coss_PR', $data);
 		}
 		// User // Admin
 		if ($type =='user' OR $type =='admin') {
-		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
-    	'conflag' => 'N',
-    	'zzuser' => $fname,
-    	'zzstrdate' => $prdate,
-    	'chksub1' => '1');
-		$this->db->insert('PR', $PR);
-		$PR_ref = array(
-        'prno' => $prno,
-    	'Dep_name' => $sqldepname1);
-		$this->db->insert('PR_ref', $PR_ref);
+			$PR = array(
+			'comid' => '0001',
+			'prno' => $prno,
+			'prdate' => $prdate,
+			'dep' => $depa,
+			'refno' => $ref,
+			'conflag' => 'N',
+			'zzuser' => $fname,
+			'zzstrdate' => $prdate,
+			'chksub1' => '1');
+			$this->db->insert('PR', $PR);
+			$PR_ref = array(
+			'prno' => $prno,
+			'Dep_name' => $sqldepname1);
+			$this->db->insert('PR_ref', $PR_ref);
 		}
 		// Hod
 		elseif($type =='hod'){
-		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
-    	'conflag' => 'N',
-    	'zzuser' => $fname,
-    	'zzstrdate' => $prdate,
-    	'chksub1' => '1');
-		$this->db->insert('PR', $PR);
-		$PR_ref = array(
-        'prno' => $prno,
-    	'Dep_name' => $sqldepname1);
-		$this->db->insert('PR_ref', $PR_ref);
+			$PR = array(
+			'comid' => '0001',
+			'prno' => $prno,
+			'prdate' => $prdate,
+			'dep' => $depa,
+			'refno' => $ref,
+			'conflag' => 'N',
+			'zzuser' => $fname,
+			'zzstrdate' => $prdate,
+			'chksub1' => '1');
+			$this->db->insert('PR', $PR);
+			$PR_ref = array(
+			'prno' => $prno,
+			'Dep_name' => $sqldepname1);
+			$this->db->insert('PR_ref', $PR_ref);
 		}
 		// accounting0
 		elseif($type =='accounting0' OR $type =='accounting'){
-		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
-    	'conflag' => 'N',
-    	'zzuser' => $fname,
-    	'zzstrdate' => $prdate,
-    	'chksub1' => '1');
-		$this->db->insert('PR', $PR);
-		$PR_ref = array(
-        'prno' => $prno,
-    	'Dep_name' => $sqldepname1);
-		$this->db->insert('PR_ref', $PR_ref);
+			$PR = array(
+			'comid' => '0001',
+			'prno' => $prno,
+			'prdate' => $prdate,
+			'dep' => $depa,
+			'refno' => $ref,
+			'conflag' => 'N',
+			'zzuser' => $fname,
+			'zzstrdate' => $prdate,
+			'chksub1' => '1');
+			$this->db->insert('PR', $PR);
+			$PR_ref = array(
+			'prno' => $prno,
+			'Dep_name' => $sqldepname1);
+			$this->db->insert('PR_ref', $PR_ref);
 		}
 		// approval
 		elseif($type =='approval'){
-		$PR = array(
-        'comid' => '0001',
-        'prno' => $prno,
-        'prdate' => $prdate,
-        'dep' => $depa,
-        'refno' => $ref,
-    	'conflag' => 'N',
-    	'zzuser' => $fname,
-    	'zzstrdate' => $prdate,
-    	'chksub1' => '1');
-		$this->db->insert('PR', $PR);
-		$PR_ref = array(
-        'prno' => $prno,
-    	'Dep_name' => $sqldepname1);
-		$this->db->insert('PR_ref', $PR_ref);
+			$PR = array(
+			'comid' => '0001',
+			'prno' => $prno,
+			'prdate' => $prdate,
+			'dep' => $depa,
+			'refno' => $ref,
+			'conflag' => 'N',
+			'zzuser' => $fname,
+			'zzstrdate' => $prdate,
+			'chksub1' => '1');
+			$this->db->insert('PR', $PR);
+			$PR_ref = array(
+			'prno' => $prno,
+			'Dep_name' => $sqldepname1);
+			$this->db->insert('PR_ref', $PR_ref);
 		}
 	}
 
@@ -305,24 +305,24 @@ class Addpr_model extends CI_Model {
 		$beta = $this->load->database('bo', TRUE);
 		$vgolist = $this->input->post('value');
 		if ($vgolist=='') {
-		$beta->select('*');
-		$beta->from('STFA0010');
-		$beta->limit(100);
-		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
-		$beta->order_by("stcode", "asc");
-		$result = $beta->get()->result_array();
-		return $result;
+			$beta->select('*');
+			$beta->from('STFA0010');
+			$beta->limit(100);
+			$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
+			$beta->order_by("stcode", "asc");
+			$result = $beta->get()->result_array();
+			return $result;
 		}else{
-		$beta->select('*');
-		$beta->from('STFA0010');
-		$beta->limit(100);
-		$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
-		$beta->like('stcode', $vgolist);
-		$beta->or_like('stname1', $vgolist);
-		$beta->or_like('stname2', $vgolist);
-		$beta->order_by("stcode", "asc");
-		$result = $beta->get()->result_array();
-		return $result;
+			$beta->select('*');
+			$beta->from('STFA0010');
+			$beta->limit(100);
+			$beta->join('STFC0060', 'STFA0010.purunit = STFC0060.mcode');
+			$beta->like('stcode', $vgolist);
+			$beta->or_like('stname1', $vgolist);
+			$beta->or_like('stname2', $vgolist);
+			$beta->order_by("stcode", "asc");
+			$result = $beta->get()->result_array();
+			return $result;
 		}
 	}
 
@@ -332,49 +332,49 @@ class Addpr_model extends CI_Model {
 		$dep = $this->session->dep;
 		$username = $this->session->username;
 		if ($vgolist=='') {
-		if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(100);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		$this->db->order_by("PR.prno", "desc");
-		$result = $this->db->get()->result_array();
+			if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
+				$this->db->select('*');
+				$this->db->from('PR');
+				$this->db->limit(100);
+				$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+				$this->db->order_by("PR.prno", "desc");
+				$result = $this->db->get()->result_array();
+			}else{
+				$this->db->select('*');
+				$this->db->from('PR');
+				$this->db->limit(100);
+				$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+				$this->db->where('PR.dep', $dep);
+				$this->db->order_by("PR.prno", "desc");
+				$result = $this->db->get()->result_array();
+			}
 		}else{
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(100);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		$this->db->where('PR.dep', $dep);
-		$this->db->order_by("PR.prno", "desc");
-		$result = $this->db->get()->result_array();
-		}
-		}else{
-		if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(100);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		$this->db->like('PR.prno', $vgolist);
-		$this->db->or_like('PR.refno', $vgolist);
-		$this->db->or_like('PR_ref.Vendor_name', $vgolist);
-		$this->db->order_by("PR.prno", "desc");
-		$result = $this->db->get()->result_array();
-		}else{
-		$this->db->select('*');
-		$this->db->from('PR');
-		$this->db->limit(100);
-		$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
-		$this->db->where('PR.dep', $dep);
-		$this->db->like('PR.prno', $vgolist);
-		$this->db->or_like('PR.refno', $vgolist);
-		$this->db->where('PR.dep', $dep);
-		$this->db->or_like('PR_ref.Vendor_name', $vgolist);
-		$this->db->where('PR.dep', $dep);
-		$this->db->or_like('PR_ref.Vendor', $vgolist);
-		$this->db->where('PR.dep', $dep);
-		$this->db->order_by("PR.prno", "desc");
-		$result = $this->db->get()->result_array();
-		}
+			if ($dep =='AC' OR $username =='Somkhit' OR $username == 'Nuntaporn2') {
+				$this->db->select('*');
+				$this->db->from('PR');
+				$this->db->limit(100);
+				$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+				$this->db->like('PR.prno', $vgolist);
+				$this->db->or_like('PR.refno', $vgolist);
+				$this->db->or_like('PR_ref.Vendor_name', $vgolist);
+				$this->db->order_by("PR.prno", "desc");
+				$result = $this->db->get()->result_array();
+			}else{
+				$this->db->select('*');
+				$this->db->from('PR');
+				$this->db->limit(100);
+				$this->db->join('PR_ref', 'PR_ref.prno = PR.prno');
+				$this->db->where('PR.dep', $dep);
+				$this->db->like('PR.prno', $vgolist);
+				$this->db->or_like('PR.refno', $vgolist);
+				$this->db->where('PR.dep', $dep);
+				$this->db->or_like('PR_ref.Vendor_name', $vgolist);
+				$this->db->where('PR.dep', $dep);
+				$this->db->or_like('PR_ref.Vendor', $vgolist);
+				$this->db->where('PR.dep', $dep);
+				$this->db->order_by("PR.prno", "desc");
+				$result = $this->db->get()->result_array();
+			}
 		}
 		return $result;
 	}
