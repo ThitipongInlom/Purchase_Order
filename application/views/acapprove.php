@@ -123,15 +123,13 @@ return $waredesc1;
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
               <div class="row" style="margin-bottom:10px;">
-                <div class="col-md-9 col-xs-8">
-                 
+                <div class="col-9 col-md-9">
+                
                 </div>
-                <div class="col-md-3 col-xs-4">
-                  <div align="right">
-                  <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
-                  <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor"> 
-                  </div>                 
-                </div>                
+                <div class="col-3 col-md-3 text-right">
+                    <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
+                    <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">                 
+                </div>               
               </div>              
               <div class="table-responsive">
                 <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed table-stripedstyle">

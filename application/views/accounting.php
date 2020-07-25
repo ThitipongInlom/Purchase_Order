@@ -128,8 +128,8 @@ return $pono;
           <button type="button" id="btnopendata" data-toggle="modal" data-target="#opendata"></button>
           <div class="box box-primary" id="tabledata">
             <div class="box-body">
-                <div class="row" style="margin-bottom: 10px;">
-                <div class="col-md-2 col-md-2">
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-12 col-md-2">
                   <?php $getv = $this->input->get('i'); ?>
                   <select id='Setvaluefordata'>
                     <option value="All" <?php if ($getv=='All') {echo 'selected';} ?>>All Department</option>
@@ -137,21 +137,13 @@ return $pono;
                     foreach ($depall as $depz) { ?>
                       <option value="<?php echo $depz['depcode']; ?>" <?php if ($getv==$depz['depcode']) {echo 'selected';} ?>><?php echo $depz['depname1']; ?></option>
                     <?php } ?>
-                  </select>
+                  </select>              
                 </div>
-                <div class="col-md-7 col-xs-8">
-
+                <div class="col-12 col-md-10 text-right">
+                  <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
+                  <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">               
                 </div>
-                <div class="col-md-3 col-xs-2">
-                  <div align="right">
-                    <!--
-                    <button class="btn btn-info btn-sm" onclick="accajaxopenproduct3(this)">ค้นหาPR เก่า</button><input type="hidden" data-toggle="modal" data-target="#csproduct" id="opencsproduct">
-                    -->
-                    <button class="btn btn-primary btn-sm" onclick="accajaxopenproduct2(this)">ค้นหาProduct</button><input type="hidden" data-toggle="modal" data-target="#productmodel" id="openproduct">
-                    <button class="btn btn-warning btn-sm" onclick="accajaxopenproductv(this)">ค้นหาVendor</button><input type="hidden" data-toggle="modal" data-target="#vendormodel" id="openvendor">
-                  </div>
-                </div>
-                </div>
+              </div>
               <div class="table-responsive">
                 <table id="show_all" cellspacing="0" width="100%" class="table table-bordered table-striped table-hover responsive table-condensed table-stripedstyle">
                   <thead>
